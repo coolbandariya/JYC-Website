@@ -4,7 +4,7 @@
 
 > **The official club-first digital home for JIIT Youth Club, Sector 128, Noida.**
 >
-> **Release: V18.27.0 — Human JYC Final / orbiting Phoenix + theme flight + JYC paper light mode + navigation/search repair** — an animated, human-first public experience built on the V18.17 functional baseline.
+> **Release: V23.0.0 — Final JYC public experience / Agentic AI bridge / Phoenix hero / centered responsive UI** — a club-first, event-first public experience for JIIT Youth Club Sector 128.
 
 JYC brings its **clubs, events, people, memories and official community channels** into one focused public website. The Control Center is separate from the student-facing experience and handles publishing, review and operations.
 
@@ -136,11 +136,11 @@ See [`docs/OPEN-SOURCE-UI-NOTES.md`](docs/OPEN-SOURCE-UI-NOTES.md) for the refer
 
 ## Current release
 
-**V18.11.0 — Final Product Pass**
+**V23.0.0 — Final Release**
 
 This release preserves the strongest JYC platform features while repairing runtime contracts, restoring admin workspaces, and consolidating the Phoenix/cursor/calendar/search experience.
 
-See [`V18.11-FINAL-PRODUCT-PASS.md`](V18.11-FINAL-PRODUCT-PASS.md) for the release-specific changes.
+See [`RELEASE-V23.0.0-FINAL.md`](RELEASE-V23.0.0-FINAL.md) for the release-specific changes.
 
 ## Verification note
 
@@ -181,3 +181,7 @@ The repository deliberately favors a small, understandable React/CSS system over
 ## Final release checklist
 
 See [`docs/JYC-FINAL-QA-CHECKLIST.md`](docs/JYC-FINAL-QA-CHECKLIST.md) for the consolidated public UI, mobile, map, admin, SEO, PWA and security checks.
+
+## V22 final UI repair
+
+The final public shell uses one warm paper/beige visual language across Home, Clubs, Events, Team and supporting public pages. The primary navigation no longer contains a separate Participate CTA. Returning visitors are kept in the light JYC theme, the assistant launcher is intentionally compact and static, and local/GitHub preview has a grounded public fallback for the 21 supplied hub communities plus published leadership/event material when no Supabase content is available.

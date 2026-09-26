@@ -2,22 +2,14 @@ import React,{useMemo,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 export function InteractivePhoenix({sceneUrl='',stats={}}){
-  const nav=useNavigate();
-  const spline=String(sceneUrl||'').startsWith('https://prod.spline.design/');
-  const nodes=[
-    ['CLUBS','/clubs','node-one'],
-    ['EVENTS','/events','node-two'],
-    ['TEAM','/team','node-three']
-  ];
-  return <div className="phoenix-3d-stage phoenix-calm-stage" aria-label="JYC Phoenix navigation">
-    {spline&&<iframe className="phoenix-spline" title="Interactive JYC Phoenix" src={sceneUrl} loading="lazy"/>}
+  return <div className="phoenix-3d-stage phoenix-depth-stage" aria-label="JYC Phoenix hero visual">
     <div className="phoenix-calm-glow" aria-hidden="true"/>
-    <div className="phoenix-orbital-system" aria-hidden="true"><span className="phoenix-orbit phoenix-orbit-a"/><span className="phoenix-orbit phoenix-orbit-b"/><span className="phoenix-orbit phoenix-orbit-c"/><i className="phoenix-orb phoenix-orb-a"/><i className="phoenix-orb phoenix-orb-b"/><i className="phoenix-orb phoenix-orb-c"/><i className="phoenix-orb phoenix-orb-d"/></div>
-    <div className="phoenix-3d-core phoenix-bird-only">
-      <span className="phoenix-halo"/>
-      <div className="phoenix-artwork" aria-hidden="true"><img src="/jyc-phoenix-reference-hd.png" alt=""/></div>
+    <div className="phoenix-depth-stack" aria-hidden="true">
+      <span className="phoenix-depth phoenix-depth-back"><img src="/jyc-phoenix-reference-hd.png" alt=""/></span>
+      <span className="phoenix-depth phoenix-depth-mid"><img src="/jyc-phoenix-reference-hd.png" alt=""/></span>
+      <span className="phoenix-depth phoenix-depth-front"><img src="/jyc-phoenix-reference-hd.png" alt=""/></span>
     </div>
-    <div className="phoenix-door-rail" aria-label="JYC destinations">{nodes.map(([label,path,cls])=><button key={label} type="button" className={`phoenix-node ${cls}`} onClick={()=>nav(path)} aria-label={`Explore ${label.toLowerCase()}`}><span>{label}</span><em>Explore →</em></button>)}</div>
+    <span className="phoenix-halo" aria-hidden="true"/>
   </div>
 }
 
@@ -52,6 +44,6 @@ export function EcosystemSection({data}){
 
 export function MomentsSection({data}){
   const nav=useNavigate();
-  const items=data.gallery.slice(0,5);
+  const preferred=['pdf-jyc-10','pdf-jyc-06','pdf-dronotics-01','pdf-vamunique-01','pdf-aura-01','pdf-aakriti-02','extra-event-35','extra-event-36','extra-event-37','extra-event-38','extra-event-39','extra-event-40']; const map=new Map(data.gallery.map(x=>[x.id,x])); const items=preferred.map(id=>map.get(id)).filter(Boolean).concat(data.gallery.filter(x=>!preferred.includes(x.id)).slice(0,8)).slice(0,12);
   return <section className="section moments-section reveal"><div className="reference-section-head"><div><span className="eyebrow">JYC MOMENTS</span><h2>Real moments. Real campus.</h2><p>The visual archive grows from photos actually published by JYC.</p></div></div>{items.length?<div className="moments-editorial">{items.map((g,i)=><button key={g.id||i} className={`moment-tile moment-${i}`} onClick={()=>nav('/gallery')}><img src={g.url} loading="lazy" alt={g.caption||'JYC moment'}/><span><small>{g.association||'JYC'}</small><strong>{g.caption||'JYC moment'}</strong></span></button>)}</div>:<div className="moments-empty"><span className="eyebrow">VISUAL ARCHIVE</span><h2>Moments will appear here as JYC publishes them.</h2><p>No synthetic imagery is used as a substitute for official campus moments.</p></div>}</section>
 }

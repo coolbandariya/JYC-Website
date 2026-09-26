@@ -1,13 +1,13 @@
 {
   "name": "jyc-website",
   "private": true,
-  "version": "20.0.0",
+  "version": "23.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "qa": "node scripts/qa-source-integrity.mjs && node scripts/qa-v20-complete.mjs && node scripts/qa-search.mjs && node scripts/qa-security.mjs && node scripts/qa-seo.mjs && node scripts/qa-build-preflight.mjs",
+    "qa": "node scripts/qa-source-integrity.mjs && node scripts/qa-v20-complete.mjs && node scripts/qa-v21-final.mjs && node scripts/qa-search.mjs && node scripts/qa-security.mjs && node scripts/qa-seo.mjs && node scripts/qa-build-preflight.mjs && node scripts/qa-v22-final.mjs && node scripts/qa-v25-theme-coherence.mjs && node scripts/qa-v23.3-hub-content.mjs && node scripts/qa-v23.4-jyc-boundary.mjs && node scripts/qa-v23.5-hub-identities.mjs && node scripts/qa-v23.6-deep-audit.mjs && node scripts/qa-v23.6-reference-integration.mjs && node scripts/qa-v23.6-consolidation.mjs",
     "qa:release": "node scripts/qa-v20-complete.mjs",
     "qa:browser": "node scripts/qa-browser.mjs",
     "qa:env": "node scripts/qa-env.mjs",

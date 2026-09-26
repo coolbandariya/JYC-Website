@@ -1,5 +1,14 @@
 # Changelog
 
+## 23.0.0 — Final Agentic Bridge Release
+
+- Auto-opens the Agentic AI bridge on fresh JYC home/Events route loads for both new and returning users.
+- Replaced the JYC-themed Agentic popup with a separate futuristic Agentic AI visual identity.
+- Removed duplicate Phoenix/flight/orbit treatments from the source-level experience.
+- Removed the rejected homepage Next JYC Moment plaque.
+- Tightened responsive centering, page widths, typography safety and mobile spacing.
+
+
 ## V18.11.2
 - Fixed duplicate `AdminErrorBoundary` declaration in the admin bundle.
 - Hardened the Vite HTML entry against public-directory asset resolution during production builds.
@@ -46,3 +55,7 @@
 - Added CODEOWNERS and Dependabot configuration.
 - Expanded browser QA coverage.
 - Added release quality gates and a release changelog.
+
+## V23.6 Reference Integration Pass
+
+Applied the strongest reusable patterns found during the V65 and supplied club-site audit to V23.6 without replacing V23.6 with V65. Added a compact ecosystem context rail, compact event list view, stricter theme unification, domain-specific hub motifs, and final overflow/motion/focus safeguards. Static and source QA remain green.

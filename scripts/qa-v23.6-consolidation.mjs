@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const main=read('src/main.jsx');
+const css=read('src/v23.6-consolidated.css');
+const legacyCss=fs.readdirSync(path.join(root,'src')).filter(x=>x.endsWith('.css')&&!['v23.6-consolidated.css'].includes(x));
+const failures=[];
+const pass=(name,ok,detail='')=>{if(ok)console.log(`PASS: ${name}`);else{console.error(`FAIL: ${name}${detail?` — ${detail}`:''}`);failures.push(name)}};
+const imports=[...main.matchAll(/import\s+['"](\.\/[^'"]+\.css)['"];?/g)].map(m=>m[1]);
+pass('exactly one active public CSS import',imports.length===1&&imports[0]==='./v23.6-consolidated.css');
+pass('consolidated stylesheet exists',fs.existsSync(path.join(root,'src/v23.6-consolidated.css')));
+pass('consolidated stylesheet contains the historical cascade boundaries',css.includes('===== styles.css =====')&&css.includes('===== v25-theme-coherence.css =====')&&css.includes('===== v23.6-canonical-system.css ====='));
+pass('consolidated stylesheet ends with V23.6 interconnection layer',css.includes('V23.6 INTERCONNECTION LAYER')&&css.trimEnd().endsWith('}'));
+pass('legacy CSS is retained only as rollback/reference source',legacyCss.length>=60&&legacyCss.includes('v23.6-canonical-system.css'));
+pass('new hub-detail stylesheet rules are present',css.includes('.hub-detail-system')&&css.includes('.hub-signature-list'));
+pass('no duplicate active CSS imports',new Set(imports).size===imports.length);
+if(failures.length)process.exit(1);console.log(`V23.6 CSS CONSOLIDATION PASS: ${7-failures.length}/7 passed.`);

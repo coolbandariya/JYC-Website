@@ -1,0 +1,123 @@
+/* V23.6 — editorial, hub identity and production polish.
+   Loaded last. Keeps one JYC visual language while letting each community
+   communicate its actual domain through restrained motifs and metadata. */
+:root{
+  --jyc-focus-ring:rgba(164,123,67,.72);
+  --jyc-max:1380px;
+}
+html{scroll-padding-top:86px}
+body{overflow-x:hidden}
+.public-app{min-height:100vh;isolation:isolate}
+.public-app a,.public-app button,.public-app input,.public-app select,.public-app textarea{outline-offset:3px}
+.public-app :focus-visible{outline:2px solid var(--jyc-focus-ring)!important;outline-offset:3px}
+
+/* Keep the navbar visible without consuming a second giant hero gap. */
+.nav{height:68px!important}
+.nav-inner{height:68px!important}
+.app.public-app{padding-top:0!important}
+
+/* JYC's colour system wins over legacy experimental palettes. */
+html[data-theme="light"] .public-app .btn,
+html[data-theme="light"] .public-app .reference-view-all,
+html[data-theme="light"] .public-app .filter-toggle.active,
+html[data-theme="light"] .public-app .event-scope-tabs button.active{color:#fff8ed!important}
+html[data-theme="dark"] .public-app .btn,
+html[data-theme="dark"] .public-app .reference-view-all,
+html[data-theme="dark"] .public-app .filter-toggle.active,
+html[data-theme="dark"] .public-app .event-scope-tabs button.active{color:#1a1510!important}
+html[data-theme="light"] .public-app .btn{background:#9a713d!important;border-color:#9a713d!important}
+html[data-theme="dark"] .public-app .btn{background:#c7a56d!important;border-color:#c7a56d!important}
+html[data-theme="light"] .public-app .btn.secondary{background:#fff9ef!important;color:#2b241c!important;border-color:rgba(122,88,48,.28)!important}
+html[data-theme="dark"] .public-app .btn.secondary{background:#15161b!important;color:#f4ead8!important;border-color:rgba(199,165,109,.28)!important}
+
+/* Subtle editorial reveal: inspired by modern React Bits scroll/reveal patterns,
+   but intentionally restrained for JYC and disabled for reduced motion. */
+.reveal{animation:jycEditorialIn .55s cubic-bezier(.2,.75,.25,1) both}
+@keyframes jycEditorialIn{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* Hub individuality: motif is domain-specific, colour remains JYC-controlled. */
+.club-identity-page,.event-identity-page{--hub-accent:#a47b43;--hub-accent-soft:rgba(164,123,67,.12);--hub-accent-line:rgba(164,123,67,.28)}
+.club-identity-page .club-hero,.event-identity-page .event-detail-hero{border-color:var(--hub-accent-line)!important}
+.hub-identity-rail{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:18px;align-items:stretch;margin:24px 0;padding:20px;border:1px solid var(--hub-accent-line);border-radius:22px;background:linear-gradient(135deg,var(--hub-accent-soft),transparent 58%),var(--bg-card);overflow:hidden}
+.hub-identity-rail:after{content:"";position:absolute;right:-70px;top:-70px;width:190px;height:190px;border:1px solid var(--hub-accent-line);border-radius:50%;opacity:.65;pointer-events:none}
+.hub-identity-mark{display:flex;flex-direction:column;justify-content:center;gap:8px;position:relative;z-index:1}
+.hub-identity-mark span,.event-identity-signature{color:var(--hub-accent)!important;font-size:10px!important;font-weight:800!important;letter-spacing:.18em!important;text-transform:uppercase}
+.hub-identity-mark b{font-size:clamp(18px,2vw,28px);line-height:1.05;max-width:650px}
+.hub-identity-traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;position:relative;z-index:1}
+.hub-identity-traits span{min-height:72px;display:flex;flex-direction:column;justify-content:space-between;padding:12px;border:1px solid var(--hub-accent-line);border-radius:14px;background:color-mix(in srgb,var(--bg-card) 86%,var(--hub-accent) 14%);font-size:11px;font-weight:750}
+.hub-identity-traits small{color:var(--hub-accent)!important;font-size:9px;font-weight:900;letter-spacing:.12em}
+
+/* Community cards inherit their hub signature. */
+.club-identity-card{--hub-accent:#a47b43;--hub-accent-soft:rgba(164,123,67,.12);--hub-accent-line:rgba(164,123,67,.28);border-top:2px solid var(--hub-accent)!important;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.club-identity-card:hover{transform:translateY(-4px);border-color:var(--hub-accent-line)!important;box-shadow:0 20px 55px color-mix(in srgb,var(--hub-accent) 14%,transparent)}
+.club-identity-card .tag,.club-identity-card .club-index{color:var(--hub-accent)!important}
+.club-identity-card .club-card-visual{background:linear-gradient(135deg,var(--hub-accent-soft),transparent 70%),var(--bg-card)!important}
+.club-identity-card[data-hub="rph"] .club-card-visual,.club-identity-card[data-hub="zencoders"] .club-card-visual,.club-identity-card[data-hub="jodc"] .club-card-visual{background-image:linear-gradient(90deg,var(--hub-accent-soft) 1px,transparent 1px),linear-gradient(var(--hub-accent-soft) 1px,transparent 1px)!important;background-size:18px 18px!important}
+.club-identity-card[data-hub="cicr"] .club-card-visual,.club-identity-card[data-hub="dronotics"] .club-card-visual{background-image:radial-gradient(circle at 30% 30%,var(--hub-accent-soft) 0 2px,transparent 3px),linear-gradient(135deg,var(--hub-accent-soft),transparent 70%)!important;background-size:26px 26px,auto!important}
+.club-identity-card[data-hub="cinekala"] .club-card-visual,.club-identity-card[data-hub="aura"] .club-card-visual{background-image:linear-gradient(90deg,transparent 48%,var(--hub-accent-line) 49%,var(--hub-accent-line) 51%,transparent 52%),linear-gradient(var(--hub-accent-soft),var(--hub-accent-soft))!important}
+.club-identity-card[data-hub="abhivyakti"] .club-card-visual,.club-identity-card[data-hub="vamunique"] .club-card-visual,.club-identity-card[data-hub="bds"] .club-card-visual{background-image:radial-gradient(ellipse at center,var(--hub-accent-soft),transparent 66%)!important}
+
+/* Events borrow the same signature from their linked community. */
+.event-identity-card{--hub-accent:#a47b43;--hub-accent-soft:rgba(164,123,67,.12);--hub-accent-line:rgba(164,123,67,.28);border-top:2px solid var(--hub-accent)!important}
+.event-identity-card .event-poster{position:relative;overflow:hidden}
+.event-identity-card .event-poster:after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(180deg,transparent,var(--hub-accent-soft));pointer-events:none}
+.event-domain-mark{position:absolute;right:12px;bottom:12px;z-index:3;padding:5px 8px;border:1px solid var(--hub-accent-line);border-radius:999px;background:color-mix(in srgb,var(--bg-main) 78%,transparent);color:var(--hub-accent)!important;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.event-identity-signature{display:block;margin:8px 0 2px}
+.event-detail-poster .event-domain-mark{right:14px;bottom:14px}
+
+/* Event detail: borrow the strongest pattern from serious fest/event sites —
+   a compact programme/context area rather than an oversized registration block. */
+.event-context-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:18px;margin:24px 0}
+.event-context-card{padding:22px;border:1px solid var(--hub-accent-line);border-radius:20px;background:linear-gradient(135deg,var(--hub-accent-soft),transparent 60%),var(--bg-card)}
+.event-context-card h2{margin:4px 0 16px;font-size:clamp(20px,2.3vw,30px);line-height:1.05}
+.event-timeline{display:grid;gap:0}
+.event-timeline>div{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--hub-accent-line)}
+.event-timeline>div:first-child{border-top:0}
+.event-timeline b{color:var(--hub-accent)!important;font-size:11px;letter-spacing:.08em}
+.event-timeline strong{display:block;font-size:14px}
+.event-timeline span{display:block;margin-top:4px;color:var(--text-muted)!important;font-size:12px;line-height:1.5}
+.event-related-club{display:flex;flex-direction:column;justify-content:center}
+.event-related-club .text-link{margin-top:12px;color:var(--hub-accent)!important}
+
+/* Editorial image wall: varied sizes, controlled ratios, no giant gaps. */
+.gallery-grid,.archive-story-collage{align-items:stretch}
+.gallery-grid .gallery-item,.archive-story-photo{min-width:0;overflow:hidden}
+.gallery-grid .gallery-item img,.archive-story-photo img{transition:transform .45s cubic-bezier(.2,.75,.25,1),filter .35s ease}
+.gallery-grid .gallery-item:hover img,.archive-story-photo:hover img{transform:scale(1.035)}
+
+/* Prevent inherited legacy text from disappearing on theme surfaces. */
+html[data-theme="light"] .public-app .feature-empty,
+html[data-theme="light"] .public-app .state,
+html[data-theme="light"] .public-app .club-section-card,
+html[data-theme="light"] .public-app .event-context-card,
+html[data-theme="light"] .public-app .hub-identity-rail{color:var(--jyc-light-ink)!important}
+html[data-theme="dark"] .public-app .feature-empty,
+html[data-theme="dark"] .public-app .state,
+html[data-theme="dark"] .public-app .club-section-card,
+html[data-theme="dark"] .public-app .event-context-card,
+html[data-theme="dark"] .public-app .hub-identity-rail{color:var(--jyc-dark-ink)!important}
+html[data-theme="light"] .public-app .feature-empty p,html[data-theme="light"] .public-app .state p{color:var(--jyc-light-muted)!important}
+html[data-theme="dark"] .public-app .feature-empty p,html[data-theme="dark"] .public-app .state p{color:var(--jyc-dark-muted)!important}
+
+/* Public filter controls stay collapsed until explicitly requested. */
+.public-app .club-filter-panel,.public-app .event-filter-panel,.public-app .gallery-filter{max-height:none}
+.public-app .filter-toggle{cursor:pointer}
+
+/* Mobile: keep the persistent nav useful rather than letting it collide with content. */
+@media(max-width:900px){
+  .nav{height:62px!important}.nav-inner{height:62px!important;width:calc(100% - 18px)!important}
+  .brand{min-width:44px!important}.brand>span:last-child{display:none}
+  .nav nav{gap:0;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}.nav nav::-webkit-scrollbar{display:none}
+  .nav nav button{padding:0 9px!important;font-size:9px!important}
+  .nav .theme-toggle{min-width:40px!important;height:36px!important;padding:0 9px!important}.theme-label{display:none}
+  .search-trigger{width:42px!important;min-width:42px!important;padding:0!important;font-size:0!important}.search-trigger span:last-child{display:none}
+  .hub-identity-rail{grid-template-columns:1fr}.hub-identity-traits{grid-template-columns:repeat(3,1fr)}
+  .event-context-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .hub-identity-traits{grid-template-columns:1fr}.hub-identity-traits span{min-height:58px}
+  .event-timeline>div{grid-template-columns:62px 1fr}.event-domain-mark{font-size:7px;max-width:55%}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{animation:none!important}.club-identity-card,.gallery-grid .gallery-item img,.archive-story-photo img{transition:none!important}
+}

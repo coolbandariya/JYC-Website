@@ -56,7 +56,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; worker-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; img-src 'self' data: blob: https://*.supabase.co https://api.qrserver.com https:; font-src 'self'; style-src 'self' 'unsafe-inline'; style-src-attr 'unsafe-inline'; script-src-attr 'none'; frame-src 'self' https://prod.spline.design https://www.google.com https://maps.google.com https://*.google.com https://www.openstreetmap.org; manifest-src 'self'"
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://unpkg.com; worker-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://unpkg.com https://www.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://api.qrserver.com https:; font-src 'self'; style-src 'self' 'unsafe-inline'; style-src-attr 'unsafe-inline'; script-src-attr 'none'; frame-src 'self' https://prod.spline.design https://www.google.com https://maps.google.com https://*.google.com https://www.openstreetmap.org; manifest-src 'self'"
         },
         {
           "key": "X-Permitted-Cross-Domain-Policies",

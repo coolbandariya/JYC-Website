@@ -81,10 +81,10 @@
 
 /* View Transition foundation based on native View Transition examples. */
 ::view-transition-group(root){animation-duration:1.15s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
-::view-transition-old(root){animation:jyc-19-old 1.15s ease both}
-::view-transition-new(root){animation:jyc-19-new 1.15s ease both}
-@keyframes jyc-19-old{to{opacity:.55;filter:saturate(.84) brightness(.94)}}
-@keyframes jyc-19-new{from{opacity:.25;filter:saturate(.78) brightness(1.05);transform:scale(1.012)}to{opacity:1;filter:none;transform:scale(1)}}
+::view-transition-old(root){animation:jyc19-old 1.15s ease both}
+::view-transition-new(root){animation:jyc19-new 1.15s ease both}
+@keyframes jyc19-old{to{opacity:.55;filter:saturate(.84) brightness(.94)}}
+@keyframes jyc19-new{from{opacity:.25;filter:saturate(.78) brightness(1.05);transform:scale(1.012)}to{opacity:1;filter:none;transform:scale(1)}}
 
 /* ---------- PUBLIC ROUTE / EDITORIAL RHYTHM ---------- */
 .route-stage{animation:jyc19-route-in .48s cubic-bezier(.2,.7,.2,1) both}.app>.section,.app>.home{min-width:0}

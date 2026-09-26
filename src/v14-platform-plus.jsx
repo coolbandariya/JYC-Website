@@ -8,6 +8,7 @@ const CAMPUSES={
   '128':{id:'128',label:'Sector 128',short:'128',subtitle:'Jaypee Wish Town · Sector-128, Noida',lat:28.518691,lng:77.365052,address:'Sector-128, Jaypee Wish Town Village, Sultanpur, Noida-201 304, Uttar Pradesh, India',pulse:'https://jiit-pulse.vercel.app/',bbox:'77.359,28.514,77.371,28.523'}
 };
 const directions=(c)=>`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${c.lat},${c.lng}`)}`;
+const googleMaps=(c)=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${c.lat},${c.lng}`)}`;
 const osmEmbed=(c)=>`https://www.openstreetmap.org/export/embed.html?bbox=${c.bbox}&layer=mapnik&marker=${c.lat},${c.lng}`;
 
 export function CampusMapPage({data}){
@@ -30,7 +31,7 @@ export function CampusMapPage({data}){
    </div>
    <label className="map-search"><span aria-hidden="true">⌕</span><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search JYC venue…" aria-label="Search campus venues"/>{q&&<button type="button" onClick={()=>setQ('')} aria-label="Clear venue search">×</button>}</label>
   </div>
-  <div className="campus-map-summary reveal"><div><span className="eyebrow">CURRENT CAMPUS</span><strong>{c.label}</strong><small>{c.subtitle}</small></div><div><b>{filtered.length}</b><span>JYC venues</span></div><div><b>{data.events.filter(e=>e.published&&!e.archived&&e.map_url&&(!e.campus||String(e.campus)===String(campus)||String(e.venue||'').toLowerCase().includes(c.label.toLowerCase())||String(e.venue||'').toLowerCase().includes(c.label.toLowerCase().replace('sector ','sector-')))).length}</b><span>event-linked places</span></div><a href={directions(c)} target="_blank" rel="noopener noreferrer">Directions ↗</a></div>
+  <div className="campus-map-summary reveal"><div><span className="eyebrow">CURRENT CAMPUS</span><strong>{c.label}</strong><small>{c.subtitle}</small></div><div><b>{filtered.length}</b><span>JYC venues</span></div><div><b>{data.events.filter(e=>e.published&&!e.archived&&e.map_url&&(!e.campus||String(e.campus)===String(campus)||String(e.venue||'').toLowerCase().includes(c.label.toLowerCase())||String(e.venue||'').toLowerCase().includes(c.label.toLowerCase().replace('sector ','sector-')))).length}</b><span>event-linked places</span></div><a href={googleMaps(c)} target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a><a href={directions(c)} target="_blank" rel="noopener noreferrer">Directions ↗</a></div>
   <div className="campus-map-layout reveal">
    <div className="campus-map-frame functional-map">
     <iframe title={`OpenStreetMap map for JIIT ${c.label}`} src={osmEmbed(c)} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>
@@ -39,7 +40,7 @@ export function CampusMapPage({data}){
     <div className="map-source-chip">OPENSTREETMAP · JYC CAMPUS LAYER</div>
    </div>
    <aside className="campus-map-side">
-    <div className="campus-location-highlight"><span className="eyebrow">CAMPUS</span><h2>{c.label}</h2><p>{c.address}</p><div className="map-side-actions"><a className="btn" href={directions(c)} target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></div>
+    <div className="campus-location-highlight"><span className="eyebrow">CAMPUS</span><h2>{c.label}</h2><p>{c.address}</p><div className="map-side-actions"><a className="btn" href={googleMaps(c)} target="_blank" rel="noopener noreferrer">Open JIIT in Google Maps ↗</a><a className="btn secondary" href={directions(c)} target="_blank" rel="noopener noreferrer">Get directions ↗</a></div></div>
     <div className="campus-venue-list"><div className="venue-list-head"><span className="eyebrow">JYC VENUES</span><small>{filtered.length} result{filtered.length===1?'':'s'}</small></div>{filtered.length?filtered.map((x,i)=><button key={x.id||i} className={selected===x.id?'active':''} onClick={()=>setSelected(x.id||null)}><span>{String(i+1).padStart(2,'0')}</span><div><strong>{x.name}</strong><small>{x.type||'VENUE'} · {x.description||'Official JYC location'}</small></div><b>→</b></button>):<div className="map-empty"><strong>No published JYC venue matches.</strong><span>Try another search or check the campus selector.</span></div>}{selectedLocation&&<div className="selected-venue-card"><span className="eyebrow">SELECTED VENUE</span><strong>{selectedLocation.name}</strong><small>{selectedLocation.description||selectedLocation.type||'JYC venue'}</small><div>{selectedLocation.mapUrl&&<a href={safe(selectedLocation.mapUrl)} target="_blank" rel="noopener noreferrer">Open venue map ↗</a>}<a href={selectedLocation.lat&&selectedLocation.lng?directions({lat:selectedLocation.lat,lng:selectedLocation.lng}):directions(c)} target="_blank" rel="noopener noreferrer">Directions ↗</a></div></div>}</div>
    </aside>
   </div>

@@ -3,7 +3,7 @@
    Inspired by the clarity of open student-organization portals and the composable/open-code
    philosophy of shadcn/ui, while keeping JYC's own Phoenix identity. */
 
-:root{--club-ink:#09090b;--club-paper:#f7f0df;--club-panel:#141217;--club-red:#d52c2c;--club-gold:#caa36e;--club-line:rgba(202,163,110,.28);--club-muted:#aaa4b1;--club-display:'Space Grotesk',sans-serif}
+:root{--club-ink:#09090b;--club-paper:#f7f0df;--club-panel:#141217;--club-red:#a47b43;--club-gold:#caa36e;--club-line:rgba(202,163,110,.28);--club-muted:#aaa4b1;--club-display:'Space Grotesk',sans-serif}
 :root[data-theme=dark]{--bg-main:var(--club-ink);--bg-card:#151319;--text-primary:#fff5dc;--text-muted:#aaa4b1;--border-tech:var(--club-line)}
 :root[data-theme=light]{--bg-main:var(--club-paper);--bg-card:#fffaf0;--text-primary:#171419;--text-muted:#716b70;--border-tech:rgba(93,63,34,.22)}
 
