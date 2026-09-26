@@ -27,6 +27,11 @@ export default defineConfig({
               priority: 25
             },
             {
+              name: 'falcon-vendor',
+              test: /node_modules[\\/]three[\\/]/,
+              priority: 25
+            },
+            {
               name: 'vendor',
               test: /node_modules[\\/]/,
               priority: 10,

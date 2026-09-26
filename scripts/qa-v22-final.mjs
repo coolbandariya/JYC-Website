@@ -12,7 +12,7 @@ check('public demo clubs fallback exists',main.includes('function publicDemoData
 check('public demo events fallback exists',main.includes('PUBLIC_EVENT_FALLBACK'));
 check('team photography assets referenced',main.includes('/assets/team/devansh-tripathi.webp')&&main.includes('/assets/team/amrit-kumar.webp'));
 check('agentic bridge remains separate',main.includes('agentic-popup')&&main.includes('demo-agentic-ai-website.vercel.app'));
-check('Phoenix remains singular on hero',main.includes('InteractivePhoenix')&&phoenix.includes('phoenix-depth-stack')&&!phoenix.includes('1780947277181-w2z6yhqv.glb'));
+check('hero visual is singular (WebGL falcon, no legacy phoenix layer)',main.includes('Falcon3DLayer')&&!main.includes('<InteractivePhoenix')&&!main.includes('sky-stars')&&phoenix.includes('phoenix-depth-stack')&&!phoenix.includes('1780947277181-w2z6yhqv.glb'));
 check('reduced motion fallback exists',css.includes('@media(prefers-reduced-motion:reduce)'));
 check('filters are closed until clicked',main.includes('filtersOpen')&&main.includes('filter-toggle'));
 check('custom cursor is removed from public shell',!main.includes('<CustomCursor/>')&&css.includes('jyc-cursor-dot'));
