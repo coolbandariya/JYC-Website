@@ -10,6 +10,8 @@ export const JYC_SOCIALS = {
   Fortissimo: {},
   BDS: {},
   VamUnique: {
+    instagram: 'https://www.instagram.com/vamunique/',
+    instagramHandle: '@vamunique',
     linkedin: 'https://www.linkedin.com/company/vamunique-the-dance-society-jiit-noida/',
     label: 'Vamunique · The Dance Society, JIIT Noida',
     verifiedBy: 'https://www.linkedin.com/company/vamunique-the-dance-society-jiit-noida/',
@@ -51,10 +53,18 @@ export const JYC_SOCIALS = {
     verifiedOn: '2026-10-03'
   },
   CypherX: {
+    instagram: 'https://www.instagram.com/cypherx_jiit/',
+    instagramHandle: '@cypherx_jiit',
     linkedin: 'https://www.linkedin.com/company/cypherx-jiit/',
     label: 'CypherX · JIIT-128'
   },
-  Arcadia: {},
+  Arcadia: {
+    instagram: 'https://www.instagram.com/arcadia_jiit/',
+    instagramHandle: '@arcadia_jiit',
+    label: 'Arcadia · JIIT Esports',
+    verifiedBy: 'all hubs 1.pdf',
+    verifiedOn: '2026-10-04'
+  },
   'Neural Nexus': {},
   GDG: {
     instagram: 'https://www.instagram.com/gdg_jiit/',
@@ -74,17 +84,25 @@ export const JYC_SOCIALS = {
     verifiedOn: '2026-10-03'
   },
   Aakriti: {},
-  Aura: {},
+  Aura: {
+    instagram: 'https://www.instagram.com/auraphotography.128/',
+    instagramHandle: '@auraphotography.128',
+    label: 'Aura Photography · JIIT-128',
+    verifiedBy: 'all hubs 1.pdf',
+    verifiedOn: '2026-10-04'
+  },
   Cinekala: {},
   Abhivyakti: {
     label: 'Abhivyakti · JIIT-128'
   },
   Prismatic: {},
   Eloquence: {
+    instagram: 'https://www.instagram.com/eloquencej128/',
+    instagramHandle: '@eloquencej128',
     linkedin: 'https://www.linkedin.com/company/eloquence-litsoc/',
     label: 'Eloquence · Literary Society of JIIT',
     verifiedBy: 'https://www.linkedin.com/company/eloquence-litsoc/',
-    verifiedOn: '2026-10-03'
+    verifiedOn: '2026-10-04'
   },
   JSA: {}
 };

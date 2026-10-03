@@ -88,6 +88,8 @@ function publicDemoData(){
  return mergePublicFallback(norm({...empty,clubs,events:PUBLIC_EVENT_FALLBACK,gallery:PUBLIC_GALLERY_FALLBACK,team:PUBLIC_TEAM_FALLBACK,homepage:{...empty.homepage,activities:PUBLIC_ACTIVITIES}}));
 }
 import { normalizeSearch, rankSearchResults } from './lib/search.js';
+import {JYCBot} from './jyc-bot.jsx';
+import {FeaturedEventPopup} from './featured-event-popup.jsx';
 import {CREATOR,JYC_CONTACTS} from './lib/site-config.js';
 
 import {QRSharePage} from './v14-platform-plus.jsx';
@@ -215,7 +217,7 @@ function App(){const loc=useLocation();const nav=useNavigate();const [data,setDa
   if(!bootReady)return <Loading stage={bootStage} cached={Boolean(readSiteCache())}/>;
   const connectionNotice=(!online||error)?<div className={`connection-notice ${readSiteCache()?'cached':'offline'} ${error==='JYC data service is not deployed. Run supabase/FINAL-PRODUCTION-REPAIR.sql in the connected Supabase project, then refresh.'?'setup-needed':''}`} role="status"><span>{!online?'You are offline. JYC will keep using cached content until the connection returns.':error==='JYC data service is not deployed. Run supabase/FINAL-PRODUCTION-REPAIR.sql in the connected Supabase project, then refresh.'?'JYC data service needs setup.':readSiteCache()?`Showing the last saved JYC snapshot · ${formatCacheAge(siteCacheAge())}.`:'JYC content is currently offline.'}</span><button onClick={()=>window.dispatchEvent(new CustomEvent('jyc-refresh-data'))}>Refresh</button></div>:null;
  const isAdmin=loc.pathname.startsWith('/admin');
- const content=<div className="app-frame"><SiteAtmosphere/><ScrollProgress/><BackToTop/><SkipLink/>{!isAdmin&&<><Navbar data={data} admin={admin} theme={theme} setTheme={setTheme}/><JYCBot data={data}/><FirstVisitTour/></>} {connectionNotice}<div id="main-content" className={isAdmin?'app admin-app':'app public-app'}><div className="route-stage" key={`${loc.pathname}${loc.search}`}><Routes data={data} admin={admin} session={session} setAdmin={setAdmin} commit={commit} notify={notify} theme={theme} setTheme={setTheme}/></div></div>{!isAdmin&&<Footer data={data} admin={admin}/>} {toast&&<div className={`toast toast-${toast.type||'success'}`} role="status"><span>{toast.type==='error'?'!':'✓'}</span>{toast.message}</div>} {confirm&&<ConfirmDialog request={confirm} onClose={ok=>{confirm.resolve?.(ok);setConfirm(null)}}/>}<InstallPrompt/></div>;
+ const content=<div className="app-frame"><SiteAtmosphere/><ScrollProgress/><BackToTop/><SkipLink/>{!isAdmin&&<><Navbar data={data} admin={admin} theme={theme} setTheme={setTheme}/><JYCBot data={data}/><FeaturedEventPopup/></>} {connectionNotice}<div id="main-content" className={isAdmin?'app admin-app':'app public-app'}><div className="route-stage" key={`${loc.pathname}${loc.search}`}><Routes data={data} admin={admin} session={session} setAdmin={setAdmin} commit={commit} notify={notify} theme={theme} setTheme={setTheme}/></div></div>{!isAdmin&&<Footer data={data} admin={admin}/>} {toast&&<div className={`toast toast-${toast.type||'success'}`} role="status"><span>{toast.type==='error'?'!':'✓'}</span>{toast.message}</div>} {confirm&&<ConfirmDialog request={confirm} onClose={ok=>{confirm.resolve?.(ok);setConfirm(null)}}/>}<InstallPrompt/></div>;
  return <MaintenanceGate data={isAdmin?{maintenance:{on:false}}:data}>{content}</MaintenanceGate>}
 
 function ClubDetail({data,id,virtualName}){
@@ -520,42 +522,6 @@ const explore=[
    <div className="more-sheet-connect"><span className="eyebrow">CONNECT WITH JYC</span><div><a href={JYC_CONTACTS.instagram} target="_blank" rel="noreferrer">Instagram ↗</a><a href={JYC_CONTACTS.whatsapp} target="_blank" rel="noreferrer">WhatsApp ↗</a><a href={'mailto:'+data.creator.email}>Email ↗</a></div></div>
   </div>
  </div>
-}
-
-function JYCBot({data}){
- const nav=useNavigate(); const loc=useLocation(); const [open,setOpen]=useState(false); const [modelReady,setModelReady]=useState(false); const [modelAvailable,setModelAvailable]=useState(false); const [modelFailed,setModelFailed]=useState(false);
- const context=loc.pathname.startsWith('/events')?'events':loc.pathname.startsWith('/clubs')?'clubs':loc.pathname.startsWith('/gallery')?'gallery':loc.pathname.startsWith('/team')||loc.pathname.startsWith('/leadership')?'team':'home';
- const copy={home:['Welcome to JYC.','Explore communities, events and the people behind campus life.'],clubs:['Find your community.','I can take you to clubs, technical hubs or creative spaces.'],events:['What’s happening?','Open the event trail and find the next JYC experience.'],gallery:['Keep the moment.','Explore the visual archive and event stories.'],team:['Meet the people.','See the leadership behind JYC.']}[context];
- useEffect(()=>{let alive=true;const checkAsset=()=>fetch('/models/jyc-spatial.glb',{method:'HEAD',cache:'no-store'}).then(r=>{if(alive)setModelAvailable(r.ok)}).catch(()=>{if(alive)setModelAvailable(false)});const ready=()=>{if(alive){setModelReady(Boolean(customElements?.get('model-viewer')));checkAsset()}};if(customElements?.get('model-viewer')){ready();return()=>{alive=false}}const script=document.createElement('script');script.type='module';script.src='https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js';script.onload=ready;script.onerror=()=>setModelFailed(true);document.head.appendChild(script);return()=>{alive=false}},[]);
- const go=p=>{setOpen(false);nav(p)};
- return <div className={`jyc-bot ${open?'is-open':''}`} data-context={context}>
-   <button className="jyc-bot-orb" type="button" aria-label={open?'Close JYC guide':'Open JYC guide'} aria-expanded={open} onClick={()=>setOpen(v=>!v)}>
-    <span className="jyc-bot-status"/><span className="jyc-bot-model-wrap">{modelReady&&modelAvailable&&!modelFailed?<model-viewer class="jyc-bot-glb" src="/models/jyc-spatial.glb" poster="/jyc-logo-circle.png" camera-controls disable-zoom auto-rotate="false" interaction-prompt="none" alt="Interactive JYC guide bot" onError={()=>setModelFailed(true)}></model-viewer>:<span className="jyc-bot-model-fallback" aria-hidden="true"><span className="bot-head"/><span className="bot-body"/><span className="bot-arm"/></span>}</span>
-   </button>
-   {open&&<div className="jyc-bot-panel" role="dialog" aria-label="JYC guide">
-    <div className="jyc-bot-head"><div><span className="eyebrow">JYC GUIDE</span><strong>{copy[0]}</strong><p>{copy[1]}</p></div><button type="button" onClick={()=>setOpen(false)} aria-label="Close JYC guide">×</button></div>
-    <div className="jyc-bot-actions"><button onClick={()=>go('/clubs')}>Find clubs <span>↗</span></button><button onClick={()=>go('/events')}>This week <span>↗</span></button><button onClick={()=>go('/gallery')}>Campus moments <span>↗</span></button><button onClick={()=>go('/about')}>How JYC works <span>↗</span></button></div>
-   </div>}
- </div>
-}
-function FirstVisitTour(){
- const nav=useNavigate();const loc=useLocation();const [step,setStep]=useState(0);const [show,setShow]=useState(false);
- useEffect(()=>{const open=()=>{setStep(0);setShow(true)};window.addEventListener('jyc-open-tour',open);try{if(storageGet('jyc-onboarding-v6')!=='done')setShow(true)}catch{setShow(true)}return()=>window.removeEventListener('jyc-open-tour',open)},[]);
- useEffect(()=>{document.body.classList.toggle('jyc-tour-open',show);return()=>document.body.classList.remove('jyc-tour-open')},[show]);
- const finish=()=>{try{storageSet('jyc-onboarding-v6','done')}catch{}setShow(false)};
- if(!show)return null;
- const steps=[
-  ['WELCOME','Welcome to JYC.','This is the official JIIT Youth Club website — communities, experiences, people and the stories they create.','START'],
-  ['01 · CLUBS','Meet the communities.','Open Clubs to explore official JYC communities, then open a club to see its people, work, links and current opportunities.','CLUBS','/clubs'],
-  ['02 · EVENTS','See JYC in motion.','Events are the live pulse of the club. Open an event for its venue, registration, save and calendar actions.','EVENTS','/events'],
-  ['03 · ARCHIVE','Keep the JYC story.','Explore published people, communities, events and visual moments across the JYC archive.','ARCHIVE','/archive'],
-  ['04 · MORE','Find the rest of JYC.','Use More for the pages that are not already in the main navigation.','MORE'],
-  ['READY','Ready to soar.','You now know the JYC route: Communities → Events → Stories → Archive. Start exploring JYC.','DONE']
- ];
- const [eyebrow,title,text,label,path]=steps[step];
- const go=()=>{if(path)nav(path);setStep(v=>Math.min(v+1,steps.length-1));window.scrollTo({top:0,behavior:'smooth'})};
- const atPage=path?loc.pathname===path:false;
- return <div className="onboarding-overlay" role="dialog" aria-modal="true" aria-label="Interactive JYC website tour"><div className="onboarding-card onboarding-card-rich jyc-club-tour-card"><button className="onboarding-close" onClick={finish} aria-label="Close guide">×</button><div className="onboarding-bird"><LogoImage alt="JIIT Youth Club"/></div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2><p>{text}</p>{path&&<button className="tour-route" onClick={go}><span>{String(Math.max(1,step)).padStart(2,'0')}</span><strong>{step===steps.length-1?'Finish tour':atPage?`Continue ${label}`:`Open ${label}`}</strong><em>{step===steps.length-1?'Start exploring →':`Navigate to ${label.toLowerCase()} and continue →`}</em></button>}<div className="onboarding-progress-label"><span>STEP {String(step+1).padStart(2,'0')} / {String(steps.length).padStart(2,'0')}</span><span>{label}</span></div><div className="onboarding-progress">{steps.map((_,i)=><i key={i} className={i===step?'active':''}/>)}</div><div className="onboarding-actions"><button className="tour-skip" onClick={finish}>Skip</button><button className="tour-next" onClick={()=>step<steps.length-1?setStep(v=>v+1):finish()}>{step<steps.length-1?'Next':'Start exploring'} →</button></div></div></div>
 }
 
 function Search({data,admin,close}){

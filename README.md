@@ -1,6 +1,6 @@
 # JIIT Youth Club 128 — Official Website
 
-> **Current direction: V43 — Official JYC 128 experience**
+> **Current direction: V45 — Social-first JYC 128 experience**
 
 The official public website for **JIIT Youth Club (JYC), JIIT Wish Town Campus, Sector 128, Noida**.
 
@@ -181,7 +181,7 @@ npm run qa:browser
 
 ## Research basis
 
-The V43 direction is based on current JIIT material, the supplied JYC hub/programme archive, current JIIT 128 community/event references, current web accessibility guidance, and current Google event structured-data guidance. The implementation keeps JYC's public experience source-first: historical supplied material is presented as archive/context rather than silently treated as a current roster.
+The V45 direction is based on current JIIT material, the supplied JYC hub/programme archive, current JIIT 128 community/event references, current web accessibility guidance, and current Google event structured-data guidance, verified public club social identities, and the JAI 2026 registration brief. The implementation keeps JYC's public experience source-first: historical supplied material is presented as archive/context rather than silently treated as a current roster.
 
 See:
 - `docs/V37-OFFICIAL-JYC-128-SCOPE.md`
@@ -205,3 +205,12 @@ A release is not production-ready until:
 10. performance and accessibility regressions are checked
 11. release metadata, package-lock and documentation identify the same product generation
 12. the connected production deployment is verified separately from GitHub CI
+
+
+## V45 product upgrades
+
+- Standalone JYC Assistant with source-grounded local search across published clubs, events, people and pages.
+- Restored the supplied JYC assistant GLB at `public/models/jyc-spatial.glb` and kept its camera fixed; clicking the bot opens the Assistant and triggers a restrained wave motion.
+- Featured JAI 2026 popup appears on every fresh public website visit, including returning visitors, with official site, Unstop registration and Discord actions.
+- Club social identities are maintained in `src/jyc-socials.js`; only publicly verified handles are added, with hub-PDF provenance where applicable.
+- Public hub/profile pages continue to use supplied All Hubs material and source photography rather than invented club facts.
