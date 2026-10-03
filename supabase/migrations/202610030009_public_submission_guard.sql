@@ -47,6 +47,19 @@ begin
   return row_data.request_count <= p_limit;
 end;
 $$;
+-- Keep the limiter table bounded without requiring a separate scheduler extension.
+create or replace function public.jyc_prune_public_submission_limits()
+returns void
+language sql
+security definer
+set search_path = public
+as $
+  delete from public.jyc_public_submission_rate_limits
+  where updated_at < now() - interval '2 days';
+$;
+revoke all on function public.jyc_prune_public_submission_limits() from public;
+grant execute on function public.jyc_prune_public_submission_limits() to service_role;
+
 revoke all on function public.jyc_allow_public_submission(text,integer,integer) from public;
 grant execute on function public.jyc_allow_public_submission(text,integer,integer) to service_role;
 
