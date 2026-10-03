@@ -15,6 +15,8 @@ import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-media.js';
 import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ACTIVITIES} from './public-v1/config.js';
 import {JYC_SOCIALS,festSocialProfile,socialProfile} from './jyc-socials.js';
+import JYCHistory,{HistoryTeaser} from './jyc-history-page.jsx';
+import './styles/jyc-history.css';
 
 const PUBLIC_TEAM_FALLBACK=[
  {id:'devansh-tripathi',name:'Devansh Tripathi',role:'General Secretary',published:true,bio:'A prominent face of JYC 128, contributing across student societies spanning leadership, creativity, innovation, culture, literature, design and technology.',photo:'/assets/team/devansh-tripathi.webp'},
@@ -366,6 +368,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  const titles={
   '/':'JIIT Youth Club (JYC) — Clubs, Events & Fests | JIIT Noida',
   '/about':'What is JIIT Youth Club (JYC)? | JIIT Noida',
+  '/history':'The History of JIIT Youth Club | JYC 128',
   '/clubs':'JIIT Clubs & Student Communities | JIIT Youth Club',
   '/events':'JIIT Events & Campus Activities | JIIT Youth Club',
   '/fests':'JIIT Fests & Flagship Events | JIIT Youth Club',
@@ -392,7 +395,8 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  };
  const descriptions={
   '/':'Official JIIT Youth Club (JYC) website for JIIT Noida. Discover JIIT clubs, student communities, JIIT events, annual fests and co-curricular activities.',
-  '/clubs':'Explore the official JIIT club list and student communities across technical, cultural, literary, creative, sports and other campus interests through JIIT Youth Club.',
+  '/history':'Read the evidence-led public history of JIIT Youth Club, from hub coordination and induction programmes to flagship JIIT campus experiences.',
+  '/clubs':'Explore the official JIIT club list and student communities across technical, cultural, literary, creative, sports and other campus interests through JIIT Youth Club.
   '/events':'Find JIIT events, workshops, competitions, cultural activities and campus events published by JIIT Youth Club at JIIT Noida.',
   '/fests':'Explore JIIT fests and flagship campus events such as officially published JYC programmes, with dates, venues, clubs and registration details when available.',
   '/resources':'JIIT Youth Club — official clubs, events, fests and community information.',
@@ -413,7 +417,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  const knownPublic=['/','/about','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/archive','/calendar','/event-calendar','/events','/achievements','/announcements','/resources','/recruitment','/join-jyc'].includes(clean)&&(clean!=='/fests'||isFestMode(data));
  const knownDetail=Boolean(club||event);
  const unknownRoute=!privateRoute&&!knownPublic&&!knownDetail;
- const pageType=club?'club':event?'event':clean==='/fests'?'fests':clean==='/clubs'?'clubs':clean==='/events'?'events':clean==='/gallery'?'gallery':clean==='/team'||clean==='/leadership'?'team':clean==='/resources'?'resources':clean==='/announcements'?'announcements':clean==='/achievements'?'achievements':clean==='/guide'?'about':clean==='/calendar'||clean==='/planner'?'calendar':clean==='/recruitment'?'recruitment':clean==='/join-jyc'?'join-jyc':clean==='/about'?'about':clean==='/contact'?'contact':'home';
+ const pageType=club?'club':event?'event':clean==='/fests'?'fests':clean==='/clubs'?'clubs':clean==='/events'?'events':clean==='/gallery'?'gallery':clean==='/team'||clean==='/leadership'?'team':clean==='/history'?'history':clean==='/resources'?'resources':clean==='/announcements'?'announcements':clean==='/achievements'?'achievements':clean==='/guide'?'about':clean==='/calendar'||clean==='/planner'?'calendar':clean==='/recruitment'?'recruitment':clean==='/join-jyc'?'join-jyc':clean==='/about'?'about':clean==='/contact'?'contact':'home';
  const canonicalPath=club?`/clubs/${slug(club.name)}`:event?`/events/${slug(event.title)}${parts[2]==='register'?'/register':''}`:clean;
  useEffect(()=>{if((club||event)&&slugId!==slug((club||event).name||(club||event).title)){const target=event?`/events/${slug(event.title)}${parts[2]==='register'?'/register':''}`:`/clubs/${slug(club.name)}`;nav(target,{replace:true});}},[slugId,club?.id,event?.id,parts[2],nav]);
  const title=club?`${club.name} | JIIT Club · JYC`:event?`${event.title} | JIIT Event · JYC`:titles[clean]||'JIIT Youth Club';
@@ -421,6 +425,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  usePageMeta(title,description,canonicalPath,{noindex:privateRoute||unknownRoute,type:event?'event':'website'});
  const schema=<JsonLd data={data} pageType={pageType} item={club||event} path={canonicalPath}/>;
  if(clean==='/')return <>{schema}<Home data={data}/></>;
+ if(clean==='/history')return <><JYCHistory data={data}/></>;
  if(clean==='/about')return <>{schema}<About data={data}/></>;if(clean==='/clubs')return <>{schema}<Clubs data={data}/></>;if(club)return <>{schema}<ClubDetail data={data} id={slugId} virtualName={hubKey||undefined}/></>;
  if(clean==='/events')return <>{schema}<Events data={data}/></>;if(clean==='/fests')return isFestMode(data)?<>{schema}<FestsPage data={data}/></>:<Navigate to="/events" replace/>;if(event&&parts[2]==='register')return <>{schema}<RegistrationPage data={data} id={slugId} session={session}/></>;if(event)return <>{schema}<EventDetail data={data} id={slugId} session={session}/></>;
  if(clean==='/gallery')return <>{schema}<Gallery data={data}/></>;if(clean==='/team'||clean==='/leadership')return <>{schema}<Team data={data}/></>;if(clean==='/contact')return <>{schema}<Contact data={data}/></>;if(clean==='/archive')return <ArchivePage data={data}/>;
@@ -500,7 +505,8 @@ function MobileMoreSheet({data,admin,close,openSearch}){
  },[close]);
  const go=p=>{close();nav(p)};
 const explore=[
-   ['/about','About JYC','History, vision, mission and values'],
+   ['/about','About JYC','Vision, mission and values'],
+   ['/history','JYC History','Evidence-led milestones and the organisation’s story'],
    ['/leadership','Leadership','Faculty, Apex and Core Team'],
    ['/clubs','Clubs & Communities','Explore the official hub ecosystem'],
    ['/events','Events','Upcoming, ongoing and completed experiences'],
@@ -588,7 +594,7 @@ function Search({data,admin,close}){
 }
 function ConfirmDialog({request,onClose}){useEffect(()=>{const onKey=e=>{if(e.key==='Escape')onClose(false);if(e.key==='Enter')onClose(true)};document.addEventListener('keydown',onKey);return()=>document.removeEventListener('keydown',onKey)},[onClose]);return <div className="confirm-overlay" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)onClose(false)}}><div className="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="jyc-confirm-title" aria-describedby="jyc-confirm-text"><span className="eyebrow">JYC · CONFIRM</span><h2 id="jyc-confirm-title">{request.title||'Are you sure?'}</h2><p id="jyc-confirm-text">{request.text||''}</p><div className="confirm-actions"><button className="btn secondary" onClick={()=>onClose(false)}>Cancel</button><button className={`btn ${request.danger?'danger':''}`} onClick={()=>onClose(true)}>{request.confirmLabel||'Confirm'}</button></div></div></div>}
 
-function Footer({data,admin}){const nav=useNavigate();return <footer className="jyc-footer jyc-club-footer"><div className="footer-top"><div className="footer-brand"><div className="footer-logo-lockup"><LogoImage alt="JYC logo"/></div><div><strong>JIIT YOUTH CLUB</strong><span>READY TO SOAR · JIIT SECTOR 128</span><p>The student-led club behind JIIT's communities, events and campus experiences.</p></div></div><div className="footer-nav"><span className="eyebrow">JYC</span><div><button onClick={()=>nav('/about')}>About</button><button onClick={()=>nav('/clubs')}>Clubs</button><button onClick={()=>nav('/events')}>Events</button>{isFestMode(data)&&<button onClick={()=>nav('/fests')}>Fests</button>}<button onClick={()=>nav('/team')}>Team</button><button onClick={()=>nav('/join-jyc')}>Join JYC</button><button onClick={()=>nav('/calendar')}>Event Calendar</button><button onClick={()=>nav('/archive')}>Archive</button><button onClick={()=>nav('/contact')}>Contact</button></div></div><div className="footer-connect creator-card"><span className="eyebrow">BUILT FOR JYC</span><strong>JYC public experience</strong><p>Official club information, communities and experiences in one public home.</p><span className="eyebrow">CONNECT</span><a href={JYC_CONTACTS.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href={JYC_CONTACTS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href={'mailto:'+data.creator.email}>Email ↗</a></div></div><div className="footer-bottom"><small>© {new Date().getFullYear()} JYC 128 · Website by {data.creator.name}</small><span>JIIT YOUTH CLUB</span><button className="footer-admin-link" onClick={()=>nav('/admin')} aria-label="JYC staff access">Staff Control Center ↗</button></div></footer>}
+function Footer({data,admin}){const nav=useNavigate();return <footer className="jyc-footer jyc-club-footer"><div className="footer-top"><div className="footer-brand"><div className="footer-logo-lockup"><LogoImage alt="JYC logo"/></div><div><strong>JIIT YOUTH CLUB</strong><span>READY TO SOAR · JIIT SECTOR 128</span><p>The student-led club behind JIIT's communities, events and campus experiences.</p></div></div><div className="footer-nav"><span className="eyebrow">JYC</span><div><button onClick={()=>nav('/about')}>About</button><button onClick={()=>nav('/clubs')}>Clubs</button><button onClick={()=>nav('/events')}>Events</button>{isFestMode(data)&&<button onClick={()=>nav('/fests')}>Fests</button>}<button onClick={()=>nav('/team')}>Team</button><button onClick={()=>nav('/join-jyc')}>Join JYC</button><button onClick={()=>nav('/calendar')}>Event Calendar</button><button onClick={()=>nav('/archive')}>Archive</button><button onClick={()=>nav('/history')}>History</button><button onClick={()=>nav('/contact')}>Contact</button></div></div><div className="footer-connect creator-card"><span className="eyebrow">BUILT FOR JYC</span><strong>JYC public experience</strong><p>Official club information, communities and experiences in one public home.</p><span className="eyebrow">CONNECT</span><a href={JYC_CONTACTS.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href={JYC_CONTACTS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><a href={'mailto:'+data.creator.email}>Email ↗</a></div></div><div className="footer-bottom"><small>© {new Date().getFullYear()} JYC 128 · Website by {data.creator.name}</small><span>JIIT YOUTH CLUB</span><button className="footer-admin-link" onClick={()=>nav('/admin')} aria-label="JYC staff access">Staff Control Center ↗</button></div></footer>}
 
 function Loading({stage='INITIALIZING',cached=false}){ 
  const labels={INITIALIZING:['INITIALIZING','CONNECTING TO JYC'],LOADING:['LOADING','PREPARING THE CAMPUS ECOSYSTEM'],SYNCING:['SYNCING',cached?'USING YOUR LATEST SAVED SNAPSHOT':'CHECKING THE LATEST CAMPUS DATA'],READY:['READY','BUILDING YOUR EXPERIENCE'],OFFLINE:['OFFLINE','OPENING THE LAST AVAILABLE JYC EXPERIENCE']};
@@ -708,7 +714,7 @@ function Home({data}){
    </div>
    <div className="v40-visual-caption"><strong>JIIT YOUTH CLUB</strong><span>Student communities · campus experiences · Sector 128</span></div>
   </div>
- </section>{data.announcement.on&&data.announcement.text&&<div className="announcement reveal"><span>JYC UPDATE</span><p>{data.announcement.text}</p>{safeExternalUrl(data.announcement.link)&&<a href={safeExternalUrl(data.announcement.link)} target="_blank" rel="noopener noreferrer">Open ↗</a>}</div>}<JYCPulse data={data}/><ImpactStats data={data}/><div className="home-layout">{visibleLayout.map(k=>render[k])}</div></div>
+ </section>{data.announcement.on&&data.announcement.text&&<div className="announcement reveal"><span>JYC UPDATE</span><p>{data.announcement.text}</p>{safeExternalUrl(data.announcement.link)&&<a href={safeExternalUrl(data.announcement.link)} target="_blank" rel="noopener noreferrer">Open ↗</a>}</div>}<JYCPulse data={data}/><ImpactStats data={data}/><HistoryTeaser/><div className="home-layout">{visibleLayout.map(k=>render[k])}</div></div>
 }
 function JoinJYC(){
  const nav=useNavigate();
