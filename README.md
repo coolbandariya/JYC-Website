@@ -1,3 +1,28 @@
+# JIIT Youth Club — JYC 128 Website
+
+> **Current release: V36.0.0 · Senior V1 product alignment**
+>
+> Official public website direction for **JIIT Youth Club, Sector 128, Noida**. The V36 line aligns the public information architecture with the approved senior V1 specification: Home, About JYC, Leadership, Events, Event Details, Event Calendar, Clubs, Gallery, Achievements, Announcements, Join JYC (Coming Soon) and Contact.
+
+## V36 product contract
+
+- **Home:** JYC 128 identity, “The Voice. The Talent. The Spirit. of JIIT.” positioning, event discovery, participation CTAs, what JYC does, updates and impact context.
+- **About JYC:** history, role, vision, mission and values.
+- **Leadership:** Faculty Coordinators → JYC Apex → Core Team → Clubs & Hubs.
+- **Events:** upcoming / live / past discovery, search, category and club filters, list/cards/calendar views.
+- **Event details:** poster, organiser, date/time, venue, schedule, rules, eligibility, prizes, FAQs, contact and registration when supplied.
+- **Event Calendar:** date-based event discovery with Google Calendar support where available.
+- **Clubs & Communities:** verified community profiles, leadership, activities, achievements, gallery, social links and recruitment status.
+- **Gallery:** event/year-oriented visual archive.
+- **Achievements:** published Wall of Fame and community outcomes.
+- **Announcements:** action-oriented official notices and registration updates.
+- **Join JYC:** public destination exists and remains **Coming Soon** until an official recruitment cycle is published.
+- **Contact:** official social channels, campus location and query form.
+
+The site remains intentionally restrained: beige / black / white, strong editorial hierarchy, JYC signature identity, responsive mobile navigation and reduced-motion support. The next work should improve verified content, participation workflows and performance rather than adding decorative animation.
+
+See docs/V1-SENIOR-PRODUCT-CONTRACT.md for the full specification and docs/V36-RESEARCH-ROADMAP.md for the researched follow-on roadmap.
+
 ## V33.3 — Distinct hub & event identities
 
 The maintained JYC ecosystem now follows the supplied 2026–27 All Hubs material: **21 named communities across five families**. Every community has a distinct but restrained visual identity, while events receive their own event-domain language and inherit their organiser identity when no specific preset exists. The shared JYC beige / black / white system remains the foundation, so identity adds recognition without turning the site into 21 unrelated mini-sites.
