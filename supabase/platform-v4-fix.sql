@@ -93,24 +93,9 @@ $$;
 revoke all on function public.jyc_save_site_data(text,jsonb,text,text) from public;
 grant execute on function public.jyc_save_site_data(text,jsonb,text,text) to authenticated;
 
--- Remove the known legacy starter/demo record from the JSON content store.
-do $$
-declare d jsonb;
-begin
-  select data into d from public.jyc_site_data where id='main' for update;
-  if d is not null then
-    d:=jsonb_set(d,'{clubs}',coalesce((select jsonb_agg(c) from jsonb_array_elements(coalesce(d->'clubs','[]'::jsonb)) c where not(lower(coalesce(c->>'id',''))='abhivyakti' and lower(trim(coalesce(c->>'name','')))='abhivyakti')),'[]'::jsonb),true);
-    d:=jsonb_set(d,'{events}',coalesce((select jsonb_agg(e) from jsonb_array_elements(coalesce(d->'events','[]'::jsonb)) e where lower(trim(coalesce(e->>'club','')))<>'abhivyakti' and lower(trim(coalesce(e->>'clubId','')))<>'abhivyakti'),'[]'::jsonb),true);
-    d:=jsonb_set(d,'{gallery}',coalesce((select jsonb_agg(g) from jsonb_array_elements(coalesce(d->'gallery','[]'::jsonb)) g where lower(trim(coalesce(g->>'association','')))<>'abhivyakti' and lower(trim(coalesce(g->>'clubId','')))<>'abhivyakti'),'[]'::jsonb),true);
-    update public.jyc_site_data set data=d,updated_at=now() where id='main';
-  end if;
-end $$;
-
--- Remove the same legacy starter from the relational foundation if it exists.
-DO $$ BEGIN
-  IF to_regclass('public.jyc_clubs') IS NOT NULL THEN
-    DELETE FROM public.jyc_clubs WHERE lower(name)='abhivyakti' AND lower(slug)='abhivyakti';
-  END IF;
-END $$;
+-- IMPORTANT: Abhivyakti is a legitimate JYC community in the supplied hub directory.
+-- Never delete content by the name/slug "abhivyakti" from a production database.
+-- The old starter cleanup used that identity and could destroy the real community.
+-- Existing content is intentionally preserved during bootstrap/re-run.
 
 select 'JYC V4 fix applied. Refresh the website.' as result;
