@@ -395,7 +395,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  const descriptions={
   '/':'Official JIIT Youth Club (JYC) website for JIIT Noida. Discover JIIT clubs, student communities, JIIT events, annual fests and co-curricular activities.',
   '/history':'Read the evidence-led public history of JIIT Youth Club, from hub coordination and induction programmes to flagship JIIT campus experiences.',
-  '/clubs':'Explore the official JIIT club list and student communities across technical, cultural, literary, creative, sports and other campus interests through JIIT Youth Club.
+  '/clubs':'Explore the official JIIT club list and student communities across technical, cultural, literary, creative, sports and other campus interests through JIIT Youth Club.',
   '/events':'Find JIIT events, workshops, competitions, cultural activities and campus events published by JIIT Youth Club at JIIT Noida.',
   '/fests':'Explore JIIT fests and flagship campus events such as officially published JYC programmes, with dates, venues, clubs and registration details when available.',
   '/resources':'JIIT Youth Club — official clubs, events, fests and community information.',
