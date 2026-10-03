@@ -300,7 +300,7 @@ grant execute on function public.jyc_register_for_event(text,text,text,text,text
 -- Remove legacy direct-registration policies. The RPC is the only public write path.
 drop policy if exists "public register event" on public.jyc_event_registrations;
 drop policy if exists "public register published native event" on public.jyc_event_registrations;
-revoke insert, update, delete on public.jyc_event_registrations from anon;
+revoke insert, update, delete on public.jyc_event_registrations from anon, authenticated;
 
 commit;
 
