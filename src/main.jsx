@@ -350,7 +350,7 @@ function Events({data}){
  const clubs=[...new Set(all.map(e=>e.club).filter(Boolean))];
  const eventFamily=name=>{const raw=String(name||'').trim().toLowerCase();const key=Object.keys(JYC_HUB_CONTENT).find(k=>raw===k.toLowerCase()||raw.includes(k.toLowerCase()));return key?JYC_HUB_CONTENT[key].family:''};
  const eventCategories=JYC_EVENT_CATEGORIES;
- const eventCategoryOf=e=>String(e.category||e.eventCategory||e.eventType||eventFamily(e.club)||'').trim();
+ const eventCategoryOf=e=>{const raw=String(e.category||e.eventCategory||e.eventType||eventFamily(e.club)||'').trim();return raw.toLowerCase()==='social outreach'?'Social':raw;};
  const filtered=all.filter(e=>filter==='All'||e.club===filter).filter(e=>family==='All'||eventCategoryOf(e).toLowerCase()===family.toLowerCase()).filter(e=>!q||`${e.title} ${e.club} ${e.venue} ${eventCategoryOf(e)} ${(e.highlights||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
  const upcoming=filtered.filter(e=>eventState(e)!=='past'),live=filtered.filter(e=>eventState(e)==='live'),past=filtered.filter(e=>eventState(e)==='past');
  const shown=scope==='upcoming'?upcoming:scope==='live'?live:scope==='past'?past:filtered;
