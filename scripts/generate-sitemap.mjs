@@ -5,7 +5,7 @@ const root=process.cwd();
 const rawSite=(process.env.VITE_SITE_URL||process.env.SITE_URL||process.env.VERCEL_PROJECT_PRODUCTION_URL||'').trim();
 const site=(rawSite?(/^[a-z]+:\/\//i.test(rawSite)?rawSite:`https://${rawSite}`):'').replace(/\/$/,'');
 const out=path.join(root,'public','sitemap.xml');
-const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/contact','/calendar','/planner','/map'];
+const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/calendar','/event-calendar','/announcements','/achievements','/join-jyc','/recruitment','/map'];
 const urls=new Set(core);
 const slug=value=>String(value||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
