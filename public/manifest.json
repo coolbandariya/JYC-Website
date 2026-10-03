@@ -9,7 +9,7 @@
   "description": "Official JIIT Youth Club website for JIIT Noida clubs, events, people and campus moments.",
   "icons": [
     {
-      "src": "/jyc-logo-circle.png",
+      "src": "/jyc-logo-official.webp",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -22,7 +22,7 @@
       "url": "/events",
       "icons": [
         {
-          "src": "/jyc-logo-circle.png",
+          "src": "/jyc-logo-official.webp",
           "sizes": "512x512"
         }
       ]
@@ -33,7 +33,7 @@
       "url": "/clubs",
       "icons": [
         {
-          "src": "/jyc-logo-circle.png",
+          "src": "/jyc-logo-official.webp",
           "sizes": "512x512"
         }
       ]
@@ -44,7 +44,7 @@
       "url": "/gallery",
       "icons": [
         {
-          "src": "/jyc-logo-circle.png",
+          "src": "/jyc-logo-official.webp",
           "sizes": "512x512"
         }
       ]
@@ -55,7 +55,7 @@
       "url": "/planner",
       "icons": [
         {
-          "src": "/jyc-logo-circle.png",
+          "src": "/jyc-logo-official.webp",
           "sizes": "512x512"
         }
       ]
