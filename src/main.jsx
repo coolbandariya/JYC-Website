@@ -15,7 +15,7 @@ import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-media.js';
 import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ACTIVITIES} from './public-v1/config.js';
 import {JYC_SOCIALS,festSocialProfile,socialProfile} from './jyc-socials.js';
-import {JYCNowStrip,JYCNowPage} from './jyc-now.jsx';
+import {JYCNowStrip,JYCNowPage,HubLatestUpdates} from './jyc-now.jsx';
 import JYCHistory,{HistoryTeaser} from './jyc-history-page.jsx';
 
 const PUBLIC_TEAM_FALLBACK=[
@@ -262,7 +262,7 @@ function ClubDetail({data,id,virtualName}){
     {c.achievements?.length>0&&<section className="club-section-card reveal"><span className="eyebrow">ACHIEVEMENTS</span><h2>What the club has built.</h2><ul className="feature-list">{c.achievements.map((x,i)=><li key={i}>{typeof x==='string'?x:x.text}</li>)}</ul></section>}
     {sections.map((x,i)=><section className="club-section-card reveal" key={x.id||x.title||i}><span className="eyebrow">CLUB SECTION</span><h2>{x.title}</h2>{x.type==='image'&&x.image&&<img className="section-image" src={x.image} alt=""/>}<p className="large-copy">{x.content}</p></section>)}
     {events.length>0&&<section id="club-events" className="club-section-card reveal"><div className="section-inline-head"><div><span className="eyebrow">EVENTS</span><h2>Featured experiences from {c.name}.</h2></div><a className="text-link" href="/events">All events →</a></div><div className="card-grid">{events.slice(0,4).map(e=><EventCard e={e} key={e.id}/>)}</div></section>}
-    {gallery.length>0&&<section id="club-gallery" className="club-section-card reveal"><span className="eyebrow">GALLERY</span><h2>Moments from the club.</h2><GalleryItems items={gallery}/></section>}
+    {gallery.length>0&&<section id="club-gallery" className="club-section-card reveal"><span className="eyebrow">GALLERY</span><h2>Moments from the club.</h2><GalleryItems items={gallery}/></section>}<HubLatestUpdates hub={c.name}/>
     {relatedHubs.length>0&&<section className="club-section-card reveal hub-related-section"><div className="section-inline-head"><div><span className="eyebrow">SAME JYC FAMILY</span><h2>Explore nearby communities.</h2></div><a className="text-link" href="/clubs">All communities →</a></div><div className="hub-related-grid">{relatedHubs.map(([name,p])=><a key={name} className="hub-related-card" href={`/clubs/${slug(name)}`}><small>{p.focus}</small><strong>{name}</strong><span>{p.summary}</span><b>Explore →</b></a>)}</div></section>}
    </main>
    <aside className="club-side-panel reveal"><span className="eyebrow">THE COMMUNITY</span><h3>{c.name}</h3><p>Explore this JYC community, its work, events and official connections.</p>{events.length>0&&<div className="club-next-event"><span>NEXT UP</span><strong>{events[0].title}</strong><small>{fmtDate(events[0].date)} · {events[0].start||'TBA'}</small></div>}{links.map(([n,u])=>safeExternalUrl(u)?<a className="side-link" key={n} href={safeExternalUrl(u)} target="_blank" rel="noopener noreferrer"><span>{n}</span><b>↗</b></a>:null)}<div className="side-divider"/><span className="eyebrow">JYC</span><p className="small-copy">JIIT Youth Club · Sector 128, Noida</p></aside>
