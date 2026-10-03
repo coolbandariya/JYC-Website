@@ -2,11 +2,13 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.117.2';
 
 const MAX_BYTES = 8 * 1024 * 1024;
 const allowedFolders = new Set(['jyc','events','gallery','team','fests','general']);
+const allowedOrigins = new Set((Deno.env.get('SITE_ORIGINS') || Deno.env.get('SITE_ORIGIN') || 'http://localhost:5173').split(',').map(x=>x.trim()).filter(Boolean));
+const allowedOrigin = (origin:string|null) => origin && (allowedOrigins.has(origin) || /^https?:\\/\\/(localhost|127\\.0\\.1)(:\\d+)?$/.test(origin)) ? origin : null;
 
 const json = (body: unknown, status = 200, origin: string | null = null) => new Response(JSON.stringify(body), {
   status,
   headers: {
-    'Access-Control-Allow-Origin': origin || 'null',
+    'Access-Control-Allow-Origin': allowedOrigin(origin) || 'null',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Vary': 'Origin',
@@ -30,12 +32,13 @@ function cleanFolder(value: unknown) {
 Deno.serve(async req => {
   const origin = req.headers.get('Origin');
   if (req.method === 'OPTIONS') return new Response('ok', { headers: {
-    'Access-Control-Allow-Origin': origin || 'null',
+    'Access-Control-Allow-Origin': allowedOrigin(origin) || 'null',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Vary': 'Origin'
   }});
   if (req.method !== 'POST') return json({ error: 'POST only.' }, 405, origin);
+  if (!allowedOrigin(origin)) return json({ error: 'Origin not allowed.' }, 403, origin);
 
   const auth = req.headers.get('Authorization') || '';
   const url = Deno.env.get('SUPABASE_URL');
