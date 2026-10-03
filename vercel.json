@@ -91,5 +91,42 @@
       "source": "/(.*)",
       "destination": "/"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/leadership",
+      "destination": "/team",
+      "permanent": true
+    },
+    {
+      "source": "/event-calendar",
+      "destination": "/calendar",
+      "permanent": true
+    },
+    {
+      "source": "/guide",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/resources",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/moments",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/planner",
+      "destination": "/events",
+      "permanent": true
+    },
+    {
+      "source": "/discover",
+      "destination": "/clubs",
+      "permanent": true
+    }
   ]
 }
