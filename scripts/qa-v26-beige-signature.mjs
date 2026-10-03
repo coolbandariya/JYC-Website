@@ -27,8 +27,8 @@ const hasExactUrl=(content,{protocol,hostname,pathname})=>{
 let pass=0,fail=0;
 const check=(name,ok)=>{if(ok){console.log('PASS: '+name);pass++}else{console.error('FAIL: '+name);fail++}};
 
-check('V33 stylesheet is loaded exactly once',main.match(/import '\.\/v33-final-public-experience\.css';/g)?.length===1);
-check('V33 visual layer is loaded after V32',main.indexOf('v33-final-public-experience.css')>main.indexOf('v32-public-production-overhaul.css'));
+check('Consolidated public stylesheet is loaded exactly once',main.match(/import '\.\/styles\/public-system\.css';/g)?.length===1);
+check('V33 visual layer remains inside the consolidated stylesheet stack',read('src/styles/public-system.css').includes("@import '../v33-final-public-experience.css';") && read('src/styles/public-system.css').indexOf('v33-final-public-experience.css')>read('src/styles/public-system.css').indexOf('v32-public-production-overhaul.css'));
 check('logo beige is the final public brand anchor',css.includes('--jyc33-brand:#f5d894')&&css.includes('--jyc33-light-bg:#f7f0e4'));
 check('light/dark theme contracts are explicit',css.includes('html[data-theme="light"]')&&css.includes('html[data-theme="dark"]')&&css.includes('--jyc33-light-ink:#171411')&&css.includes('--jyc33-dark-ink:#fff9ed'));
 check('public text has explicit secondary contrast',css.includes('.public-app p,.public-app li,.public-app small')&&css.includes('color:var(--jyc33-muted)!important'));
@@ -48,7 +48,7 @@ check('official JYC hub content is wired',main.includes('JYC_HUB_CONTENT')&&main
 check('verified leadership content remains source-grounded',main.includes('Dr. Vinay Anand Tikkiwal')&&main.includes('Dr. Pankaj Kumar Srivastava')&&main.includes("name:'Harisha'")&&main.includes("name:'Dhruv Choudhary'"));
 check('production path does not fabricate demo content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 check('JYC logo remains the public hero identity',main.includes('hero-logo-stage')&&main.includes('<img src={logo}'));
-check('SEO/social preview remains logo-led',index.includes('og:image" content="/jyc-logo-official.webp"')&&index.includes('twitter:image" content="/jyc-logo-official.webp"'));
+check('SEO/social preview remains logo-led',index.includes('og:image" content="https://www.jiityouthclub128.in/jyc-logo-official.webp"')&&index.includes('twitter:image" content="https://www.jiityouthclub128.in/jyc-logo-official.webp"'));
 check('service worker cache is current',sw.includes('jyc-cache-v37-0-0'));
 const maintainedHubCount=(hubContent.match(/^\s{2}(?:'[^']+'|[A-Za-z][^:]+):\{/gm)||[]).length;
 check('orientation source count stays internally consistent',main.includes('21 communities')&&main.includes("Object.keys(JYC_HUB_CONTENT).length")&&maintainedHubCount===21);
