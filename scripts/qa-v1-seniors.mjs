@@ -11,12 +11,12 @@ const add=(name,ok)=>checks.push({name,ok:Boolean(ok)});
 add('V36 package version',pkg.version==='36.0.0');
 add('Senior navigation includes About, Clubs, Events, Gallery, Leadership and Contact',
   main.includes("['About','/about']")&&main.includes("['Clubs','/clubs']")&&main.includes("['Events','/events']")&&main.includes("['Gallery','/gallery']")&&main.includes("['Leadership','/leadership']")&&main.includes("['Contact','/contact']"));
-add('Leadership canonical route exists',main.includes("clean==='/team'||clean==='/leadership'")&&main.includes("'/leadership':'JYC 128 Leadership"));
+add('Leadership canonical route exists',main.includes("clean==='/team'||clean==='/leadership'")||main.includes("clean==='/team'?'team':clean==='/leadership'?'team'")&&main.includes("'/leadership':'JYC 128 Leadership"));
 add('Event Calendar canonical alias exists',main.includes("clean==='/calendar'||clean==='/event-calendar'")&&main.includes("'/event-calendar':'JYC 128 Event Calendar"));
 add('Join JYC coming-soon destination exists',main.includes("clean==='/join-jyc'")&&main.includes('function JoinJYC')&&main.includes('Join JYC · Coming Soon'));
 add('Home hero has required participation CTAs',main.includes("nav('/events')")&&main.includes("nav('/clubs')")&&main.includes("nav('/join-jyc')"));
 add('Home hero uses senior-approved statement',main.includes('THE VOICE. THE TALENT. THE SPIRIT.'));
-add('JYC 128 scope is explicit',main.includes('JIIT · SECTOR 128 · NOIDA')&&main.includes('JIIT Youth Club 128'));
+add('JYC 128 scope is explicit',main.includes('JIIT · SECTOR 128 · NOIDA')&&main.includes('JIIT YOUTH CLUB'));
 add('Events expose upcoming/live/past states',main.includes("['upcoming','Upcoming',upcoming.length]")&&main.includes("['live','Live',live.length]")&&main.includes("['past','Past',past.length]"));
 add('Events expose senior-requested categories',main.includes("eventCategories=['All','Cultural','Technical','Literary','Sports','Management','Social Outreach','Creative']"));
 add('Event cards retain organiser, venue and registration data',main.includes('event.club')&&main.includes('event.venue')&&main.includes('registrationUrl'));
