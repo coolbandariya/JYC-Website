@@ -12,7 +12,8 @@ const scripts = [
   'qa-v26-beige-signature.mjs',
   'qa-v1-seniors.mjs',
   'qa-production-hardening.mjs',
-  'qa-sql-contract.mjs'
+  'qa-sql-contract.mjs',
+  'qa-architecture.mjs'
 ];
 
 for (const script of scripts) {
