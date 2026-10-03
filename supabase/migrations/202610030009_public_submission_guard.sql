@@ -26,6 +26,10 @@ declare
   now_ts timestamptz := now();
   row_data public.jyc_public_submission_rate_limits;
 begin
+  if random() < 0.02 then
+    delete from public.jyc_public_submission_rate_limits
+    where updated_at < now() - interval '2 days';
+  end if;
   if coalesce(trim(p_fingerprint),'') = '' then return false; end if;
   p_limit := greatest(1, least(coalesce(p_limit,5),50));
   p_window_seconds := greatest(60, least(coalesce(p_window_seconds,3600),86400));
