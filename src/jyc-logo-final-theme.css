@@ -233,6 +233,10 @@ html[data-theme="dark"] .public-app .gallery-filter button.active{
   border-color:var(--jyc-champagne)!important;
 }
 
+/* One shared visual identity: hub/event accents never escape the senior logo palette. */
+.public-app [style*="--hub-accent"]{--hub-accent:var(--jyc-bronze)!important;--hub-accent-soft:rgba(194,166,130,.12)!important;--hub-accent-line:rgba(194,166,130,.34)!important}
+html[data-theme="dark"] .public-app [style*="--hub-accent"]{--hub-accent:var(--jyc-champagne)!important;--hub-accent-soft:rgba(194,166,130,.14)!important;--hub-accent-line:rgba(194,166,130,.34)!important}
+
 /* Logo-led navigation */
 .public-app .nav{
   background:color-mix(in srgb,var(--jyc-navy) 96%,transparent)!important;
