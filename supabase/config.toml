@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.ai-content-assist]
 verify_jwt = true
+
+[functions.error-report]
+verify_jwt = false
