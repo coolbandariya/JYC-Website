@@ -16,6 +16,8 @@ import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-
 import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ACTIVITIES} from './public-v1/config.js';
 import {JYC_SOCIALS,festSocialProfile,socialProfile} from './jyc-socials.js';
 
+function SkipLink(){return <a className="skip-link" href="#main-content">Skip to main content</a>}
+
 const PUBLIC_TEAM_FALLBACK=[
  {id:'devansh-tripathi',name:'Devansh Tripathi',role:'General Secretary',published:true,bio:'A prominent face of JYC 128, contributing across student societies spanning leadership, creativity, innovation, culture, literature, design and technology.',photo:'/assets/team/devansh-tripathi.webp'},
  {id:'amrit-kumar',name:'Amrit Kumar Jha',role:'Vice President',published:true,bio:'A planner, coordinator and problem-solver focused on streamlining operations, supporting decisions, bringing teams together and creating structure behind the scenes.',photo:'/assets/team/amrit-kumar.webp'},
