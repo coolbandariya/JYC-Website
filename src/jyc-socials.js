@@ -78,7 +78,7 @@ export const JYC_FEST_SOCIALS = {
     label: 'CICR × CONVERGE 2026'
   },
   'JAI 2026 · Jaypee Agentic AI Hackathon': {
-    website: 'https://jai-summit-psi.vercel.app/',
+    website: 'https://www.jiityouthclub128.in/',
     label: 'Jaypee Agentic AI International Summit 2026'
   },
   'RIDE Hack 26': {
