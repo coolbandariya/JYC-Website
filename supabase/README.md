@@ -11,9 +11,7 @@ Run migrations in this order:
 6. `platform-v5-production.sql`
 7. `contact-and-project-submissions.sql`
 
-For an existing development database containing the accidental starter club, run:
-
-`maintenance/00-remove-legacy-demo-data.sql`
+The historical Abhivyakti cleanup script is now non-destructive. Do not delete a club by name alone; verify any unexpected record against an independent source-backed identifier first.
 
 Edge Functions:
 
