@@ -16,7 +16,9 @@ const scripts = [
   'qa-architecture.mjs',
   'qa-logo-theme.mjs',
   'qa-final-product.mjs',
-  'qa-data-integrity.mjs'
+  'qa-data-integrity.mjs',
+  'qa-accessibility-contract.mjs',
+  'qa-repo-hygiene.mjs'
 ];
 
 for (const script of scripts) {
