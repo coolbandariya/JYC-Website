@@ -26,9 +26,12 @@ Deno.serve(async req=>{
   if(req.method==='OPTIONS') return new Response('ok',{headers:json({},200,origin).headers});
   if(req.method!=='POST') return json({error:'POST only.'},405,origin);
   if(!allowedOrigin(origin)) return json({error:'Origin not allowed.'},403,origin);
-  const length=Number(req.headers.get('content-length')||0);
-  if(length>18000) return json({error:'Request is too large.'},413,origin);
-  let body:any; try{body=await req.json()}catch{return json({error:'Invalid JSON request.'},400,origin)}
+  let raw='';
+  try{
+    raw=await req.text();
+  }catch{return json({error:'Invalid request body.'},400,origin)}
+  if(new TextEncoder().encode(raw).byteLength>18000) return json({error:'Request is too large.'},413,origin);
+  let body:any; try{body=JSON.parse(raw)}catch{return json({error:'Invalid JSON request.'},400,origin)}
   if(cleanText(body?.website,120)) return json({ok:true},200,origin);
   const type=body?.type==='project'?'project':body?.type==='contact'?'contact':'';
   if(!type) return json({error:'Unsupported submission type.'},400,origin);
