@@ -726,7 +726,7 @@ function Home({data}){
    <div className="v40-hero-rule"/>
    <h4>{h.heroSubtitle||'JIIT YOUTH CLUB'}</h4>
    <p>{h.heroLead||'The student-led ecosystem connecting communities, events, creativity, technology, sport and campus spirit at JIIT Sector 128.'}</p>
-   <div className="hero-actions v40-hero-actions"><Button onClick={()=>nav('/clubs')}>Explore JYC ↗</Button><Button secondary onClick={()=>nav('/events')}>What’s next →</Button></div>
+   <div className="hero-actions v40-hero-actions"><Button onClick={()=>nav('/clubs')}>Explore JYC ↗</Button><Button secondary onClick={()=>nav('/events')}>What’s next →</Button><button className="btn hero-join-soon" type="button" onClick={()=>nav('/join-jyc')} title="JYC recruitment is coming soon">Join JYC · Coming Soon</button></div>
    <div className="v40-hero-micro"><span>01 <b>COMMUNITIES</b></span><span>02 <b>EXPERIENCES</b></span><span>03 <b>MEMORIES</b></span></div>
    <HeroStats communities={clubs.length} families={JYC_HUB_FAMILIES.length} programmes={PDF_HUB_PROGRAMME.length} campus="128"/>
   </div>
@@ -734,7 +734,7 @@ function Home({data}){
    <div className="v40-visual-frame">
     <div className="v40-visual-top"><span>JYC / 128</span><span>01 — IDENTITY</span></div>
     <button className="v40-interactive-logo" type="button" aria-label="Interact with the JYC emblem" onClick={e=>{e.currentTarget.classList.remove('is-active');requestAnimationFrame(()=>e.currentTarget.classList.add('is-active'))}}>
-      <span className="v40-logo-halo"/><LogoImage alt="JIIT Youth Club official emblem" fetchPriority="high" decoding="async"/>
+      <span className="v40-logo-halo"/><img src={logo} alt="JIIT Youth Club official emblem" fetchPriority="high" decoding="async" onError={e=>{if(e.currentTarget.dataset.fallback==="1")return;e.currentTarget.dataset.fallback="1";e.currentTarget.src=logoFallback}}/>
       <span className="v40-logo-pulse" aria-hidden="true"/>
     </button>
     <div className="v40-visual-bottom"><span>CLICK THE EMBLEM</span><span className="v40-scroll-arrow">↓</span></div>
