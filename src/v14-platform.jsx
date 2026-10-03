@@ -2,7 +2,7 @@ import React,{useMemo,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 export function InteractivePhoenix(){
-  return <div className="jyc-identity-stage" aria-label="JIIT Youth Club identity"><div className="ecosystem-brand-lockup ecosystem-logo-only"><img src="/jyc-logo-circle.png" alt="JIIT Youth Club"/></div></div>
+  return <div className="jyc-identity-stage" aria-label="JIIT Youth Club identity"><div className="ecosystem-brand-lockup ecosystem-logo-only"><img src="/jyc-logo-official.webp" alt="JIIT Youth Club"/></div></div>
 }
 export function EcosystemSection({data}){
   const nav=useNavigate();
@@ -20,7 +20,7 @@ export function EcosystemSection({data}){
       <span className="ecosystem-connector ecosystem-connector-3" aria-hidden="true"/>
       <div className="ecosystem-core-wrap">
         <button className="ecosystem-core ecosystem-core-action" onClick={()=>nav('/about')} aria-label="Open About JYC" onMouseEnter={()=>setActive('core')} onMouseLeave={()=>setActive('')}>
-          <div className="ecosystem-brand-lockup ecosystem-logo-only"><img src="/jyc-logo-circle.png" alt="JIIT Youth Club"/></div>
+          <div className="ecosystem-brand-lockup ecosystem-logo-only"><img src="/jyc-logo-official.webp" alt="JIIT Youth Club"/></div>
           <span>JYC</span>
         </button>
       </div>
