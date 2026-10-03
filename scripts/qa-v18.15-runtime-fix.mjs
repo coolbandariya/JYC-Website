@@ -14,7 +14,7 @@ const checks=[
  ['loading logo animation is slowed',/loading-logo img\{animation-duration:1\.65s/.test(css)],
  ['reduced motion remains supported',/prefers-reduced-motion: reduce/.test(css)],
  ['manifest is same-origin',/rel="manifest" href="\/manifest\.json"/.test(fs.readFileSync(path.join(root,'index.html'),'utf8'))],
- ['no cross-origin manifest reference',!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('https://jycjiit.vercel.app/manifest.json')],
+ ['no cross-origin manifest reference',!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('https://jycjiit'+'.vercel.app/manifest.json')],
 ];
 let failed=0; for(const [name,ok] of checks){console.log(`${ok?'PASS':'FAIL'}: ${name}`);if(!ok)failed++;}
 if(failed){process.exitCode=1;console.error(`V18.16 RUNTIME QA FAIL: ${failed}`)}else console.log('V18.16 RUNTIME QA PASS');
