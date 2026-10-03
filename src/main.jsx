@@ -733,7 +733,7 @@ function Home({data}){
   <div className="v40-hero-visual" ref={heroArtRef}>
    <div className="v40-visual-frame">
     <div className="v40-visual-top"><span>JYC / 128</span><span>01 — IDENTITY</span></div>
-    <button className="v40-interactive-logo" type="button" aria-label="Interact with the JYC emblem" onClick={e=>{e.currentTarget.classList.remove('is-active');requestAnimationFrame(()=>e.currentTarget.classList.add('is-active'))}}>
+    <button className="v40-interactive-logo hero-logo-stage" type="button" aria-label="Interact with the JYC emblem" onClick={e=>{e.currentTarget.classList.remove('is-active');requestAnimationFrame(()=>e.currentTarget.classList.add('is-active'))}}>
       <span className="v40-logo-halo"/><img src={logo} alt="JIIT Youth Club official emblem" fetchPriority="high" decoding="async" onError={e=>{if(e.currentTarget.dataset.fallback==="1")return;e.currentTarget.dataset.fallback="1";e.currentTarget.src=logoFallback}}/>
       <span className="v40-logo-pulse" aria-hidden="true"/>
     </button>
