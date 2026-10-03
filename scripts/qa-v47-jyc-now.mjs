@@ -7,8 +7,8 @@ check(lock.version==='47.0.0'&&lock.packages?.['']?.version==='47.0.0','lockfile
 check(main.includes("from './jyc-now.jsx'")&&main.includes('<JYCNowStrip data={data}/>'),'JYC Now homepage layer is mounted');
 check(main.includes("clean==='/updates'")&&main.includes('<JYCNowPage data={data}/>'),'JYC Now route is mounted');
 check(main.includes("'/updates','JYC Now'"),'JYC Now is discoverable from More');
-check(now.includes('What JYC is creating now')&&now.includes('Community Spotlight'),'editorial JYC Now experience exists');
-check(now.includes('View original ↗')&&now.includes('canonical source'),'cards retain source-first editorial behavior');
+check(now.includes('What JYC is creating now')&&now.includes('COMMUNITY SPOTLIGHT'),'editorial JYC Now experience exists');
+check(now.includes('View original ↗')&&now.includes('original hub or JYC source'),'cards retain source-first editorial behavior');
 check(now.includes('not a social-network feed')&&now.includes('does not recreate likes, comments or follows'),'public page is not a social-network clone');
 check(api.includes('META_ACCESS_TOKEN')&&api.includes('YOUTUBE_API_KEY')&&api.includes('LINKEDIN_ACCESS_TOKEN')&&api.includes('JYC_RSS_FEEDS'),'server-side connectors are configurable');
 check(!api.includes('eyJ')&&!api.includes('EAAC'),'provider credentials are not hard-coded');
