@@ -4,6 +4,7 @@ import path from 'node:path';
 const root=process.cwd();
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const main=read('src/main.jsx');
+const extra=read('src/extra-features.jsx');
 const pkg=JSON.parse(read('package.json'));
 const checks=[];
 const add=(name,ok)=>checks.push({name,ok:Boolean(ok)});
@@ -25,6 +26,10 @@ add('Team structure follows Faculty → Apex → Core → Clubs & Hubs',main.inc
 add('Clubs have recruitment and social fields',main.includes("recruitment:{on:false")&&main.includes("instagram:''")&&main.includes("linkedin:''"));
 add('Announcements and achievements have dedicated public routes',main.includes("clean==='/announcements'")&&main.includes("clean==='/achievements'"));
 add('Gallery and archive remain public',main.includes("clean==='/gallery'")&&main.includes("clean==='/archive'"));
+add('Find Your Community discovery is present',main.includes('FIND YOUR COMMUNITY')&&main.includes('Build & code')&&main.includes('Leadership & events'));
+add('Recruitment exposes deadlines and application links',extra.includes('RecruitmentHub')&&extra.includes('recruitment.deadline')&&extra.includes('recruitment.link'));
+add('Calendar exposes Google Calendar and device ICS export',extra.includes('Google Calendar ↗')&&extra.includes('Add JYC dates to device')&&extra.includes('text/calendar'));
+add('Gallery exposes source/credit provenance',extra.includes('gallery-provenance')&&extra.includes('active.credit||active.source||active.sourceLabel'));
 add('Contact form has name/email/message fields',main.includes('name="name"')&&main.includes('name="email"')&&main.includes('name="message"'));
 add('Production does not use demo fallback content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 
