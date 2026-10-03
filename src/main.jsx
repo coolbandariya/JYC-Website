@@ -523,14 +523,14 @@ const explore=[
 }
 
 function JYCBot({data}){
- const nav=useNavigate(); const loc=useLocation(); const [open,setOpen]=useState(false); const [loaded,setLoaded]=useState(false);
+ const nav=useNavigate(); const loc=useLocation(); const [open,setOpen]=useState(false); const [modelReady,setModelReady]=useState(false); const [modelFailed,setModelFailed]=useState(false);
  const context=loc.pathname.startsWith('/events')?'events':loc.pathname.startsWith('/clubs')?'clubs':loc.pathname.startsWith('/gallery')?'gallery':loc.pathname.startsWith('/team')||loc.pathname.startsWith('/leadership')?'team':'home';
  const copy={home:['Welcome to JYC.','Explore communities, events and the people behind campus life.'],clubs:['Find your community.','I can take you to clubs, technical hubs or creative spaces.'],events:['What’s happening?','Open the event trail and find the next JYC experience.'],gallery:['Keep the moment.','Explore the visual archive and event stories.'],team:['Meet the people.','See the leadership behind JYC.']}[context];
- useEffect(()=>{let alive=true;const id=setTimeout(()=>{if(alive)setLoaded(true)},900);return()=>{alive=false;clearTimeout(id)}},[]);
+ useEffect(()=>{const ready=()=>setModelReady(Boolean(customElements?.get('model-viewer')));ready();window.addEventListener('load',ready);return()=>window.removeEventListener('load',ready)},[]);
  const go=p=>{setOpen(false);nav(p)};
  return <div className={`jyc-bot ${open?'is-open':''}`} data-context={context}>
    <button className="jyc-bot-orb" type="button" aria-label={open?'Close JYC guide':'Open JYC guide'} aria-expanded={open} onClick={()=>setOpen(v=>!v)}>
-    <span className="jyc-bot-status"/><span className="jyc-bot-model-wrap">{loaded?<span className="jyc-bot-model-fallback" aria-hidden="true"><span className="bot-head"/><span className="bot-body"/><span className="bot-arm"/></span>:<LogoImage alt="JYC guide"/></span>
+    <span className="jyc-bot-status"/><span className="jyc-bot-model-wrap">{modelReady&&!modelFailed?<model-viewer class="jyc-bot-glb" src="/models/jyc-spatial.glb" poster="/jyc-logo-circle.png" camera-controls disable-zoom auto-rotate="false" interaction-prompt="none" alt="Interactive JYC guide bot" onError={()=>setModelFailed(true)}></model-viewer>:<span className="jyc-bot-model-fallback" aria-hidden="true"><span className="bot-head"/><span className="bot-body"/><span className="bot-arm"/></span>}</span>
    </button>
    {open&&<div className="jyc-bot-panel" role="dialog" aria-label="JYC guide">
     <div className="jyc-bot-head"><div><span className="eyebrow">JYC GUIDE</span><strong>{copy[0]}</strong><p>{copy[1]}</p></div><button type="button" onClick={()=>setOpen(false)} aria-label="Close JYC guide">×</button></div>
