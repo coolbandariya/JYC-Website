@@ -10,8 +10,12 @@ if(!fs.existsSync(migrationsDir)) failures.push('supabase/migrations directory i
 const migrations=fs.existsSync(migrationsDir)?fs.readdirSync(migrationsDir).filter(x=>/^\d{12}_[a-z0-9_-]+\.sql$/.test(x)).sort():[];
 if(!migrations.includes('202610030001_production_hardening.sql')) failures.push('production hardening migration is missing');
 if(!migrations.includes('202610030002_ai_hardening.sql')) failures.push('AI hardening migration is missing');
+if(!migrations.includes('202610030003_campus_verification.sql')) failures.push('campus verification migration is missing');
+if(!migrations.includes('202610030004_media_write_boundary.sql')) failures.push('media write-boundary migration is missing');
 
 const hardening=read('supabase/migrations/202610030001_production_hardening.sql');
+const mediaBoundary=read('supabase/migrations/202610030004_media_write_boundary.sql');
+if(!mediaBoundary.includes('revoke insert, update, delete on storage.objects from anon, authenticated;')) failures.push('media write-boundary migration does not revoke direct Storage writes');
 for(const needle of [
   'revoke insert, update, delete on public.jyc_site_data from anon, authenticated;',
   "'jyc-backups',\n  'jyc-backups',\n  false",
