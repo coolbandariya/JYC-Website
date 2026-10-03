@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 const main=fs.readFileSync('src/main.jsx','utf8');
 const history=fs.readFileSync('src/jyc-history-page.jsx','utf8');
-const css=fs.readFileSync('src/styles/jyc-history.css','utf8');
+const css=fs.readFileSync('src/styles/public-system.css','utf8');
 const sw=fs.readFileSync('public/sw.js','utf8');
 const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
 const lock=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
