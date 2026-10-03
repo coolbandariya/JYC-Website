@@ -1,0 +1,1 @@
+V36 deep research and correction pass — see repository history and current senior V1 roadmap. This document records the verified research findings, implemented corrections, and P0/P1/P2 production gates for the 03 October 2026 audit.
