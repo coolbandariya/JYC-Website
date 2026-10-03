@@ -57,3 +57,48 @@ test('reduced-motion mode disables hero animation', async ({ page }) => {
   );
   expect(animationNames.every(name => name === 'none')).toBe(true);
 });
+
+
+test('brand text contrast stays readable in both themes', async ({ page }) => {
+  const contrast = await page.evaluate(() => {
+    const parse = value => {
+      const m = String(value || '').match(/rgba?\\((\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)(?:\\s*,\\s*([\\d.]+))?\\)/i);
+      if (!m) return null;
+      return [Number(m[1]),Number(m[2]),Number(m[3]),m[4]===undefined?1:Number(m[4])];
+    };
+    const luminance = rgb => {
+      const channels = rgb.slice(0,3).map(v => {
+        const x=v/255;
+        return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);
+      });
+      return .2126*channels[0]+.7152*channels[1]+.0722*channels[2];
+    };
+    const ratio = (a,b) => {
+      const la=luminance(a),lb=luminance(b);
+      return (Math.max(la,lb)+.05)/(Math.min(la,lb)+.05);
+    };
+    const effectiveBg = el => {
+      let node=el;
+      while(node && node!==document.documentElement){
+        const bg=parse(getComputedStyle(node).backgroundColor);
+        if(bg && bg[3]>.05){
+          const alpha=bg[3];
+          if(alpha>=.95)return bg;
+        }
+        node=node.parentElement;
+      }
+      return parse(getComputedStyle(document.documentElement).backgroundColor)||[250,247,239,1];
+    };
+    const selectors=['.hero h1','.hero p','.hero-context-rail span','.nav a'];
+    return selectors.map(selector=>{
+      const el=document.querySelector(selector);
+      if(!el)return {selector,ratio:null};
+      const fg=parse(getComputedStyle(el).color);
+      const bg=effectiveBg(el);
+      return {selector,ratio:fg&&bg?ratio(fg,bg):null};
+    });
+  });
+  for(const item of contrast){
+    if(item.ratio!==null) expect(item.ratio, item.selector).toBeGreaterThanOrEqual(4.5);
+  }
+});
