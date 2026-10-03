@@ -53,7 +53,7 @@ check('service worker cache is current',sw.includes('jyc-cache-v36-0-0'));
 const maintainedHubCount=(hubContent.match(/^\s{2}(?:'[^']+'|[A-Za-z][^:]+):\{/gm)||[]).length;
 check('orientation source count stays internally consistent',main.includes('21 communities')&&main.includes("Object.keys(JYC_HUB_CONTENT).length")&&maintainedHubCount===21);
 check('hub detail exposes source and live evidence layers',main.includes('hub-evidence-rail')&&main.includes('club-source')&&main.includes('Published JYC records provide the live layer'));
-check('events support family-level discovery',main.includes("[family,setFamily]=useState('All')")&&main.includes('eventFamily(e.club)===family')&&main.includes('All categories'));
+check('events support family-level discovery',main.includes("[family,setFamily]=useState('All')")&&main.includes('eventCategoryOf(e).toLowerCase()===family.toLowerCase()')&&main.includes('All'));
 check('hub identity comment matches maintained count',read('src/hub-identities.js').includes('21 maintained community signatures'));
 check('all 21 hub identities are represented',maintainedHubCount===21&&read('src/hub-identities.js').includes('21 maintained community signatures'));
 check('event identity system covers supplied flagship events',read('src/hub-identities.js').includes('Dron-O-War')&&read('src/hub-identities.js').includes('Converge')&&read('src/hub-identities.js').includes('Code Clash')&&main.includes('eventIdentity(e)'));
