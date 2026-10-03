@@ -19,6 +19,8 @@ Never put `SUPABASE_SERVICE_ROLE_KEY`, OpenAI API keys, VAPID private keys, or b
 Set these with the Supabase CLI/secrets UI:
 
 - `SITE_ORIGINS` — comma-separated exact browser origins, e.g. `https://your-domain.example`
+
+For the public contact/project submission function, `SITE_ORIGINS` is required in production. Set it to the exact deployed origin (for example `https://www.jiityouthclub128.in`) before deploying `public-submission`. Public clients do not receive a database insert grant; the Edge Function uses the service role after origin, payload, honeypot and rate-limit checks.
 - `BACKUP_FUNCTION_TOKEN` — long random secret used by the backup function scheduler
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
