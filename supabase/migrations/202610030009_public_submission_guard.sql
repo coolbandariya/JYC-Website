@@ -9,6 +9,8 @@ create table if not exists public.jyc_public_submission_rate_limits (
 );
 alter table public.jyc_public_submission_rate_limits enable row level security;
 revoke all on public.jyc_public_submission_rate_limits from anon, authenticated;
+revoke insert on public.jyc_contact_submissions from anon, authenticated;
+revoke insert on public.jyc_project_submissions from anon, authenticated;
 
 create or replace function public.jyc_allow_public_submission(
   p_fingerprint text,
