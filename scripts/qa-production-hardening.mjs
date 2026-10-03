@@ -7,7 +7,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 const migrationsDir=path.join(root,'supabase','migrations');
 if(!fs.existsSync(migrationsDir)) failures.push('supabase/migrations directory is missing');
-const migrations=fs.existsSync(migrationsDir)?fs.readdirSync(migrationsDir).filter(x=>/^\d{12}_[a-z0-9-]+\.sql$/.test(x)).sort():[];
+const migrations=fs.existsSync(migrationsDir)?fs.readdirSync(migrationsDir).filter(x=>/^\d{12}_[a-z0-9_-]+\.sql$/.test(x)).sort():[];
 if(!migrations.includes('202610030001_production_hardening.sql')) failures.push('production hardening migration is missing');
 if(!migrations.includes('202610030002_ai_hardening.sql')) failures.push('AI hardening migration is missing');
 
