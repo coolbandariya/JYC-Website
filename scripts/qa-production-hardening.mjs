@@ -14,7 +14,7 @@ if(!migrations.includes('202610030002_ai_hardening.sql')) failures.push('AI hard
 const hardening=read('supabase/migrations/202610030001_production_hardening.sql');
 for(const needle of [
   'revoke insert, update, delete on public.jyc_site_data from anon, authenticated;',
-  "values ('jyc-backups','jyc-backups',false",
+  "'jyc-backups',\n  'jyc-backups',\n  false",
   'jyc_ingest_error_report',
   'jyc_registration_rate_limits',
   'revoke insert, delete on public.jyc_event_registrations from anon, authenticated;'
