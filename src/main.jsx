@@ -19,7 +19,7 @@ import {hubIdentity,eventIdentity} from './hub-identities.js';
 import {PDF_HUB_GALLERY,PDF_HUB_STORIES,HUB_PHOTO_MAP} from './pdf-hub-content.js';
 import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-media.js';
-import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY} from './public-v1/config.js';
+import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ACTIVITIES} from './public-v1/config.js';
 import {JYC_SOCIALS,socialProfile} from './jyc-socials.js';
 
 const PUBLIC_TEAM_FALLBACK=[
@@ -66,16 +66,7 @@ const PUBLIC_GALLERY_FALLBACK=[
  {id:'team-pratik-campaign',url:'/assets/team/campaign/pratik-kumar.webp',caption:'Leadership campaign · Pratik Kumar',association:'JYC Team · Pratik Kumar',year:'2026'},
  {id:'team-shriya-campaign',url:'/assets/team/campaign/shriya-singh.webp',caption:'Leadership campaign · Shriya Singh',association:'JYC Team · Shriya Singh',year:'2026'}
 ];
-const PUBLIC_ACTIVITIES=[
- {title:'Cultural',text:'Music, dance, theatre, visual expression and the performances that shape campus culture.',link:'/clubs'},
- {title:'Technical',text:'Coding, robotics, AI, open source and hands-on technology communities.',link:'/clubs'},
- {title:'Literary',text:'Writing, debate, speaking, quizzing, anchoring and ideas in motion.',link:'/clubs'},
- {title:'Sports',text:'Competition, teamwork, fitness and student representation through sport.',link:'/clubs'},
- {title:'Management',text:'Planning, hospitality, public relations, security and event execution.',link:'/team'},
- {title:'Social Outreach',text:'Community initiatives, awareness programmes and campus impact.',link:'/events'},
- {title:'Workshops',text:'Practical learning through workshops, mentorship and skill-building sessions.',link:'/events'},
- {title:'Competitions',text:'Hackathons, contests, challenges and inter-community experiences.',link:'/events'}
-];
+const PUBLIC_ACTIVITIES=JYC_PUBLIC_ACTIVITIES;
 function mergePublicFallback(d,{allowContentFallback=true}={}){
  const x=norm(d||{});
  const fallbackClubs=enrichSourceClubs(Object.entries(JYC_HUB_CONTENT).map(([name,p],i)=>({id:'hub-'+slug(name),name,type:p.family==='Technical'?'Technical':'Non-Technical',category:p.focus,description:p.summary,about:p.detail,interests:[p.family,p.focus],published:true,status:'published',pinned:i<5,theme:'jyc'})));
