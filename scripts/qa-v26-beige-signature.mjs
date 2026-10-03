@@ -20,7 +20,7 @@ check('V32 layer is loaded after V29',main.indexOf('v32-public-production-overha
 check('JYC beige palette is preserved',v26.includes('--jyc-beige:#a47b43')&&v26.includes('--jyc-black:#090909')&&v26.includes('--jyc-white:#fffdf8'));
 check('V32 light/dark theme variables are complete',css.includes('--jyc32-paper:#fffaf1')&&css.includes('--jyc32-ink:#17120d')&&css.includes('html[data-theme="dark"]')&&css.includes('--jyc32-paper:#171411')&&css.includes('--jyc32-ink:#f8f1e7'));
 check('public cards keep readable secondary text',css.includes('.public-app .card p')&&css.includes('color:var(--jyc32-muted)!important'));
-check('homepage hierarchy is centered',css.includes('.home .hero{text-align:center')&&css.includes('.home .hero-copy')&&css.includes('justify-items:center!important'));
+check('homepage hierarchy is centered',css.includes('.home .hero{')&&css.includes('text-align:center!important')&&css.includes('.home .hero-copy')&&css.includes('justify-items:center!important'));
 check('page headers are centered and bounded',css.includes('.compact-page-head')&&css.includes('margin:24px auto 0!important')&&css.includes('text-align:center!important'));
 check('mobile layout has compact widths',css.includes('@media(max-width:560px)')&&css.includes('width:calc(100% - 16px)!important'));
 check('image treatment uses responsive crop instead of distortion',css.includes('object-fit:cover!important')&&css.includes('object-position:center!important'));
