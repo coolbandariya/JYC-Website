@@ -1,6 +1,6 @@
 # JIIT Youth Club 128 — Official Website
 
-> **Current direction: V46 — JYC identity, history & editorial experience**
+> **Current direction: V47 — JYC identity, history & community editorial experience**
 
 The official public website for **JIIT Youth Club (JYC), JIIT Wish Town Campus, Sector 128, Noida**.
 
@@ -19,6 +19,7 @@ JYC 128 is the central coordinating body for major college events, fests and int
 - Gallery
 - Achievements
 - Announcements
+- JYC Now — verified recent public updates from JYC and published hubs
 - Join JYC — Coming Soon until an official cycle is published
 - Contact
 
@@ -42,6 +43,7 @@ The public experience is benchmarked against JIIT’s own Innovation/CICR ecosys
 6. **Publish trustworthy information** — public records need a source, verification date and clear published/archive state internally.
 7. **Support official communication** — announcements, registration links, social channels and contact information.
 8. **Remain fast and accessible** — restrained motion, responsive imagery, keyboard access, reduced-motion support and strong mobile layouts.
+9. **Be the canonical editorial window** — surface verified hub activity without becoming a social-network clone or student-help portal.
 
 ## Content truth policy
 
@@ -212,6 +214,27 @@ A release is not production-ready until:
 12. the connected production deployment is verified separately from GitHub CI
 
 
+## V47 product upgrades
+
+- Added **JYC Now**, a first-class editorial layer for recent verified public updates from JYC and its published communities.
+- Added `/updates` with community/platform filters, source labels, canonical “View original” links and a Community Spotlight tied back to club profiles.
+- Added a server-side aggregation endpoint at `/api/jyc-updates` with configurable Instagram, YouTube, LinkedIn, RSS and manual editorial adapters.
+- Added the V47 Supabase schema `supabase/V47-JYC-NOW.sql` for verified source records, normalized posts and aggregation runs. Public writes are blocked by RLS; server-side service credentials stay off the client.
+- Added V47 browser/static QA coverage and refreshed the service-worker cache generation.
+- The public experience deliberately avoids likes, comments, follows, DMs, algorithmic “For You” ranking and portal-style utility dashboards.
+
+### Connector setup
+
+The public page works with a curated official-source fallback immediately. To enable live aggregation, configure the **server-only** values in `.env` / Vercel:
+- `META_ACCESS_TOKEN` + `JYC_INSTAGRAM_ACCOUNTS` for Instagram Professional accounts.
+- `YOUTUBE_API_KEY` + `JYC_YOUTUBE_CHANNELS` for YouTube channels.
+- `LINKEDIN_ACCESS_TOKEN` + `JYC_LINKEDIN_ORGS` for authorized organisation pages.
+- `JYC_RSS_FEEDS` for official websites that expose RSS/Atom.
+- `JYC_MANUAL_UPDATES` for verified sources that cannot be read through an API.
+- `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` for server-side persistence.
+- `JYC_SYNC_SECRET` for protected scheduled sync calls.
+
+Provider credentials must never use a `VITE_` prefix or appear in browser code.
 ## V45 product upgrades
 
 - Standalone JYC Assistant with source-grounded local search across published clubs, events, people and pages.
