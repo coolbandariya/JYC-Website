@@ -9,7 +9,7 @@ const socials=read('src/jyc-socials.js');
 const pkg=JSON.parse(read('package.json'));
 
 const checks=[
- [pkg.version==='48.0.0','V47 current release'],
+ [pkg.version==='48.0.0','V48 current release'],
  [main.includes("import {JYCBot} from './jyc-bot.jsx';")&&!main.includes('function JYCBot('),'bot runtime is isolated from main.jsx'],
  [main.includes("import {FeaturedEventPopup} from './featured-event-popup.jsx';")&&main.includes('<FeaturedEventPopup/>'),'featured event popup is mounted in the public shell'],
  [!main.includes('function FirstVisitTour(')&&!main.includes('<FirstVisitTour/>'),'obsolete first-visit tour does not compete with the persistent featured event'],
