@@ -13,7 +13,7 @@ add('Homepage title targets JIIT Youth Club + clubs/events/fests',html.includes(
 add('Organization structured data',meta.includes("'@type':'Organization'") && meta.includes('sameAs'));
 add('Event structured data',meta.includes("'@type':'Event'") && meta.includes('startDate'));
 add('Breadcrumb structured data',meta.includes("'@type':'BreadcrumbList'") && meta.includes('itemListElement'));
-add('Dynamic canonical URLs',meta.includes('canonical') && meta.includes('window.location.origin'));
+add('Dynamic canonical URLs',meta.includes('canonical') && meta.includes('VITE_SITE_URL') && meta.includes('jiityouthclub128.in'));
 add('Open Graph image',meta.includes("og:image") && html.includes('og:image'));
 add('Private route noindex',main.includes("clean.startsWith('/qr/')") && meta.includes("noindex,nofollow"));
 add('Robots allows public crawling',robots.includes('Allow: /') && robots.includes('Disallow: /admin'));
