@@ -68,9 +68,17 @@ create table if not exists public.jyc_site_data (
 
 alter table public.jyc_site_data enable row level security;
 drop policy if exists "Public can read published site data" on public.jyc_site_data;
-create policy "Public can read published site data"
-on public.jyc_site_data for select to anon, authenticated
-using (id = 'main');
+drop policy if exists "Public can read site data" on public.jyc_site_data;
+drop policy if exists "Admins can read site data" on public.jyc_site_data;
+create policy "Admins can read site data"
+on public.jyc_site_data for select to authenticated
+using (
+  exists (
+    select 1 from public.jyc_admins a
+    where a.user_id = auth.uid()
+      and a.is_active = true
+  )
+);
 
 drop policy if exists "JYC admins can manage site data" on public.jyc_site_data;
 create policy "JYC admins can manage site data"
