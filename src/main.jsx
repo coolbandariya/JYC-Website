@@ -550,15 +550,17 @@ function MobileMoreSheet({data,admin,close,openAssistant}){
  },[close]);
  const go=p=>{close();nav(p)};
 const explore=[
-   ['/about','About JYC','The organisation, its purpose and structure'],
-   ['/join-jyc','Join JYC','Recruitment destination · coming soon'],
-   ['/clubs','JYC Communities','Explore the official hub ecosystem'],
-   ['/events','JYC Events','Fests, competitions, performances and programmes'],
-   ['/fests','Fests','Flagship JYC campus experiences'],
-   ['/archive','JYC Archive','The published JYC story by year'],
+   ['/about','About JYC','History, vision, mission and values'],
+   ['/team','Leadership','Faculty, Apex and Core Team'],
+   ['/clubs','Clubs & Communities','Explore the official hub ecosystem'],
+   ['/events','Events','Upcoming, ongoing and completed experiences'],
+   ['/event-calendar','Event Calendar','Browse JYC events by date'],
+   ['/gallery','Gallery','Event memories, years and visual archive'],
+   ['/achievements','Achievements','Wall of Fame and community outcomes'],
    ['/announcements','Announcements','Registrations, notices and JYC updates'],
-   ['/achievements','Achievements','JYC wall of fame and published outcomes'],
-   ['/contact','Connect with JYC','Official public channels and contact']
+   ['/join-jyc','Join JYC','Recruitment destination · coming soon'],
+   ['/archive','Archive','The published JYC story by year'],
+   ['/contact','Contact','Official public channels and query form']
   ];
  return <div ref={sheetRef} className="more-sheet-overlay" role="dialog" aria-modal="true" aria-label="More JYC" onMouseDown={e=>{if(e.target===e.currentTarget)close()}}>
   <div className="more-sheet jyc-more-club-sheet">
