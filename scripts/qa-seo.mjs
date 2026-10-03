@@ -22,7 +22,7 @@ add('Sitemap generator exists',fs.existsSync(path.join(root,'scripts/generate-si
 add('SEO pages have useful route metadata',main.includes('JIIT Clubs & Student Communities') && main.includes('JIIT Events & Campus Activities') && main.includes('About JIIT Youth Club') && main.includes('JIIT Fests & Flagship Events'));
 add('Fest discovery route exists',main.includes("clean==='/fests'") && llms.includes('/fests'));
 add('Search-intent editorial content is visible on key pages',main.includes('SearchTopicBand') && main.includes('Official JIIT clubs and student communities') && main.includes('JIIT events, workshops and campus experiences'));
-add('Service worker cache namespace updated',/CACHE_NAME\s*=\s*['"]jyc-cache-v44-0-0['"]/.test(read('public/sw.js')));
+add('Service worker cache namespace updated',/CACHE_NAME\s*=\s*['"]jyc-cache-v46-0-0['"]/.test(read('public/sw.js')));
 const failed=checks.filter(x=>!x.ok);
 for(const c of checks) console.log(`${c.ok?'PASS':'FAIL'}: ${c.name}${c.detail?` — ${c.detail}`:''}`);
 if(failed.length){process.exitCode=1;console.error(`SEO QA failed: ${failed.length} check(s)`)} else console.log(`PASS: SEO QA (${checks.length} checks)`);
