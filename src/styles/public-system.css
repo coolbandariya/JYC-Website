@@ -3,6 +3,7 @@
    consolidated behind one stable entry point. Delete a legacy layer only after
    visual regression confirms it is unused. */
 
+@import '../v40-deep-ui.css';
 @import '../v23.6-consolidated.css';
 @import '../jyc-editorial-centered.css';
 @import '../v26-beige-signature.css';
