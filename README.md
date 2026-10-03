@@ -1,16 +1,17 @@
 # JIIT Youth Club 128 — Official Website
 
-> **Current direction: V45 — Social-first JYC 128 experience**
+> **Current direction: V46 — JYC identity, history & editorial experience**
 
 The official public website for **JIIT Youth Club (JYC), JIIT Wish Town Campus, Sector 128, Noida**.
 
-JYC 128 is the central coordinating body for major college events, fests and inter-society activities. The website is therefore an **official organisational presence**: it represents JYC's identity, leadership, clubs/hubs, events, achievements, announcements, memories and official contact channels.
+JYC 128 is the central coordinating body for major college events, fests and inter-society activities. The website is therefore an **official organisational presence**: it represents JYC's identity, leadership, history, clubs/hubs, events, achievements, announcements, memories and official contact channels. It is intentionally **not** a student-help portal or campus utility dashboard.
 
 ## Public website scope
 
 ### Core sections
 - Home
 - About JYC
+- JYC History
 - Leadership
 - Events
 - Event Details
@@ -26,6 +27,10 @@ JYC 128 is the central coordinating body for major college events, fests and int
 **Identity → About → Leadership → Clubs → Events → Event Details → Results / Achievements → Gallery / Memories → Contact**
 
 This is **not** an academic portal, attendance/schedule portal, student-help portal, campus utility dashboard or social-network clone.
+
+## Benchmark direction
+
+The public experience is benchmarked against JIIT’s own Innovation/CICR ecosystem, the current JYC 128 site, major student-run festival sites and strong university student-organisation sites. We borrow information architecture, editorial storytelling, event presentation, archive discipline and organisation-level credibility — **not** portal-heavy utility patterns, generic dashboards, excessive WebGL, custom cursors or visual noise.
 
 ## What the site should do exceptionally well
 
