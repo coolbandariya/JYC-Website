@@ -17,7 +17,7 @@ for(const needle of [
   "values ('jyc-backups','jyc-backups',false",
   'jyc_ingest_error_report',
   'jyc_registration_rate_limits',
-  'revoke insert, update, delete on public.jyc_event_registrations from anon;'
+  'revoke insert, delete on public.jyc_event_registrations from anon, authenticated;'
 ]) if(!hardening.includes(needle)) failures.push('hardening migration missing: '+needle);
 
 const ai=read('supabase/functions/ai-content-assist/index.ts');
