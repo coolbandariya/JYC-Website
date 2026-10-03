@@ -1,7 +1,7 @@
 // JYC V1 public experience contract.
 // Keep navigation, discovery labels and filters here so page components stay focused on rendering.
 export const JYC_PUBLIC_ROUTES=[
-  ['About','/about'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/leadership'],['Contact','/contact']
+  ['About','/about'],['History','/history'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/leadership'],['Contact','/contact']
 ];
 
 export const JYC_EVENT_CATEGORIES=['All','Cultural','Technical','Literary','Sports','Management','Social','Creative'];
