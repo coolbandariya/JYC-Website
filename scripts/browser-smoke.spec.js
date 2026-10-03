@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const base = process.env.JYC_BASE_URL || 'http://127.0.0.1:5173';
-const routes = ['/', '/about', '/clubs', '/events', '/gallery', '/team', '/planner', '/map', '/my-jyc', '/contact', '/fests', '/guide'];
+const routes = ['/', '/about', '/history', '/clubs', '/events', '/gallery', '/team', '/planner', '/map', '/my-jyc', '/contact', '/fests', '/guide'];
 
 test('public app mounts with no runtime errors', async ({ page }) => {
   const errors = [];
