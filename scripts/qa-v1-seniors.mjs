@@ -33,7 +33,7 @@ add('Team structure follows Faculty → Apex → Core → Clubs & Hubs',main.inc
 add('Clubs have recruitment and social fields',main.includes("recruitment:{on:false")&&main.includes("instagram:''")&&main.includes("linkedin:''"));
 add('Announcements and achievements have dedicated public routes',main.includes("clean==='/announcements'")&&main.includes("clean==='/achievements'"));
 add('Gallery and archive remain public',main.includes("clean==='/gallery'")&&main.includes("clean==='/archive'"));
-add('Find Your Community discovery is present',main.includes('FIND YOUR COMMUNITY')&&main.includes('Build & code')&&main.includes('Leadership & events'));
+add('Find Your Community discovery is present',main.includes('JYC COMMUNITY MAP')&&main.includes('Build & code')&&main.includes('Leadership & events'));
 add('Recruitment exposes deadlines and application links',extra.includes('RecruitmentHub')&&extra.includes('recruitment.deadline')&&extra.includes('recruitment.link'));
 add('Calendar exposes Google Calendar and device ICS export',extra.includes('Google Calendar ↗')&&extra.includes('Add JYC dates to device')&&extra.includes('text/calendar'));
 add('Gallery exposes source/credit provenance',extra.includes('gallery-provenance')&&extra.includes('active.credit||active.sourceLabel||active.source'));
