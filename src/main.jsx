@@ -95,7 +95,7 @@ function publicDemoData(){
 }
 import { normalizeSearch, rankSearchResults } from './lib/search.js';
 import {CREATOR,JYC_CONTACTS} from './lib/site-config.js';
-import {JYC_SOCIALS,festSocialProfile,socialProfile} from './jyc-socials.js';
+
 import {CampusMapPage,QRSharePage} from './v14-platform-plus.jsx';
 import {MomentsSection} from './v14-platform.jsx';
 import {SkipLink,InstallPrompt,MaintenanceGate,ErrorBoundary,MyJYC,CalendarPage,EventTools,DownloadICS,RegistrationPage,AccountLogin,JsonLd,usePageMeta,EventReminderButton,Gallery,GalleryItems,RecruitmentHub} from './extra-features.jsx';
