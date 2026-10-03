@@ -77,12 +77,15 @@ export const JYC_SOCIALS = {
   Aura: {},
   Cinekala: {},
   Abhivyakti: {
-    instagram: 'https://www.instagram.com/abhivyakti2024/',
-    instagramHandle: '@abhivyakti2024',
     label: 'Abhivyakti · JIIT-128'
   },
   Prismatic: {},
-  Eloquence: {},
+  Eloquence: {
+    linkedin: 'https://www.linkedin.com/company/eloquence-litsoc/',
+    label: 'Eloquence · Literary Society of JIIT',
+    verifiedBy: 'https://www.linkedin.com/company/eloquence-litsoc/',
+    verifiedOn: '2026-10-03'
+  },
   JSA: {}
 };
 
