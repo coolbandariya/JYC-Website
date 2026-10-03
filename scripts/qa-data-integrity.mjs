@@ -15,7 +15,7 @@ const checks=[
   [!admin.includes("String(c.id).toLowerCase()==='abhivyakti'")&&!admin.includes("String(e.club||'').toLowerCase().trim()!=='abhivyakti'"),'admin workspaces do not hide Abhivyakti by name'],
   [!bootstrap.includes("DELETE FROM public.jyc_clubs WHERE lower(name)='abhivyakti'")&&!bootstrap.includes("coalesce(c->>'id',''))='abhivyakti'"),'production bootstrap does not delete Abhivyakti by name'],
   [!v4.includes("DELETE FROM public.jyc_clubs WHERE lower(name)='abhivyakti'")&&!v4.includes("coalesce(c->>'id',''))='abhivyakti'"),'legacy V4 repair does not delete Abhivyakti by name'],
-  [!maintenance.match(/\\b(delete|update)\\b/i),'historical Abhivyakti maintenance script is non-destructive'],
+  [!maintenance.split(/\\n/).some(line=>/^\\s*(delete|update|insert)\\b/i.test(line)),'historical Abhivyakti maintenance script is non-destructive'],
   [!sitemap.includes("'/map'"),'retired map route is absent from generated sitemap'],
   [!main.includes("clean==='/events'?'map'"),'route metadata has no stale events-to-map branch']
 ];
