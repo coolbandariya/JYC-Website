@@ -308,8 +308,7 @@ function Contact({data}){
      setSubmitError('The live contact inbox is not configured yet. Please use Instagram, LinkedIn or WhatsApp below.');
      return;
    }
-   const {error}=await supabase.from('jyc_contact_submissions').insert({name:form.name.trim(),email:form.email.trim(),message:form.message.trim(),source:'public-contact'});
-   if(error)throw error;
+   const {data:result,error}=await supabase.functions.invoke('public-submission',{body:{type:'contact',name:form.name.trim(),email:form.email.trim(),message:form.message.trim(),website:''}});if(error||!result?.ok)throw error||new Error(result?.error||'Could not submit your message.');
    setSent(true);
  }catch(err){
    console.warn('JYC contact submission unavailable:',err);
