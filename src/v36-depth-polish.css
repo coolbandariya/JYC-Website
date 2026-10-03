@@ -1,0 +1,113 @@
+/* V36 depth polish — intentional motion, no decorative noise. */
+:root{
+  --jyc-v36-ease:cubic-bezier(.22,.8,.24,1);
+  --jyc-v36-beige:#c8a66a;
+}
+.public-app{
+  text-rendering:optimizeLegibility;
+  overflow-wrap:anywhere;
+}
+.public-app .reveal{
+  animation:jycV36Reveal .72s var(--jyc-v36-ease) both;
+  animation-timeline:view();
+  animation-range:entry 0% cover 24%;
+}
+.public-app .section:not(.home) .eyebrow{
+  letter-spacing:.18em;
+}
+.public-app a,.public-app button{
+  -webkit-tap-highlight-color:transparent;
+}
+.public-app .text-link{
+  position:relative;
+  width:max-content;
+  max-width:100%;
+}
+.public-app .text-link::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-4px;height:1px;
+  transform:scaleX(.22);
+  transform-origin:left;
+  background:currentColor;
+  transition:transform .35s var(--jyc-v36-ease);
+}
+.public-app .text-link:hover::after,
+.public-app .text-link:focus-visible::after{transform:scaleX(1)}
+.public-app .card,.public-app .club-card,.public-app .reference-event-grid article,
+.public-app .announcement-card,.public-app .achievement-feature,.public-app .event-related-card{
+  position:relative;
+  isolation:isolate;
+}
+.public-app .card::before,.public-app .club-card::before,
+.public-app .reference-event-grid article::before,.public-app .announcement-card::before,
+.public-app .achievement-feature::before,.public-app .event-related-card::before{
+  content:"";
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  border:1px solid color-mix(in srgb,var(--jyc33-brand) 0%,transparent);
+  transition:border-color .35s,transform .45s var(--jyc-v36-ease);
+}
+.public-app .card:hover::before,.public-app .club-card:hover::before,
+.public-app .reference-event-grid article:hover::before,.public-app .announcement-card:hover::before,
+.public-app .achievement-feature:hover::before,.public-app .event-related-card:hover::before{
+  border-color:color-mix(in srgb,var(--jyc33-brand) 42%,transparent);
+}
+.public-app img{
+  max-width:100%;
+  height:auto;
+}
+.public-app h1,.public-app h2,.public-app h3,.public-app h4,
+.public-app p,.public-app span,.public-app a,.public-app button{
+  overflow-wrap:anywhere;
+}
+.public-app .hero-actions .btn,
+.public-app .hero-actions a,
+.public-app .detail-actions .btn,
+.public-app .detail-actions a{
+  min-height:44px;
+}
+.public-app .section-head p,
+.public-app .reference-section-head p{
+  max-width:68ch;
+}
+.public-app .find-community-panel{
+  position:relative;
+  overflow:hidden;
+}
+.public-app .find-community-panel::after{
+  content:"";
+  position:absolute;
+  width:240px;height:240px;right:-110px;top:-120px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--jyc33-brand) 25%,transparent);
+  box-shadow:0 0 0 36px color-mix(in srgb,var(--jyc33-brand) 5%,transparent),
+             0 0 0 72px color-mix(in srgb,var(--jyc33-brand) 3%,transparent);
+  pointer-events:none;
+  animation:jycV36Orbit 18s linear infinite;
+}
+.public-app .find-community-panel .community-chip{
+  position:relative;
+  z-index:1;
+  transition:transform .3s var(--jyc-v36-ease),background .3s,border-color .3s;
+}
+.public-app .find-community-panel .community-chip:hover{
+  transform:translateY(-3px);
+}
+.public-app .event-context-grid,.public-app .event-related-grid,
+.public-app .achievement-grid,.public-app .announcement-index{
+  content-visibility:auto;
+  contain-intrinsic-size:1px 700px;
+}
+@keyframes jycV36Reveal{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes jycV36Orbit{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){
+  .public-app .reveal{animation:none!important}
+  .public-app .find-community-panel::after{animation:none!important}
+}
+@media (max-width:700px){
+  .public-app .hero-actions{align-items:stretch}
+  .public-app .hero-actions>*{min-width:0}
+  .public-app .find-community-panel::after{display:none}
+}
