@@ -64,10 +64,11 @@ check('Agentic AI 2026 content is complete',main.includes('Cybersecurity')&&main
 check('About section exposes the five-family ecosystem',main.includes('home-about-ecosystem')&&main.includes('FIVE FAMILIES · 21 COMMUNITIES'));
 check('assistant is theme-safe in dark mode',css.includes('.assistant-panel-modern')&&css.includes('html[data-theme="dark"] .assistant-panel-modern')&&css.includes('.assistant-search'));
 check('loading screen keeps the JYC logo and responsive boot state',main.includes('loading-mark')&&main.includes('loading-tagline')&&css.includes('.loading-mark img'));
-check('V20 split hero keeps copy left and logo right on desktop',css.includes('grid-template-columns:minmax(0,1fr) minmax(360px,.9fr)!important')&&css.includes('.home .hero-logo-stage{width:min(500px,42vw)!important'));
-check('global public text has explicit active-theme contrast',css.includes('.public-app h1,.public-app h2')&&css.includes('html[data-theme="dark"] .public-app .card h3'));
+const finalCss=fs.readFileSync(path.join(root,'src/v32-public-production-overhaul.css'),'utf8');
+check('V32 final visual layer is loaded after V29',main.includes("import './v32-public-production-overhaul.css';")&&main.indexOf("v32-public-production-overhaul.css")>main.indexOf("v29-interaction-polish.css")&&finalCss.includes('--jyc32-accent'));
+check('V32 light/dark surfaces have explicit readable contrast',finalCss.includes('html[data-theme="dark"]')&&finalCss.includes('--jyc32-paper:#171411')&&finalCss.includes('--jyc32-ink:#f8f1e7')&&finalCss.includes('.public-app .card p'));
 check('homepage hierarchy is centered',css.includes('.home .section-head')&&css.includes('.home .jyc-feature-copy{align-items:center!important;text-align:center!important}'));
-check('release version is V30.0',pkg.version==='31.0.0');
+check('release metadata remains synchronized',pkg.version==='31.0.0');
 
 if(fail)process.exit(1);
 console.log(`V26 BEIGE SIGNATURE QA: ${pass}/${pass+fail} passed.`);
