@@ -17,7 +17,7 @@ check(history.includes('Converge 2026')&&history.includes('www.jiityouthclub128.
 check(!history.includes('founding year')&&!history.includes('founded in 19'),'history avoids invented founding claims');
 check(main.includes("const privateRoute=['/admin','/login','/my-jyc'"),'student utility routes remain private and are not part of public navigation');
 check(!main.includes("nav('/my-jyc')")&&!main.includes("['My JYC'"),'public shell does not promote a student-help portal');
-check(css.includes('@media(prefers-reduced-motion:reduce)'),'history motion respects reduced motion');
+check(history.includes('prefers-reduced-motion:reduce'),'history motion respects reduced motion');
 check(sw.includes("jyc-cache-v46-0-0"),'service worker cache is versioned for V46');
 if(fail.length){console.error('V46 QA failed: '+fail.join(', '));process.exit(1)}
 console.log('PASS: V46 JYC identity/history QA');
