@@ -48,7 +48,7 @@ check('official JYC hub content is wired',main.includes('JYC_HUB_CONTENT')&&main
 check('verified leadership content remains source-grounded',main.includes('Dr. Vinay Anand Tikkiwal')&&main.includes('Dr. Pankaj Kumar Srivastava')&&main.includes("name:'Harisha'")&&main.includes("name:'Dhruv Choudhary'"));
 check('production path does not fabricate demo content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 check('JYC logo remains the public hero identity',main.includes('hero-logo-stage')&&main.includes('<img src={logo}'));
-check('SEO/social preview remains logo-led',index.includes('og:image" content="/jyc-logo-circle.png"')&&index.includes('twitter:image" content="/jyc-logo-circle.png"'));
+check('SEO/social preview remains logo-led',index.includes('og:image" content="/jyc-logo-official.webp"')&&index.includes('twitter:image" content="/jyc-logo-official.webp"'));
 check('service worker cache is current',sw.includes('jyc-cache-v37-0-0'));
 const maintainedHubCount=(hubContent.match(/^\s{2}(?:'[^']+'|[A-Za-z][^:]+):\{/gm)||[]).length;
 check('orientation source count stays internally consistent',main.includes('21 communities')&&main.includes("Object.keys(JYC_HUB_CONTENT).length")&&maintainedHubCount===21);
