@@ -366,7 +366,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  const liveClub=clean.startsWith('/clubs/')?data.clubs.find(c=>String(c.id)===String(slugId)||slug(c.name)===slug(slugId)):null;const hubKey=clean.startsWith('/clubs/')?Object.keys(JYC_HUB_CONTENT).find(k=>slug(k)===slug(slugId)):null;const club=liveClub||(!clean.startsWith('/clubs/')||!hubKey?null:{id:`hub-${slug(hubKey)}`,name:hubKey,type:JYC_HUB_CONTENT[hubKey].family==='Technical'?'Technical':'Non-Technical',category:JYC_HUB_CONTENT[hubKey].family,description:JYC_HUB_CONTENT[hubKey].summary,about:JYC_HUB_CONTENT[hubKey].detail,interests:[JYC_HUB_CONTENT[hubKey].focus],published:true,status:'published',theme:'jyc',customSections:[],achievements:[],projects:[],heads:[],recruitment:{on:false},logo:'',banner:'',instagram:'',whatsapp:'',website:'',linkedin:'',youtube:''});
  const event=clean.startsWith('/events/')?data.events.find(e=>String(e.id)===String(slugId)||slug(e.title)===slug(slugId)):null;
  const titles={
-  '/':'JIIT Youth Club 128 — Clubs, Events & Campus Life | JIIT Noida',
+  '/':'JIIT Youth Club (JYC) — Clubs, Events & Fests | JIIT Noida',
   '/about':'What is JIIT Youth Club (JYC)? | JIIT Noida',
   '/clubs':'JIIT Clubs & Student Communities | JIIT Youth Club',
   '/events':'JIIT Events & Campus Activities | JIIT Youth Club',
