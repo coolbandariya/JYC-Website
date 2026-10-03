@@ -9,6 +9,7 @@ import './jyc-editorial-centered.css';
 import './v26-beige-signature.css';
 import './v28-editorial-system.css';
 import './v29-interaction-polish.css';
+import './v32-public-production-overhaul.css';
 import {JYC_HUB_CONTENT, JYC_HUB_FAMILIES, hubProfile} from './v21-hub-content.js';
 import {hubDetails} from './v23.6-hub-details.js';
 import {hubIdentity,eventIdentity} from './hub-identities.js';
@@ -17,17 +18,17 @@ import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 
 const PUBLIC_TEAM_FALLBACK=[
  {id:'devansh-tripathi',name:'Devansh Tripathi',role:'General Secretary',published:true,bio:'A prominent face of JYC 128, contributing across student societies spanning leadership, creativity, innovation, culture, literature, design and technology.',photo:'/assets/team/devansh-tripathi.webp'},
- {id:'amrit-kumar',name:'Amrit Kumar',role:'Vice President',published:true,bio:'A planner, coordinator and problem-solver focused on streamlining operations, supporting decisions, bringing teams together and creating structure behind the scenes.',photo:'/assets/team/amrit-kumar.webp'},
+ {id:'amrit-kumar',name:'Amrit Kumar Jha',role:'Vice President',published:true,bio:'A planner, coordinator and problem-solver focused on streamlining operations, supporting decisions, bringing teams together and creating structure behind the scenes.',photo:'/assets/team/amrit-kumar.webp'},
  {id:'daksh-sachdeva',name:'Daksh Sachdeva',role:'Finance Secretary / Treasurer',published:true,bio:'Responsible for budgeting, planning and careful resource management across JYC activities.',photo:'/assets/team/daksh-sachdeva.webp'},
  {id:'saksham-kotia',name:'Saksham Kotia',role:'Joint Secretary',published:true,bio:'Supports coordination, execution and cross-team work across the JYC ecosystem.',photo:'/assets/team/saksham-kotia.webp'},
- {id:'asmi-srivastava',name:'Asmi Srivastava',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/asmi-srivastava.webp'},
- {id:'juhi-hatuka',name:'Juhi Hatuka',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/juhi-hatuka.webp'},
- {id:'pratik-kumar',name:'Pratik Kumar',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/pratik-kumar.webp'},
- {id:'divye-bajaj',name:'Divye Bajaj',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/divye-bajaj.webp'},
- {id:'revant-srivastava',name:'Revant Srivastava',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/revant-srivastava.webp'},
+ {id:'asmi-srivastava',name:'Asmi Srivastava',role:'Hospitality Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/asmi-srivastava.webp'},
+ {id:'juhi-hatuka',name:'Juhi Hatuka',role:'Hospitality Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/juhi-hatuka.webp'},
+ {id:'pratik-kumar',name:'Pratik Kumar',role:'Security Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/pratik-kumar.webp'},
+ {id:'divye-bajaj',name:'Divye Bajaj',role:'PR Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/divye-bajaj.webp'},
+ {id:'revant-srivastava',name:'Revant Srivastava',role:'Management Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/revant-srivastava.webp'},
  {id:'aradhyaa-singh',name:'Aradhyaa Singh',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/aradhyaa-singh.webp'},
- {id:'vansh-mahajan',name:'Vansh Mahajan',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/vansh-mahajan.webp'},
- {id:'shriya-singh',name:'Shriya Singh',role:'Executive Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/shriya-singh.webp'},
+ {id:'vansh-mahajan',name:'Vansh Mahajan',role:'Security Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/vansh-mahajan.webp'},
+ {id:'shriya-singh',name:'Shriya Singh',role:'Digital Head',published:true,bio:'Executive leadership supporting JYC communities, programmes and student experiences.',photo:'/assets/team/shriya-singh.webp'},
  {id:'faculty-vinay-anand-tikkiwal',name:'Dr. Vinay Anand Tikkiwal',role:'Faculty Advisor',published:true,bio:'Faculty advisor supporting the JYC student ecosystem.',photo:''},
  {id:'faculty-pankaj-kumar-srivastava',name:'Dr. Pankaj Kumar Srivastava',role:'Faculty Advisor',published:true,bio:'Faculty advisor supporting the JYC student ecosystem.',photo:''},
  {id:'harisha',name:'Harisha',role:'Creative Head',published:true,bio:'Leads creative coordination across JYC programmes and campus experiences.',photo:''},
@@ -449,7 +450,7 @@ function Navbar({data,admin,theme,setTheme}){
  const nav=useNavigate();const loc=useLocation();
  const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[assistant,setAssistant]=useState(false),[homeSection,setHomeSection]=useState('hero');
  const shortcutRef=React.useRef('');
- const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Moments','/gallery'],['Team','/team']];
+ const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Moments','/gallery'],['Team','/team'],['Contact','/contact']];
  const homeLinks=[['Home','hero'],['About','about'],['Clubs','clubs'],['Events','events'],['Moments','moments'],['Team','team']];
  useEffect(()=>{
    const onKey=e=>{
