@@ -11,7 +11,7 @@ Deno.serve(async (req) => {
   if(error) return new Response(JSON.stringify({error:error.message}),{status:500,headers:{'content-type':'application/json'}})
   const body=JSON.stringify({backup_at:new Date().toISOString(),source:data})
   const path=`automated/${new Date().toISOString().replace(/[:.]/g,'-')}.json`
-  const upload=await db.storage.from('jyc-media').upload(path,new Blob([body],{type:'application/json'}),{upsert:false,contentType:'application/json'})
+  const upload=await db.storage.from('jyc-backups').upload(path,new Blob([body],{type:'application/json'}),{upsert:false,contentType:'application/json'})
   if(upload.error) return new Response(JSON.stringify({error:upload.error.message}),{status:500,headers:{'content-type':'application/json'}})
   return new Response(JSON.stringify({ok:true,path}),{headers:{'content-type':'application/json'}})
 })
