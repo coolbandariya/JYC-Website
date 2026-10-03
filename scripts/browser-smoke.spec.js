@@ -26,3 +26,34 @@ for (const route of routes) {
     expect(errors, `runtime errors on ${route}`).toEqual([]);
   });
 }
+
+
+test('homepage accessibility and responsive guardrails', async ({ page }) => {
+  await page.goto(base, { waitUntil: 'domcontentloaded' });
+
+  const missingAlt = await page.locator('img:not([alt])').count();
+  expect(missingAlt).toBe(0);
+
+  const unnamedButtons = await page.locator('button').evaluateAll(buttons =>
+    buttons.filter(button => {
+      const text = (button.innerText || '').trim();
+      const aria = button.getAttribute('aria-label') || button.getAttribute('aria-labelledby');
+      return !text && !aria;
+    }).length
+  );
+  expect(unnamedButtons).toBe(0);
+
+  const overflow = await page.evaluate(() =>
+    document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
+  );
+  expect(overflow).toBe(false);
+});
+
+test('reduced-motion mode disables hero animation', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(base, { waitUntil: 'domcontentloaded' });
+  const animationNames = await page.locator('.hero-logo-stage img').evaluateAll(nodes =>
+    nodes.map(node => getComputedStyle(node).animationName)
+  );
+  expect(animationNames.every(name => name === 'none')).toBe(true);
+});
