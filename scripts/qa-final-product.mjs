@@ -20,7 +20,10 @@ const checks=[
   [manifest.includes('"theme_color": "#efe3cb"'),'PWA theme color stays on the senior palette'],
   [main.includes('fetchPriority="high"')&&main.includes('decoding="async"'),'hero identity image is prioritized for first paint'],
   [main.includes('PDF_HUB_PROGRAMME.map')&&main.includes('supplied-event-programme'),'All Hubs programme material remains surfaced'],
-  [main.includes('PDF_HUB_EXTRA_GALLERY')&&main.includes('PDF_HUB_STORIES'),'source archive remains wired into the public experience']
+  [main.includes('PDF_HUB_EXTRA_GALLERY')&&main.includes('PDF_HUB_STORIES'),'source archive remains wired into the public experience'],
+  [main.includes('AdminVerification')&&main.includes("tab==='verification'"),'admin verification workflow is wired into the control center'],
+  [fs.existsSync('supabase/migrations/202610030005_publication_verification_guard.sql'),'publication verification guard migration exists'],
+  [fs.existsSync('supabase/tests/database/jyc_security_rls.test.sql'),'database RLS regression suite exists']
 ];
 let failed=false;
 for(const [ok,label] of checks){console.log(ok?'PASS':'FAIL',label);if(!ok)failed=true}
