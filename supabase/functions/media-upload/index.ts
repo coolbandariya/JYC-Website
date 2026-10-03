@@ -3,7 +3,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.117.2';
 const MAX_BYTES = 8 * 1024 * 1024;
 const allowedFolders = new Set(['jyc','events','gallery','team','fests','general']);
 const allowedOrigins = new Set((Deno.env.get('SITE_ORIGINS') || Deno.env.get('SITE_ORIGIN') || 'http://localhost:5173').split(',').map(x=>x.trim()).filter(Boolean));
-const allowedOrigin = (origin:string|null) => origin && (allowedOrigins.has(origin) || /^https?:\\/\\/(localhost|127\\.0\\.1)(:\\d+)?$/.test(origin)) ? origin : null;
+const allowedOrigin = (origin:string|null) => origin && (allowedOrigins.has(origin) || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) ? origin : null;
 
 const json = (body: unknown, status = 200, origin: string | null = null) => new Response(JSON.stringify(body), {
   status,
