@@ -426,7 +426,7 @@ function NavIcon({kind}){const paths={home:'M3 10.5 12 3l9 7.5M5.5 9.5V21h13V9.5
 
 function Navbar({data,admin,theme,setTheme}){
  const nav=useNavigate();const loc=useLocation();
- const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[assistant,setAssistant]=useState(false),[homeSection,setHomeSection]=useState('hero');
+ const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[homeSection,setHomeSection]=useState('hero');
  const shortcutRef=React.useRef('');
  const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/leadership'],['Contact','/contact']];
  const homeLinks=[['Home','hero'],['About','about'],['Clubs','clubs'],['Events','events'],['Gallery','moments'],['Leadership','team']];
@@ -557,7 +557,7 @@ function Search({data,admin,close}){
   ...(isFestMode(data)?[['Fests','Flagship JIIT and JYC fest experiences.','PAGE','/fests']]:[]),
   ['JYC Team','Meet the people behind JYC.','PAGE','/team'],['Contact JYC','Official JYC contact information.','PAGE','/contact'],['JYC Archive','Published JYC events, clubs, gallery moments and campus stories.','PAGE','/archive'],['Announcements','JYC announcements, registration notices and updates.','PAGE','/announcements'],['Achievements','JYC achievements, wall of fame and published outcomes.','PAGE','/achievements'],['JYC Calendar','Published JYC event dates and programme.','PAGE','/calendar'],
   ...((data.academicCalendar?.showInSearch!==false)?[['JIIT Academic Calendar 2026–27','Official academic dates, exams, vacations and holidays.','ACADEMIC','/calendar']]:[]),
-  ['Campus Map','Find venues for JYC events.','PAGE','/events']
+  ['Events & venues','Find published JYC event locations.','PAGE','/events']
  ];
  const adminPages=admin?[['Control Center','Staff publishing, reviews, registrations and operations.','ADMIN','/admin']]:[];
  const rawResults=[
