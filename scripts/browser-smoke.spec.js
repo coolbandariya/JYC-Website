@@ -62,7 +62,7 @@ test('reduced-motion mode disables hero animation', async ({ page }) => {
 test('brand text contrast stays readable in both themes', async ({ page }) => {
   const contrast = await page.evaluate(() => {
     const parse = value => {
-      const m = String(value || '').match(/rgba?\\((\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)(?:\\s*,\\s*([\\d.]+))?\\)/i);
+      const m = String(value || '').match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\)/i);
       if (!m) return null;
       return [Number(m[1]),Number(m[2]),Number(m[3]),m[4]===undefined?1:Number(m[4])];
     };
