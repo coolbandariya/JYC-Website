@@ -18,6 +18,7 @@ import {hubIdentity,eventIdentity} from './hub-identities.js';
 import {PDF_HUB_GALLERY,PDF_HUB_STORIES,HUB_PHOTO_MAP} from './pdf-hub-content.js';
 import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-media.js';
+import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ROUTES,JYC_V1_ANIMATION_CONTRACT,JYC_CONTENT_RULES} from './public-v1/config.js';
 
 const PUBLIC_TEAM_FALLBACK=[
  {id:'devansh-tripathi',name:'Devansh Tripathi',role:'General Secretary',published:true,bio:'A prominent face of JYC 128, contributing across student societies spanning leadership, creativity, innovation, culture, literature, design and technology.',photo:'/assets/team/devansh-tripathi.webp'},
@@ -344,7 +345,7 @@ function Events({data}){
  const all=data.events.filter(e=>e.published&&!e.archived).filter(e=>!queryYear||String(e.date||'').startsWith(queryYear)).sort((a,b)=>(Number(!!b.pinned)-Number(!!a.pinned))||`${a.date} ${a.start}`.localeCompare(`${b.date} ${b.start}`));
  const clubs=[...new Set(all.map(e=>e.club).filter(Boolean))];
  const eventFamily=name=>{const raw=String(name||'').trim().toLowerCase();const key=Object.keys(JYC_HUB_CONTENT).find(k=>raw===k.toLowerCase()||raw.includes(k.toLowerCase()));return key?JYC_HUB_CONTENT[key].family:''};
- const eventCategories=['All','Cultural','Technical','Literary','Sports','Management','Social Outreach','Creative'];
+ const eventCategories=JYC_EVENT_CATEGORIES;
  const eventCategoryOf=e=>String(e.category||e.eventCategory||e.eventType||eventFamily(e.club)||'').trim();
  const filtered=all.filter(e=>filter==='All'||e.club===filter).filter(e=>family==='All'||eventCategoryOf(e).toLowerCase()===family.toLowerCase()).filter(e=>!q||`${e.title} ${e.club} ${e.venue} ${eventCategoryOf(e)} ${(e.highlights||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
  const upcoming=filtered.filter(e=>eventState(e)!=='past'),live=filtered.filter(e=>eventState(e)==='live'),past=filtered.filter(e=>eventState(e)==='past');
@@ -862,7 +863,7 @@ function Clubs({data}){
  const familyVisible=visible.filter(c=>family==='All'||familyOf(c)===family);
  const cats=[...new Set(familyVisible.filter(c=>type==='All'||c.type===type).map(c=>c.category).filter(Boolean))];
  const ints=[...new Set(familyVisible.filter(c=>type==='All'||c.type===type).flatMap(c=>c.interests||[]))];
- const discoveryAliases={'build & code':['coding','programming','development','open source','competitive programming','code'],'ai & robotics':['ai','machine learning','robotics','drones','aerial robotics','automation','electronics'],'music & dance':['music','dance','bhangra','performance','ensemble'],'theatre & performance':['theatre','dramatics','performance','film','storytelling'],'writing & debate':['writing','literary','speaking','debate','anchoring'],'design & media':['design','graphic design','photography','film','visual','creative','media'],'sports & fitness':['sports','cricket','football','basketball','fitness'],'social impact':['social','sustainability','environment','outreach'],'leadership & events':['leadership','management','events','community']};
+ const discoveryAliases=Object.fromEntries(Object.entries(JYC_COMMUNITY_DISCOVERY).map(([key,terms])=>[key.toLowerCase(),terms]));
  const query=String(q||'').trim().toLowerCase();
  const discoveryTerms=discoveryAliases[query]||[];
  const list=familyVisible.filter(c=>type==='All'||c.type===type).filter(c=>cat==='All'||c.category===cat).filter(c=>interest==='All'||(c.interests||[]).includes(interest)).filter(c=>{if(!query)return true;const hay=`${c.name} ${c.category} ${familyOf(c)} ${(c.interests||[]).join(' ')} ${c.description||''} ${c.about||''}`.toLowerCase();return hay.includes(query)||discoveryTerms.some(term=>hay.includes(term))});
