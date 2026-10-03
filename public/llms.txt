@@ -9,8 +9,6 @@ JIIT Youth Club is the student-led campus ecosystem for JIIT Noida. The public J
 - /fests — official published JYC fests and flagship campus events.
 - /calendar — JYC events calendar.
 - /gallery — official JYC moments and event/fest photo archive.
-- /map — JIIT campus venues connected to JYC activities.
-- /planner — JYC Planner: published JYC events alongside academic dates and device-calendar export.
 - /about — JYC purpose, communities and quick-start answers.
 - /team — public JYC team information.
 
