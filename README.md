@@ -4,7 +4,7 @@
 
 > **The official club-first digital home for JIIT Youth Club, Sector 128, Noida.**
 >
-> **Release: V32.0.0 — Public Experience / Beige Signature / Production Polish** — a club-first, event-first public experience for JIIT Youth Club Sector 128.
+> **Release: V31.0.0 — Public Experience / Beige Signature / Production Polish** — a club-first, event-first public experience for JIIT Youth Club Sector 128.
 
 JYC brings its **clubs, events, people, memories and official community channels** into one focused public website. The Control Center is separate from the student-facing experience and handles publishing, review and operations.
 
@@ -138,7 +138,7 @@ See [`docs/OPEN-SOURCE-UI-NOTES.md`](docs/OPEN-SOURCE-UI-NOTES.md) for the refer
 
 ## Current release
 
-**V32.0.0 — Public Experience Release**
+**V31.0.0 — Public Experience Release**
 
 This release preserves the strongest JYC platform features while tightening the public visual system around JYC beige, black and white, a centered logo-led hero, compact section rhythm, curated homepage content and stronger photography hierarchy.
 
