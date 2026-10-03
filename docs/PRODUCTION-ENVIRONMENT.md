@@ -35,6 +35,7 @@ Apply the ordered files in `supabase/migrations/` after the existing bootstrap/r
 1. `202610030001_production_hardening.sql`
 2. `202610030002_ai_hardening.sql`
 3. `202610030003_campus_verification.sql`
+4. `202610030004_media_write_boundary.sql`
 
 Run the backup/restore drill documented in `docs/PRODUCTION-BACKUP-RESTORE.md` before treating a new production environment as recoverable.
 
@@ -50,3 +51,7 @@ A production release requires:
 6. GitHub CodeQL, CI and Quality Gate success
 
 Do not mark the deployment healthy solely because the Vercel build completed; verify the application and Supabase functions against the production environment.
+
+## Existing-production migration baseline
+
+The repository now contains versioned hardening migrations, but the historical Supabase schema was originally created through legacy bootstrap SQL. Before using `supabase db push` against the live project, link the project and run `supabase db pull` so the live schema becomes the authoritative baseline migration. Supabase documents this as the supported way to reconcile an existing production database with migration history. Do not fabricate a baseline from the legacy SQL files or push the hardening migrations blindly into an already-populated database. After the pull, run `supabase db reset` locally and `supabase test db`.
