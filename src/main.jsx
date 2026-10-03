@@ -6,7 +6,6 @@ import {supabase} from './lib/supabase';
 import {uploadJycMedia} from './lib/media.js';
 import {jycToast} from './lib/ui';
 import './styles/public-system.css';
-import './v40-deep-ui.css';
 import {JYC_HUB_CONTENT, JYC_HUB_FAMILIES, hubProfile} from './v21-hub-content.js';
 import {JYC_ORIENTATION_FAMILIES,JYC_ORIENTATION_LAYERS,JYC_ORIENTATION_EVENTS,JYC_ORIENTATION_AT_A_GLANCE} from './jyc-orientation-insights.js';
 import {hubDetails} from './v23.6-hub-details.js';
