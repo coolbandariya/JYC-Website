@@ -18,8 +18,8 @@ add('Join JYC coming-soon destination exists',main.includes("clean==='/join-jyc'
 add('Home hero has required participation CTAs',main.includes("nav('/events')")&&main.includes("nav('/clubs')")&&main.includes("nav('/join-jyc')"));
 add('Home hero uses senior-approved statement',main.includes('THE VOICE. THE TALENT. THE SPIRIT.'));
 add('JYC 128 scope is explicit',main.includes('JIIT · SECTOR 128 · NOIDA')&&main.includes('JIIT YOUTH CLUB'));
-add('Events expose upcoming/live/past states',main.includes("['upcoming','Upcoming',upcoming.length]")&&main.includes("['live','Live',live.length]")&&main.includes("['past','Past',past.length]"));
-add('Events expose senior-requested categories',main.includes("eventCategories=['All','Cultural','Technical','Literary','Sports','Management','Social Outreach','Creative']"));
+add('Events expose upcoming/live/past states',main.includes("['upcoming','Upcoming',upcoming.length]")&&main.includes("['live','Ongoing',live.length]")&&main.includes("['past','Completed',past.length]"));
+add('Events expose senior-requested categories',main.includes("JYC_EVENT_CATEGORIES")&&main.includes("'Social'"));
 add('Event cards retain organiser, venue and registration data',main.includes('event.club')&&main.includes('event.venue')&&main.includes('registrationUrl'));
 add('Event template contains rules, eligibility, prizes and FAQs',main.includes('rules:[]')&&main.includes('eligibility:')&&main.includes('prizes:[]')&&main.includes('faqs:[]'));
 add('Team structure follows Faculty → Apex → Core → Clubs & Hubs',main.includes('Faculty → Apex → Core → Clubs & Hubs')&&main.includes('JYC Apex'));
@@ -35,6 +35,9 @@ add('Event category filter uses event category/type rather than only organiser f
 add('Leadership and gallery have explicit page metadata',main.includes("'/leadership':'JYC 128 Leadership")&&main.includes("'/gallery':'JYC Gallery"));
 add('Contact form does not claim success when Supabase is unconfigured',main.includes("if(!supabase.__configured)")&&main.includes("The live contact inbox is not configured yet"));
 add('Contact form has name/email/message fields',main.includes('name="name"')&&main.includes('name="email"')&&main.includes('name="message"'));
+add('Homepage What JYC Does covers the senior categories',main.includes("title:'Cultural'")&&main.includes("title:'Technical'")&&main.includes("title:'Literary'")&&main.includes("title:'Sports'")&&main.includes("title:'Management'")&&main.includes("title:'Social Outreach'")&&main.includes("title:'Workshops'")&&main.includes("title:'Competitions'"));
+add('JYC social identity uses the publicly verified handle',main.includes("instagramHandle: '@jiityouthclub'")&&main.includes("verifiedBy: 'https://linktr.ee/jiityouthclub'"));
+add('Club cards surface verified social actions',main.includes('club-socials')&&main.includes('socialProfile(c.name)'));
 add('Production does not use demo fallback content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 
 const failed=checks.filter(x=>!x.ok);
