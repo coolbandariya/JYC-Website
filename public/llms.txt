@@ -8,6 +8,7 @@ The public website is the official organisational source for published JYC infor
 
 - / — JYC 128 home
 - /about — About JYC
+- /history — JYC history and documented milestones
 - /team — JYC 128 leadership and organisational structure
 - /clubs — official published clubs and hubs
 - /events — official published JYC events
