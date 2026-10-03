@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root=process.cwd();
-const rawSite=(process.env.VITE_SITE_URL||process.env.SITE_URL||process.env.VERCEL_PROJECT_PRODUCTION_URL||'').trim();
+const rawSite=(process.env.VITE_SITE_URL||process.env.SITE_URL||process.env.VERCEL_PROJECT_PRODUCTION_URL||'https://www.jiityouthclub128.in').trim();
 const site=(rawSite?(/^[a-z]+:\/\//i.test(rawSite)?rawSite:`https://${rawSite}`):'').replace(/\/$/,'');
 const out=path.join(root,'public','sitemap.xml');
 const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/contact','/calendar','/announcements','/achievements','/join-jyc','/map'];
