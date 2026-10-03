@@ -5,7 +5,7 @@ const root=process.cwd();
 const rawSite=(process.env.VITE_SITE_URL||process.env.SITE_URL||process.env.VERCEL_PROJECT_PRODUCTION_URL||'').trim();
 const site=(rawSite?(/^[a-z]+:\/\//i.test(rawSite)?rawSite:`https://${rawSite}`):'').replace(/\/$/,'');
 const out=path.join(root,'public','sitemap.xml');
-const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/calendar','/event-calendar','/announcements','/achievements','/join-jyc','/recruitment','/map'];
+const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/contact','/calendar','/announcements','/achievements','/join-jyc','/map'];
 const urls=new Set(core);
 const slug=value=>String(value||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
@@ -33,8 +33,18 @@ if(!site){
   process.exit(0);
 }
 await loadDynamic();
-const now=new Date().toISOString().slice(0,10);
-const xml=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...urls].map(u=>`  <url><loc>${site}${u}</loc><lastmod>${now}</lastmod></url>`).join('\n')}\n</urlset>\n`;
+const fallbackDate=new Date().toISOString().slice(0,10);
+const dynamicDates=new Map();
+// Use content timestamps when available; otherwise fall back to the build date.
+try{
+  const supabaseUrl=(process.env.VITE_SUPABASE_URL||'').replace(/\/$/,'');
+  const key=process.env.VITE_SUPABASE_PUBLISHABLE_KEY||process.env.VITE_SUPABASE_ANON_KEY||'';
+  if(supabaseUrl&&key){
+    const r=await fetch(`${supabaseUrl}/rest/v1/jyc_site_data?id=eq.main&select=updated_at`,{headers:{apikey:key,Authorization:`Bearer ${key}`}});
+    if(r.ok){const rows=await r.json();if(rows?.[0]?.updated_at)dynamicDates.set('/',String(rows[0].updated_at).slice(0,10));}
+  }
+}catch{}
+const xml=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...urls].map(u=>`  <url><loc>${site}${u}</loc><lastmod>${dynamicDates.get(u)||fallbackDate}</lastmod></url>`).join('\n')}\n</urlset>\n`;
 fs.writeFileSync(out,xml);
 const robots=path.join(root,'public','robots.txt');
 if(fs.existsSync(robots)){
