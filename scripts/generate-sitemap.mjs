@@ -17,8 +17,8 @@ async function loadDynamic(){
     const r=await fetch(`${supabaseUrl}/rest/v1/rpc/jyc_read_site_data`,{method:'POST',headers:{apikey:key,Authorization:`Bearer ${key}`,Prefer:'return=representation'}});
     if(!r.ok)return;
     const data=await r.json();
-    for(const c of (data?.clubs||[])) if(c?.published&&c?.status!=='archived') urls.add(`/clubs/${slug(c.name)||encodeURIComponent(String(c.id))}`);
-    for(const e of (data?.events||[])) if(e?.published&&!e?.archived) urls.add(`/events/${slug(e.title)||encodeURIComponent(String(e.id))}`);
+    for(const c of (data?.clubs||[])) if(c?.published&&c?.status!=='archived') { const u=`/clubs/${slug(c.name)||encodeURIComponent(String(c.id))}`; urls.add(u); if(c.updated_at) dynamicDates.set(u,String(c.updated_at).slice(0,10)); }
+    for(const e of (data?.events||[])) if(e?.published&&!e?.archived) { const u=`/events/${slug(e.title)||encodeURIComponent(String(e.id))}`; urls.add(u); if(e.updated_at) dynamicDates.set(u,String(e.updated_at).slice(0,10)); }
   }catch{}
 }
 
