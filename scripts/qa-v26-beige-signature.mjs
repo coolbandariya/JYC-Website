@@ -49,7 +49,7 @@ check('verified leadership content remains source-grounded',main.includes('Dr. V
 check('production path does not fabricate demo content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 check('JYC logo remains the public hero identity',main.includes('hero-logo-stage')&&main.includes('<img src={logo}'));
 check('SEO/social preview remains logo-led',index.includes('og:image" content="/jyc-logo-circle.png"')&&index.includes('twitter:image" content="/jyc-logo-circle.png"'));
-check('service worker cache is current',sw.includes('jyc-cache-v35-1-0'));
+check('service worker cache is current',sw.includes('jyc-cache-v36-0-0'));
 const maintainedHubCount=(hubContent.match(/^\s{2}(?:'[^']+'|[A-Za-z][^:]+):\{/gm)||[]).length;
 check('orientation source count stays internally consistent',main.includes('21 communities')&&main.includes("Object.keys(JYC_HUB_CONTENT).length")&&maintainedHubCount===21);
 check('hub detail exposes source and live evidence layers',main.includes('hub-evidence-rail')&&main.includes('club-source')&&main.includes('Published JYC records provide the live layer'));
