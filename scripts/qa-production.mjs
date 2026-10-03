@@ -31,7 +31,7 @@ if(main.includes("supabase.from('jyc_contact_submissions')")) pass('Contact form
 if(contactSql.includes('alter table public.jyc_contact_submissions enable row level security')&&contactSql.includes('Admins can read contact messages')) pass('Contact inbox has RLS and admin-only reads'); else fail('Contact inbox security policy incomplete');
 if(contactSql.includes('public.jyc_project_submissions')&&contactSql.includes('Admins can update project submissions')) pass('Project submission inbox schema and RLS are present'); else fail('Project submission schema/security incomplete');
 if(ai.includes("gpt-6-luna")) pass('AI content assistant uses a current configured model default'); else fail('AI content assistant model default is stale');
-if(ai.includes('if(!allowedOrigin(origin))')&&ai.includes('requestWindows')&&ai.includes('contentLength>24000')) pass('AI content assistant has origin, size and rate guards'); else fail('AI content assistant request guards are incomplete');
+if(ai.includes('if(!allowedOrigin(origin))')&&ai.includes('jyc_allow_ai_request')&&ai.includes('contentLength>24000')&&ai.includes('store:false')&&ai.includes('json_schema')) pass('AI content assistant has origin, size, distributed rate and structured-output guards'); else fail('AI content assistant request guards are incomplete');
 if(adminFn.includes('https://jycjiit.vercel.app')) pass('Admin edge function includes the current JYC production origin'); else fail('Admin edge function production origin missing');
 
 const failed=checks.filter(x=>!x[0]);
