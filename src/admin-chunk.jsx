@@ -5,7 +5,7 @@ import {jycToast,jycConfirm} from './lib/ui';
 import {CREATOR} from './lib/site-config.js';
 import {AdminSystem,AdminReviews,AdminVersions,AdminApprovals,AdminRegistrations,AdminAlbums,AdminProjectSubmissions} from './admin-extra.jsx';
 
-const logo='/jyc-logo-circle.png';
+const logo='/jyc-logo-official.webp';
 const markLogo=logo;
 const uid=()=>globalThis.crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;
 const empty={clubs:[],events:[],gallery:[],team:[],categories:{Technical:[], 'Non-Technical':[]},announcement:{on:false,text:'',link:''},mode:'events',fest:null,homepage:{heroTitle:'JIIT YOUTH CLUB',heroSubtitle:'READY TO SOAR',heroLead:'A student-led ecosystem connecting campus communities, creativity, technology and experiences at JIIT Sector 128.',showClubs:true,showEvents:true,showGallery:true,aboutTitle:'The JYC story belongs here.',aboutText:''},creator:CREATOR};
