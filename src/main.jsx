@@ -843,7 +843,7 @@ function About({data}){
   <section className="about-vision-v28 reveal"><article><span className="eyebrow">VISION</span><h2>A campus where every student can find a place to participate, create, lead and belong.</h2></article><article><span className="eyebrow">MISSION</span><p>Connect students with clubs and communities, create meaningful experiences, develop leadership and teamwork, and make campus life more participatory.</p><div className="about-inline-links"><button onClick={()=>nav('/team')}>Meet the people →</button><button onClick={()=>nav('/gallery')}>See the archive →</button></div></article></section>
   <section className="about-section-title-v28 reveal" style={{marginTop:28,textAlign:'center'}}>
    <span className="eyebrow">WHAT WE STAND FOR</span>
-   <h2>Six principles that shape the JYC experience.</h2>
+   <h2>Seven principles that shape the JYC experience.</h2>
    <p>These are presented as the public-facing values of the student ecosystem; operational details remain controlled by JYC.</p>
   </section>
   <section className="about-principles-v33 reveal">
@@ -853,7 +853,8 @@ function About({data}){
     ['03','Leadership','Responsibility grows through real coordination, execution and teamwork.'],
     ['04','Innovation','Technical communities turn curiosity into projects, competitions and learning.'],
     ['05','Collaboration','Hubs, committees and volunteers create experiences together.'],
-    ['06','Inclusivity','There should be a place to discover, learn, contribute and belong.']
+    ['06','Inclusivity','There should be a place to discover, learn, contribute and belong.'],
+    ['07','Campus spirit','JYC turns participation, celebration and shared responsibility into a stronger campus community.']
    ].map(([n,t,p])=><article className="about-principle-v33" key={t}><span>{n}</span><strong>{t}</strong><p>{p}</p></article>)}
   </section>
   <div className="about-source-note reveal">Content scope: JYC 128 hub orientation material + current public JIIT information. Current event, recruitment and team records are published separately through the JYC Control Center.</div>
