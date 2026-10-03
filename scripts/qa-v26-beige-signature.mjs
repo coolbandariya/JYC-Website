@@ -53,7 +53,7 @@ check('service worker cache is current',sw.includes('jyc-cache-v36-0-0'));
 const maintainedHubCount=(hubContent.match(/^\s{2}(?:'[^']+'|[A-Za-z][^:]+):\{/gm)||[]).length;
 check('orientation source count stays internally consistent',main.includes('21 communities')&&main.includes("Object.keys(JYC_HUB_CONTENT).length")&&maintainedHubCount===21);
 check('hub detail exposes source and live evidence layers',main.includes('hub-evidence-rail')&&main.includes('club-source')&&main.includes('Published JYC records provide the live layer'));
-check('events support family-level discovery',main.includes("[family,setFamily]=useState('All')")&&main.includes('eventFamily(e.club)===family')&&main.includes('All families'));
+check('events support family-level discovery',main.includes("[family,setFamily]=useState('All')")&&main.includes('eventFamily(e.club)===family')&&main.includes('All categories'));
 check('hub identity comment matches maintained count',read('src/hub-identities.js').includes('21 maintained community signatures'));
 check('all 21 hub identities are represented',maintainedHubCount===21&&read('src/hub-identities.js').includes('21 maintained community signatures'));
 check('event identity system covers supplied flagship events',read('src/hub-identities.js').includes('Dron-O-War')&&read('src/hub-identities.js').includes('Converge')&&read('src/hub-identities.js').includes('Code Clash')&&main.includes('eventIdentity(e)'));
@@ -62,7 +62,7 @@ check('source-first hub media helper exists',sourceMedia.includes('enrichSourceC
 check('event identity fallback is deterministic',read('src/hub-identities.js').includes('EVENT_VISUALS')&&read('src/hub-identities.js').includes('hashEvent')&&read('src/hub-identities.js').includes('eventSeed'));
 check('hub directory editorial preview exists',main.includes('hub-directory-stage')&&main.includes('hub-directory-preview')&&main.includes('onMouseEnter={()=>setActive(name)}'));
 check('event timeline preview exists',main.includes('EventTimelinePreview')&&main.includes('event-timeline-row'));
-check('release metadata is synchronized',pkg.version==='35.1.0');
+check('release metadata is synchronized',pkg.version==='36.0.0');
 
 if(fail)process.exit(1);
 console.log(`Public visual QA: ${pass}/${pass+fail} passed.`);
