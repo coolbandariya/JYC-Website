@@ -77,3 +77,6 @@ The repository now has:
 The remaining production database baseline operation must be performed against the real Supabase project with `supabase db pull`, because the historical schema was created outside the current migration directory.
 
 _Last reviewed against the merged production-hardening baseline and final-product branch on 2026-10-03._
+
+
+QA branch created from final-product-architecture head for a clean release gate.
