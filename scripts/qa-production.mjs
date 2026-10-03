@@ -25,7 +25,8 @@ if(read('src/extra-features.jsx').includes("if(item.date&&item.end)eventGraph.en
 const ai=read('supabase/functions/ai-content-assist/index.ts');
 const adminFn=read('supabase/functions/admin-management/index.ts');
 const contactSql=read('supabase/contact-and-project-submissions.sql');
-if(pkg.version!=='38.0.0'||lock.version!=='38.0.0'||lock.engines?.node!=='>=22') fail('Release metadata and lockfile engine are out of sync'); else pass('Release metadata and lockfile engine are synchronized');
+const lockPackage=lock.packages?.['']||{};
+if(pkg.version!==lock.version||pkg.version!==lockPackage.version||lockPackage.engines?.node!==pkg.engines?.node) fail('Release metadata and lockfile engine are out of sync'); else pass('Release metadata and lockfile engine are synchronized');
 if((main.match(/import '\.\/styles\/public-system\.css';/g)||[]).length!==1) fail('Consolidated public stylesheet must be imported exactly once'); else pass('Consolidated public stylesheet import is unique');
 if(main.includes("functions.invoke('public-submission'")&&main.includes("type:'contact'")) pass('Contact form uses the guarded persistent submission target'); else fail('Contact form has no guarded persistent submission target');
 if(contactSql.includes('alter table public.jyc_contact_submissions enable row level security')&&contactSql.includes('Admins can read contact messages')) pass('Contact inbox has RLS and admin-only reads'); else fail('Contact inbox security policy incomplete');
