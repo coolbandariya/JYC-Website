@@ -25,7 +25,7 @@ if(read('src/extra-features.jsx').includes("if(item.date&&item.end)eventGraph.en
 const ai=read('supabase/functions/ai-content-assist/index.ts');
 const adminFn=read('supabase/functions/admin-management/index.ts');
 const contactSql=read('supabase/contact-and-project-submissions.sql');
-if(pkg.version!=='30.0.0'||lock.version!=='30.0.0'||lock.engines?.node!=='>=22') fail('Release metadata and lockfile engine are out of sync'); else pass('Release metadata and lockfile engine are synchronized');
+if(pkg.version!=='31.0.0'||lock.version!=='31.0.0'||lock.engines?.node!=='>=22') fail('Release metadata and lockfile engine are out of sync'); else pass('Release metadata and lockfile engine are synchronized');
 if((main.match(/import '\.\/v29-interaction-polish\.css';/g)||[]).length!==1) fail('V29 interaction stylesheet must be imported exactly once'); else pass('Interaction stylesheet import is unique');
 if(main.includes("supabase.from('jyc_contact_submissions')")) pass('Contact form has a persistent submission target'); else fail('Contact form has no persistent submission target');
 if(contactSql.includes('alter table public.jyc_contact_submissions enable row level security')&&contactSql.includes('Admins can read contact messages')) pass('Contact inbox has RLS and admin-only reads'); else fail('Contact inbox security policy incomplete');
