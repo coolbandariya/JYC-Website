@@ -379,3 +379,9 @@ html[data-theme="dark"] .public-app .card:hover,html[data-theme="dark"] .public-
   .home .hero-actions{justify-content:center!important}
   .home .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+
+/* Accessible keyboard bypass: visible on focus, unobtrusive otherwise. */
+.skip-link{position:fixed;left:16px;top:12px;z-index:10000;transform:translateY(-180%);padding:10px 14px;min-height:44px;display:inline-flex;align-items:center;border:2px solid var(--jyc-ink,#0f1420);border-radius:10px;background:var(--jyc-cream,#efe3cb);color:var(--jyc-ink,#0f1420);font-weight:800;text-decoration:none;box-shadow:0 8px 24px rgba(15,20,32,.18);transition:transform .18s ease}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid currentColor;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.skip-link{transition:none}}
