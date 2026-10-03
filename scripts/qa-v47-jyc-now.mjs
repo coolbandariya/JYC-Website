@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const main=read('src/main.jsx'),now=read('src/jyc-now.jsx'),api=read('api/jyc-updates.js'),sw=read('public/sw.js'),pkg=JSON.parse(read('package.json')),lock=JSON.parse(read('package-lock.json'));
+const fail=[];const check=(ok,name)=>{if(!ok)fail.push(name);console.log((ok?'PASS':'FAIL')+': '+name)};
+check(pkg.version==='47.0.0','package version is 47.0.0');
+check(lock.version==='47.0.0'&&lock.packages?.['']?.version==='47.0.0','lockfile version is 47.0.0');
+check(main.includes("from './jyc-now.jsx'")&&main.includes('<JYCNowStrip data={data}/>'),'JYC Now homepage layer is mounted');
+check(main.includes("clean==='/updates'")&&main.includes('<JYCNowPage data={data}/>'),'JYC Now route is mounted');
+check(main.includes("'/updates','JYC Now'"),'JYC Now is discoverable from More');
+check(now.includes('What JYC is creating now')&&now.includes('Community Spotlight'),'editorial JYC Now experience exists');
+check(now.includes('View original ↗')&&now.includes('canonical source'),'cards retain source-first editorial behavior');
+check(now.includes('not a social-network feed')&&now.includes('does not recreate likes, comments or follows'),'public page is not a social-network clone');
+check(api.includes('META_ACCESS_TOKEN')&&api.includes('YOUTUBE_API_KEY')&&api.includes('JYC_RSS_FEEDS'),'server-side connectors are configurable');
+check(!api.includes('eyJ')&&!api.includes('EAAC'),'provider credentials are not hard-coded');
+check(fs.existsSync('supabase/V47-JYC-NOW.sql'),'aggregation schema exists');
+check(sw.includes('jyc-cache-v47-0-0'),'service worker cache is refreshed for V47');
+check(main.includes('Explore the JYC ecosystem.')&&main.includes('JYC COMMUNITY MAP'),'public club language stays JYC-first');
+if(fail.length){console.error('V47 QA failed: '+fail.join(', '));process.exit(1)}console.log('PASS: V47 JYC Now QA');
