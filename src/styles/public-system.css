@@ -1,0 +1,64 @@
+/* JYC 128 public design system
+   The visual stack is intentionally preserved while the legacy CSS generations are
+   consolidated behind one stable entry point. Delete a legacy layer only after
+   visual regression confirms it is unused. */
+
+@import '../v23.6-consolidated.css';
+@import '../jyc-editorial-centered.css';
+@import '../v26-beige-signature.css';
+@import '../v28-editorial-system.css';
+@import '../v29-interaction-polish.css';
+@import '../v32-public-production-overhaul.css';
+@import '../v33-final-public-experience.css';
+@import '../v36-depth-polish.css';
+@import '../jyc-logo-theme.css';
+
+:root {
+  color-scheme: light;
+  --jyc-bg: #f8f1e4;
+  --jyc-surface: #fffaf1;
+  --jyc-ink: #171513;
+  --jyc-muted: #665f56;
+  --jyc-line: rgba(23,21,19,.16);
+  --jyc-accent: #a47b43;
+  --jyc-focus: #5c3d16;
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--jyc-focus);
+  outline-offset: 3px;
+}
+
+:where(button, [role="button"], input[type="button"], input[type="submit"], input[type="reset"]) {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:where(img, video, iframe) {
+  content-visibility: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .site-atmosphere,
+  .shooting-star,
+  .tilt-card {
+    transform: none !important;
+  }
+}
