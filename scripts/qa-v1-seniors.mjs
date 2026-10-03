@@ -7,6 +7,7 @@ const main=read('src/main.jsx');
 const extra=read('src/extra-features.jsx');
 const pkg=JSON.parse(read('package.json'));
 const socials=read('src/jyc-socials.js');
+const config=read('src/public-v1/config.js');
 const checks=[];
 const add=(name,ok)=>checks.push({name,ok:Boolean(ok)});
 
@@ -20,7 +21,7 @@ add('Home hero has required participation CTAs',main.includes("nav('/events')")&
 add('Home hero uses senior-approved statement',main.includes('THE VOICE. THE TALENT. THE SPIRIT.'));
 add('JYC 128 scope is explicit',main.includes('JIIT · SECTOR 128 · NOIDA')&&main.includes('JIIT YOUTH CLUB'));
 add('Events expose upcoming/live/past states',main.includes("['upcoming','Upcoming',upcoming.length]")&&main.includes("['live','Ongoing',live.length]")&&main.includes("['past','Completed',past.length]"));
-add('Events expose senior-requested categories',main.includes("JYC_EVENT_CATEGORIES")&&main.includes("'Social'"));
+add('Events expose senior-requested categories',config.includes("JYC_EVENT_CATEGORIES")&&config.includes("'Social'"));
 add('Event cards retain organiser, venue and registration data',main.includes('event.club')&&main.includes('event.venue')&&main.includes('registrationUrl'));
 add('Event template contains rules, eligibility, prizes and FAQs',main.includes('rules:[]')&&main.includes('eligibility:')&&main.includes('prizes:[]')&&main.includes('faqs:[]'));
 add('Team structure follows Faculty → Apex → Core → Clubs & Hubs',main.includes('Faculty → Apex → Core → Clubs & Hubs')&&main.includes('JYC Apex'));
@@ -31,12 +32,12 @@ add('Find Your Community discovery is present',main.includes('FIND YOUR COMMUNIT
 add('Recruitment exposes deadlines and application links',extra.includes('RecruitmentHub')&&extra.includes('recruitment.deadline')&&extra.includes('recruitment.link'));
 add('Calendar exposes Google Calendar and device ICS export',extra.includes('Google Calendar ↗')&&extra.includes('Add JYC dates to device')&&extra.includes('text/calendar'));
 add('Gallery exposes source/credit provenance',extra.includes('gallery-provenance')&&extra.includes('active.credit||active.sourceLabel||active.source'));
-add('Community discovery chips map to meaningful search aliases',main.includes("const discoveryAliases=")&&main.includes("'build & code'")&&main.includes("'ai & robotics'")&&main.includes('discoveryTerms.some'));
+add('Community discovery chips map to meaningful search aliases',config.includes("'Build & code'")&&config.includes("'AI & robotics'")&&main.includes('discoveryTerms.some'));
 add('Event category filter uses event category/type rather than only organiser family',main.includes('const eventCategoryOf=')&&main.includes('eventCategoryOf(e).toLowerCase()===family.toLowerCase()'));
 add('Leadership and gallery have explicit page metadata',main.includes("'/leadership':'JYC 128 Leadership")&&main.includes("'/gallery':'JYC Gallery"));
 add('Contact form does not claim success when Supabase is unconfigured',main.includes("if(!supabase.__configured)")&&main.includes("The live contact inbox is not configured yet"));
 add('Contact form has name/email/message fields',main.includes('name="name"')&&main.includes('name="email"')&&main.includes('name="message"'));
-add('Homepage What JYC Does covers the senior categories',main.includes("title:'Cultural'")&&main.includes("title:'Technical'")&&main.includes("title:'Literary'")&&main.includes("title:'Sports'")&&main.includes("title:'Management'")&&main.includes("title:'Social Outreach'")&&main.includes("title:'Workshops'")&&main.includes("title:'Competitions'"));
+add('Homepage What JYC Does covers the senior categories',config.includes("title:'Cultural'")&&config.includes("title:'Technical'")&&config.includes("title:'Literary'")&&config.includes("title:'Sports'")&&config.includes("title:'Management'")&&config.includes("title:'Social Outreach'")&&config.includes("title:'Workshops'")&&config.includes("title:'Competitions'"));
 add('JYC social identity uses the publicly verified handle',socials.includes("instagramHandle: '@jiityouthclub'")&&socials.includes("verifiedBy: 'https://linktr.ee/jiityouthclub'"));
 add('Club cards surface verified social actions',main.includes('club-socials')&&main.includes('socialProfile(c.name)'));
 add('Production does not use demo fallback content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
