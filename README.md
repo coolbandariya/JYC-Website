@@ -1,6 +1,6 @@
 # JIIT Youth Club 128 — Official Website
 
-> **Current direction: V37 — Official JYC 128 experience**
+> **Current direction: V43 — Official JYC 128 experience**
 
 The official public website for **JIIT Youth Club (JYC), JIIT Wish Town Campus, Sector 128, Noida**.
 
@@ -181,11 +181,12 @@ npm run qa:browser
 
 ## Research basis
 
-The V37 direction is based on current JIIT material, current JYC 128 public activity, JIIT 128 club sites and comparable student-organisation/event sites.
+The V43 direction is based on current JIIT material, the supplied JYC hub/programme archive, current JIIT 128 community/event references, current web accessibility guidance, and current Google event structured-data guidance. The implementation keeps JYC's public experience source-first: historical supplied material is presented as archive/context rather than silently treated as a current roster.
 
 See:
 - `docs/V37-OFFICIAL-JYC-128-SCOPE.md`
 - `docs/V36-DEEP-RESEARCH-2026-10-03.md`
+- the V42/V43 public-page and QA history in GitHub pull requests
 
 The JIIT 2026 brochure describes JYC 128 as the central coordinating body responsible for planning, managing and executing major college events, fests and inter-society activities. Current JIIT public material identifies Converge 2026 as a Sector-128 fest organised by JYC, while current JYC 128 public activity shows JAI 2026 as a major upcoming JYC 128 event.
 
@@ -202,3 +203,5 @@ A release is not production-ready until:
 8. event/club content is clearly sourced or labelled historical
 9. critical pages have no runtime errors
 10. performance and accessibility regressions are checked
+11. release metadata, package-lock and documentation identify the same product generation
+12. the connected production deployment is verified separately from GitHub CI
