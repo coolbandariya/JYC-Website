@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+const main=fs.readFileSync('src/main.jsx','utf8');
+const history=fs.readFileSync('src/jyc-history-page.jsx','utf8');
+const css=fs.readFileSync('src/styles/jyc-history.css','utf8');
+const sw=fs.readFileSync('public/sw.js','utf8');
+const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
+const lock=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
+const fail=[];
+const check=(ok,name)=>{if(!ok)fail.push(name);console.log((ok?'PASS':'FAIL')+': '+name)};
+check(pkg.version==='46.0.0','package version is 46.0.0');
+check(lock.version==='46.0.0'&&lock.packages?.['']?.version==='46.0.0','lockfile version is 46.0.0');
+check(main.includes("clean==='/history'")&&main.includes('<JYCHistory data={data}/>'),'history route is mounted');
+check(main.includes("'/history','JYC History'"),'history is discoverable from More');
+check(main.includes('<HistoryTeaser/>'),'home has a JYC history teaser');
+check(history.includes('JIIT Annual Report 2019–20')&&history.includes('JIIT Annual Report 2021–22')&&history.includes('JIIT Annual Report 2022–23'),'history uses published JIIT records');
+check(history.includes('Converge 2026')&&history.includes('www.jiityouthclub128.in'),'current JYC reference is included');
+check(!history.includes('founding year')&&!history.includes('founded in 19'),'history avoids invented founding claims');
+check(main.includes("const privateRoute=['/admin','/login','/my-jyc'"),'student utility routes remain private and are not part of public navigation');
+check(!main.includes("nav('/my-jyc')")&&!main.includes("['My JYC'"),'public shell does not promote a student-help portal');
+check(css.includes('@media(prefers-reduced-motion:reduce)'),'history motion respects reduced motion');
+check(sw.includes("jyc-cache-v46-0-0"),'service worker cache is versioned for V46');
+if(fail.length){console.error('V46 QA failed: '+fail.join(', '));process.exit(1)}
+console.log('PASS: V46 JYC identity/history QA');
