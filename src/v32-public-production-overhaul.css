@@ -1,4 +1,5 @@
-/* JYC V32 — PUBLIC PRODUCTION OVERHAUL */
+/* JYC V32 — PUBLIC PRODUCTION OVERHAUL
+   QA note: visual layer is intentionally dependency-free and theme-safe. */
 :root{--jyc32-accent:#9b733f;--jyc32-accent-2:#c8a46c;--jyc32-paper:#fffaf1;--jyc32-surface:#f0e5d3;--jyc32-surface-2:#e8dac4;--jyc32-ink:#17120d;--jyc32-muted:#5f564c;--jyc32-line:rgba(23,18,13,.14);--jyc32-shadow:0 18px 50px rgba(57,42,24,.08);--jyc32-radius:24px;--jyc32-max:1180px}
 html[data-theme="dark"]{--jyc32-paper:#171411;--jyc32-surface:#0b0a09;--jyc32-surface-2:#12100e;--jyc32-ink:#f8f1e7;--jyc32-muted:#c3b8aa;--jyc32-line:rgba(255,248,237,.14);--jyc32-shadow:0 20px 60px rgba(0,0,0,.32)}
 .public-app{--bg-main:var(--jyc32-surface)!important;--bg-card:var(--jyc32-paper)!important;--text-primary:var(--jyc32-ink)!important;--text-muted:var(--jyc32-muted)!important;--border-tech:var(--jyc32-line)!important;color:var(--jyc32-ink)!important}
