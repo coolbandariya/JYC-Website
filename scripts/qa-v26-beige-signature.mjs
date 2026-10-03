@@ -62,7 +62,7 @@ check('source-first hub media helper exists',sourceMedia.includes('enrichSourceC
 check('event identity fallback is deterministic',read('src/hub-identities.js').includes('EVENT_VISUALS')&&read('src/hub-identities.js').includes('hashEvent')&&read('src/hub-identities.js').includes('eventSeed'));
 check('hub directory editorial preview exists',main.includes('hub-directory-stage')&&main.includes('hub-directory-preview')&&main.includes('onMouseEnter={()=>setActive(name)}'));
 check('event timeline preview exists',main.includes('EventTimelinePreview')&&main.includes('event-timeline-row'));
-check('release metadata is synchronized',pkg.version==='38.0.0');
+const lock=JSON.parse(read('package-lock.json'));check('release metadata is synchronized',pkg.version===lock.version&&pkg.version===lock.packages?.['']?.version);
 
 if(fail)process.exit(1);
 console.log(`Public visual QA: ${pass}/${pass+fail} passed.`);
