@@ -21,7 +21,8 @@ const scripts = [
   'qa-data-integrity.mjs',
   'qa-accessibility-contract.mjs',
   'qa-repo-hygiene.mjs',
-  'qa-v45-social-bot.mjs'
+  'qa-v45-social-bot.mjs',
+  'qa-v46-jyc-identity.mjs'
 ];
 
 for (const script of scripts) {
