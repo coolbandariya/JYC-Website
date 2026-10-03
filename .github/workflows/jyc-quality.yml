@@ -33,6 +33,9 @@ jobs:
       - name: Production build
         run: npm run build
 
+      - name: Production performance budget
+        run: node scripts/qa-performance.mjs
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
