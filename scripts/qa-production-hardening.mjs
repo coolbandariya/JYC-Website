@@ -27,6 +27,10 @@ if(!ai.includes("json_schema")) failures.push('AI Responses request must use a s
 
 const backup=read('supabase/functions/backup-site-data/index.ts');
 if(!backup.includes("from('jyc-backups')")) failures.push('backup function is not using private jyc-backups bucket');
+for(const fn of ['supabase/functions/admin-management/index.ts','supabase/functions/send-notification/index.ts','supabase/functions/ai-content-assist/index.ts']) {
+  const source=read(fn);
+  if(source.includes('https://jycjiit.vercel.app') || source.includes('https://jyc-website-livid.vercel.app')) failures.push(fn+' still contains a legacy Vercel origin');
+}
 
 const config=read('supabase/config.toml');
 if(!config.includes('[functions.error-report]')||!config.includes('verify_jwt = false')) failures.push('public error-report Edge Function is not configured');
