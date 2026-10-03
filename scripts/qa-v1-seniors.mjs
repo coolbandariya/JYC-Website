@@ -29,7 +29,11 @@ add('Gallery and archive remain public',main.includes("clean==='/gallery'")&&mai
 add('Find Your Community discovery is present',main.includes('FIND YOUR COMMUNITY')&&main.includes('Build & code')&&main.includes('Leadership & events'));
 add('Recruitment exposes deadlines and application links',extra.includes('RecruitmentHub')&&extra.includes('recruitment.deadline')&&extra.includes('recruitment.link'));
 add('Calendar exposes Google Calendar and device ICS export',extra.includes('Google Calendar ↗')&&extra.includes('Add JYC dates to device')&&extra.includes('text/calendar'));
-add('Gallery exposes source/credit provenance',extra.includes('gallery-provenance')&&extra.includes('active.credit||active.source||active.sourceLabel'));
+add('Gallery exposes source/credit provenance',extra.includes('gallery-provenance')&&extra.includes('active.credit||active.sourceLabel||active.source'));
+add('Community discovery chips map to meaningful search aliases',main.includes("const discoveryAliases=")&&main.includes("'build & code'")&&main.includes("'ai & robotics'")&&main.includes('discoveryTerms.some'));
+add('Event category filter uses event category/type rather than only organiser family',main.includes('const eventCategoryOf=')&&main.includes('eventCategoryOf(e).toLowerCase()===family.toLowerCase()'));
+add('Leadership and gallery have explicit page metadata',main.includes("'/leadership':'JYC 128 Leadership")&&main.includes("'/gallery':'JYC Gallery"));
+add('Contact form does not claim success when Supabase is unconfigured',main.includes("if(!supabase.__configured)")&&main.includes("The live contact inbox is not configured yet"));
 add('Contact form has name/email/message fields',main.includes('name="name"')&&main.includes('name="email"')&&main.includes('name="message"'));
 add('Production does not use demo fallback content',main.includes('allowContentFallback:false')&&main.includes('return norm(empty)'));
 
