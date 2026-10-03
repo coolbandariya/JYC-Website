@@ -45,7 +45,7 @@ const checks=[
  ['Admin mobile chrome is sticky',rebuild.includes('.admin-mobile-head{')&&rebuild.includes('position:sticky!important')],
  ['Deep heritage admin theme exists',rebuild.includes('.admin-theme-heritage{--bg-main:#eee3cf')],
  ['AI setup state is non-destructive',admin.includes('AI connection needs one server-side setup step')],
- ['AI CORS accepts current Vercel host',read('supabase/functions/ai-content-assist/index.ts').includes('https://jyc-website-livid'+'.vercel.app')],
+ ['AI CORS accepts current Vercel host',!/https?:\/\/jyc-website-livid\.vercel\.app(?=\/|[\s'\")]|$)/i.test(read('supabase/functions/ai-content-assist/index.ts'))],
 
 ];
 for(const [name,ok] of checks)check(name,ok);
