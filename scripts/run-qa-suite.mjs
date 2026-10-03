@@ -14,7 +14,8 @@ const scripts = [
   'qa-production-hardening.mjs',
   'qa-sql-contract.mjs',
   'qa-architecture.mjs',
-  'qa-logo-theme.mjs'
+  'qa-logo-theme.mjs',
+  'qa-final-product.mjs'
 ];
 
 for (const script of scripts) {
