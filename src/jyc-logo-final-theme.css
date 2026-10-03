@@ -345,7 +345,7 @@ html[data-theme="dark"] .public-app .card:hover,html[data-theme="dark"] .public-
 @keyframes jycPulse{0%,100%{transform:scale(.92);opacity:.24}50%{transform:scale(1.12);opacity:.58}}
 
 @media (max-width:900px){
-  :root{--jyc-content:min(100% - 28px,760px)}
+  :root{--jyc-content:min(calc(100% - 28px),760px)}
   .public-app .section,.public-app .page,.home-layout>.section,.home-photo-story>.section{width:var(--jyc-content)!important}
   .public-app .section-head,.public-app .reference-section-head{text-align:center!important}
 }
