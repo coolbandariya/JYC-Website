@@ -484,7 +484,7 @@ function Navbar({data,admin,theme,setTheme}){
  const nav=useNavigate();const loc=useLocation();
  const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[assistant,setAssistant]=useState(false),[homeSection,setHomeSection]=useState('hero');
  const shortcutRef=React.useRef('');
- const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/team'],['Contact','/contact']];
+ const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/leadership'],['Contact','/contact']];
  const homeLinks=[['Home','hero'],['About','about'],['Clubs','clubs'],['Events','events'],['Gallery','moments'],['Leadership','team']];
  useEffect(()=>{
    const onKey=e=>{
@@ -512,8 +512,8 @@ function Navbar({data,admin,theme,setTheme}){
    return()=>observer.disconnect();
  },[loc.pathname]);
  const goHomeSection=id=>{setOpen(false);setMoreOpen(false);if(loc.pathname!=='/') {nav('/#'+id);return}document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});setHomeSection(id)};
- const dockItems=[['Home','/','home'],['Clubs','/clubs','clubs'],['Events','/events','events'],['Leadership','/team','team'],['More','__more','more']];
- const dockActive=loc.pathname==='/'?0:loc.pathname.startsWith('/clubs')?1:loc.pathname.startsWith('/events')?2:loc.pathname.startsWith('/team')?3:4;
+ const dockItems=[['Home','/','home'],['Clubs','/clubs','clubs'],['Events','/events','events'],['Leadership','/leadership','team'],['More','__more','more']];
+ const dockActive=loc.pathname==='/'?0:loc.pathname.startsWith('/clubs')?1:loc.pathname.startsWith('/events')?2:(loc.pathname.startsWith('/team')||loc.pathname.startsWith('/leadership'))?3:4;
  const dock=<div className="mobile-dock" style={{'--dock-index':dockActive}} aria-label="Mobile navigation"><i className="dock-active-pill" aria-hidden="true"/>{dockItems.map(([n,p,icon],i)=>{const active=i===dockActive;return <button key={n} className={active?'active':''} onClick={()=>p==='__more'?setMoreOpen(v=>!v):nav(p)} aria-current={active?'page':undefined}><span><NavIcon kind={icon}/></span><b>{n}</b></button>})}</div>;
  const more=moreOpen?<MobileMoreSheet data={data} admin={admin} close={()=>setMoreOpen(false)} openAssistant={()=>{setMoreOpen(false);setAssistant(true)}}/>:null;
  const searchView=search?<Search data={data} admin={admin} close={()=>setSearch(false)}/>:null;
@@ -551,7 +551,7 @@ function MobileMoreSheet({data,admin,close,openAssistant}){
  const go=p=>{close();nav(p)};
 const explore=[
    ['/about','About JYC','History, vision, mission and values'],
-   ['/team','Leadership','Faculty, Apex and Core Team'],
+   ['/leadership','Leadership','Faculty, Apex and Core Team'],
    ['/clubs','Clubs & Communities','Explore the official hub ecosystem'],
    ['/events','Events','Upcoming, ongoing and completed experiences'],
    ['/event-calendar','Event Calendar','Browse JYC events by date'],
