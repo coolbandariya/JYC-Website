@@ -66,7 +66,3 @@ img {
     transform: none !important;
   }
 }
-
-
-/* V46 — JYC history editorial layer */
-@media(max-width:800px){.jyc-history-hero,.jyc-history-intro,.jyc-history-current,.jyc-history-teaser{display:block!important}.jyc-history-principle-grid{grid-template-columns:1fr 1fr!important}.jyc-history-item{grid-template-columns:54px 1fr!important}}@media(max-width:560px){.jyc-history-principle-grid{grid-template-columns:1fr!important}.jyc-history-hero h1{font-size:48px}@media(prefers-reduced-motion:reduce){.jyc-history-page *{scroll-behavior:auto}}.jyc-history-card{padding:22px 20px!important}.jyc-history-current,.jyc-history-teaser{padding:26px 20px!important}}
