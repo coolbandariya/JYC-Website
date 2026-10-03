@@ -5,7 +5,7 @@ const allowedOrigin = (origin:string|null) => {
     .split(',').map(x=>x.trim()).filter(Boolean);
   const known = new Set(configured);
   if (origin && known.has(origin)) return origin;
-  if (origin && /^https?:\/\/(localhost|127\.0\.0\.1)(:\\d+)?$/.test(origin)) return origin;
+  if (origin && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return origin;
   return known.values().next().value || 'null';
 };
 
