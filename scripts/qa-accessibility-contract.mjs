@@ -5,6 +5,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const failures=[];
 const check=(name,ok)=>{console.log((ok?'PASS':'FAIL')+': '+name);if(!ok)failures.push(name)};
 const main=read('src/main.jsx');
+const extras=read('src/extra-features.jsx');
 const css=read('src/styles/public-system.css')+'\n'+read('src/jyc-logo-final-theme.css');
 const browser=read('scripts/browser-smoke.spec.js');
 check('one public CSS entry remains active',(main.match(/import ['"][^'"]+\.css['"];?/g)||[]).length===1);
@@ -16,6 +17,6 @@ check('homepage browser QA checks missing image alt',browser.includes("img:not([
 check('homepage browser QA checks unnamed buttons',browser.includes('unnamedButtons'));
 check('homepage browser QA checks horizontal overflow',browser.includes('scrollWidth'));
 check('no positive tabindex values are introduced',!/tabIndex\s*=\s*\{\s*[1-9]\d*\s*\}|tabindex\s*=\s*["'][1-9]\d*["']/i.test(main));
-check('skip link exists',main.includes('SkipLink')&&main.includes('skip-link'));
+check('skip link exists',main.includes('SkipLink')&&/className=["']skip-link["']/.test(extras)&&read('index.html').includes('skip-link'));
 if(failures.length) process.exit(1);
 console.log('Accessibility contract QA PASS ('+(10-failures.length)+' checks)');
