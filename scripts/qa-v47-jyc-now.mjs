@@ -13,6 +13,6 @@ check(now.includes('not a social-network feed')&&now.includes('does not recreate
 check(api.includes('META_ACCESS_TOKEN')&&api.includes('YOUTUBE_API_KEY')&&api.includes('LINKEDIN_ACCESS_TOKEN')&&api.includes('JYC_RSS_FEEDS'),'server-side connectors are configurable');
 check(!api.includes('eyJ')&&!api.includes('EAAC'),'provider credentials are not hard-coded');
 check(fs.existsSync('supabase/V47-JYC-NOW.sql'),'aggregation schema exists');
-check(sw.includes('jyc-cache-v47-0-0'),'service worker cache is refreshed for V47');
+check(sw.includes('jyc-cache-v48-0-0'),'service worker cache is refreshed for V48');
 check(main.includes('Explore the JYC ecosystem.')&&main.includes('JYC COMMUNITY MAP'),'public club language stays JYC-first');
 if(fail.length){console.error('V47 QA failed: '+fail.join(', '));process.exit(1)}console.log('PASS: V47 JYC Now QA');
