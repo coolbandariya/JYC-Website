@@ -24,13 +24,7 @@ const QUALITY_OVERRIDES={
   Zencoders:['/assets/hub-photos-extra/zencoders-17.webp','/assets/hub-photos-extra/zencoders-18.webp','/assets/hub-photos-extra/zencoders-19.webp','/assets/hub-photos-extra/zencoders-20.webp','/assets/hub-photos-extra/zencoders-21.webp','/assets/hub-photos-extra/zencoders-22.webp','/assets/hub-photos-extra/zencoders-23.webp','/assets/hub-photos-extra/zencoders-24.webp'],
   Arcadia:['/assets/hub-photos-extra/arcadia-64.webp','/assets/hub-photos-extra/arcadia-65.webp','/assets/hub-photos-extra/arcadia-66.webp'],
   NeuralNexus:['/assets/hub-photos-extra/neural-nexus-67.webp','/assets/hub-photos-extra/neural-nexus-68.webp','/assets/hub-photos-extra/neural-nexus-69.webp','/assets/hub-photos-extra/neural-nexus-70.webp','/assets/hub-photos-extra/neural-nexus-71.webp'],
-  Sports:['/assets/hub-photos/sports-01.webp','/assets/hub-photos/sports-02.webp','/assets/hub-photos/sports-03.webp','/assets/hub-photos/sports-04.webp'],
-  Fortissimo:['/assets/hub-photos/jyc-09.webp','/assets/hub-photos/jyc-04.webp'],
-  Cinekala:['/assets/hub-photos/jyc-04.webp','/assets/hub-photos/jyc-08.webp'],
-  Abhivyakti:['/assets/hub-photos/jyc-04.webp','/assets/hub-photos/jyc-09.webp'],
-  GDG:['/assets/hub-photos/jyc-02.webp','/assets/hub-photos/jyc-11.webp'],
-  Innovation:['/assets/hub-photos/jyc-02.webp','/assets/hub-photos/jyc-11.webp'],
-  JODC:['/assets/hub-photos-extra/zencoders-17.webp','/assets/hub-photos-extra/zencoders-21.webp']
+  Sports:['/assets/hub-photos/sports-01.webp','/assets/hub-photos/sports-02.webp','/assets/hub-photos/sports-03.webp','/assets/hub-photos/sports-04.webp']
 };
 
 const QUALITY_BY_KEY=new Map(Object.entries(QUALITY_OVERRIDES).map(([name,photos])=>[normalise(name),photos]));
