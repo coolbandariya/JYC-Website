@@ -18,11 +18,11 @@ for(const n of required){const ok=exports.has(n);console.log(`${ok?'PASS':'FAIL'
 const source=fs.readFileSync(path.join(root,'src/main.jsx'),'utf8');
 const metaSource=extra.match(/export function usePageMeta[\\s\\S]*?\\n\\nexport function JsonLd/)?.[0]||'';
 const metaOriginOk=metaSource.includes("import.meta.env.VITE_SITE_URL||window.location.origin")&&metaSource.includes("const origin=");
-console.log(\`${metaOriginOk ? "PASS" : "FAIL"}: usePageMeta resolves a site origin before building canonical/OG URLs\`);
+console.log((metaOriginOk ? "PASS" : "FAIL")+": usePageMeta resolves a site origin before building canonical/OG URLs");
 if(!metaOriginOk)failed++;
 const lightboxSource=extra.match(/export function GalleryItems[\\s\\S]*$/)?.[0]||'';
 const modalA11yOk=lightboxSource.includes('role="dialog"')&&lightboxSource.includes('aria-modal="true"')&&lightboxSource.includes('closeRef.current?.focus()')&&lightboxSource.includes("e.key==='Tab'");
-console.log(\`${modalA11yOk ? "PASS" : "FAIL"}: gallery lightbox keeps keyboard focus inside the modal\`);
+console.log((modalA11yOk ? "PASS" : "FAIL")+": gallery lightbox keeps keyboard focus inside the modal");
 if(!modalA11yOk)failed++;
 for(const [label,needle] of [['Fest Mode fallback',':[]'],['Recruitment homepage gate','recruitmentEnabled(data)'],['Contact route',"clean==='/contact'"]]){const ok=source.includes(needle);console.log(`${ok?'PASS':'FAIL'}: ${label}`);if(!ok)failed++}
 if(failed)process.exit(1);
