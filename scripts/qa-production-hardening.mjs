@@ -47,7 +47,7 @@ if(!String(assetMap.get('cache-control')||'').includes('immutable')) failures.pu
 
 if(failures.length){
   console.error('PRODUCTION HARDENING QA FAIL');
-  for(const f of failures) console.error('FAIL:',f);
+  for(const f of failures) { console.error('FAIL:',f); console.error(`::error file=scripts/qa-production-hardening.mjs::${f}`); }
   process.exit(1);
 }
 console.log('PRODUCTION HARDENING QA PASS');
