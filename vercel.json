@@ -127,6 +127,11 @@
       "source": "/discover",
       "destination": "/clubs",
       "permanent": true
+    },
+    {
+      "source": "/map",
+      "destination": "/events",
+      "permanent": true
     }
   ]
 }
