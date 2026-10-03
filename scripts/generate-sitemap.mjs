@@ -7,6 +7,7 @@ const site=(rawSite?(/^[a-z]+:\/\//i.test(rawSite)?rawSite:`https://${rawSite}`)
 const out=path.join(root,'public','sitemap.xml');
 const core=['/','/about','/clubs','/events','/fests','/gallery','/team','/contact','/calendar','/announcements','/achievements','/join-jyc'];
 const urls=new Set(core);
+const dynamicDates=new Map();
 const slug=value=>String(value||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
 async function loadDynamic(){
@@ -25,7 +26,6 @@ async function loadDynamic(){
 if(!site) throw new Error('SEO sitemap: production origin could not be resolved.');
 await loadDynamic();
 const fallbackDate=new Date().toISOString().slice(0,10);
-const dynamicDates=new Map();
 // Use content timestamps when available; otherwise fall back to the build date.
 try{
   const supabaseUrl=(process.env.VITE_SUPABASE_URL||'').replace(/\/$/,'');
