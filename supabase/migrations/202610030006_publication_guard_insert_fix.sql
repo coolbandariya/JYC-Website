@@ -25,6 +25,8 @@ begin
          select 1 from public.jyc_content_verification v
          where v.entity_type='club' and v.entity_id=entity_id
            and v.campus_id is not null and v.status in ('verified','published')
+           and v.source_url ~* '^https?://'
+           and v.verified_by is not null and v.verified_at is not null
            and (v.expires_at is null or v.expires_at>now())
        )
     then
@@ -43,6 +45,8 @@ begin
          select 1 from public.jyc_content_verification v
          where v.entity_type='event' and v.entity_id=entity_id
            and v.campus_id is not null and v.status in ('verified','published')
+           and v.source_url ~* '^https?://'
+           and v.verified_by is not null and v.verified_at is not null
            and (v.expires_at is null or v.expires_at>now())
        )
     then
