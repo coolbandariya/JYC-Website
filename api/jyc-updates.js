@@ -6,6 +6,7 @@ const cleanText=value=>String(value||'').replace(/<[^>]+>/g,' ').replace(/&amp;/
 const cfg={
  instagram:json(process.env.JYC_INSTAGRAM_ACCOUNTS),
  youtube:json(process.env.JYC_YOUTUBE_CHANNELS),
+ linkedin:json(process.env.JYC_LINKEDIN_ORGS),
  rss:json(process.env.JYC_RSS_FEEDS),
  manual:Array.isArray(json(process.env.JYC_MANUAL_UPDATES))?json(process.env.JYC_MANUAL_UPDATES):[]
 };
@@ -26,6 +27,15 @@ async function youtube(hub,channelId){
  const pr=await fetch(p);if(!pr.ok)throw Error('YouTube playlist '+pr.status);
  return ((await pr.json()).items||[]).map(x=>({externalId:x.contentDetails?.videoId,hub,platform:'YouTube',type:'Video',title:x.snippet?.title||hub+' video',summary:cleanText(x.snippet?.description).slice(0,220),publishedAt:x.snippet?.publishedAt,url:x.contentDetails?.videoId?'https://www.youtube.com/watch?v='+x.contentDetails.videoId:'',image:x.snippet?.thumbnails?.high?.url||x.snippet?.thumbnails?.medium?.url||'',verified:true}));
 }
+async function linkedin(hub,org){
+ const token=process.env.LINKEDIN_ACCESS_TOKEN;if(!token||!org)return [];
+ const author=String(org).startsWith('urn:li:organization:')?String(org):'urn:li:organization:'+String(org);
+ const u=new URL('https://api.linkedin.com/rest/posts');u.searchParams.set('q','author');u.searchParams.set('author',author);u.searchParams.set('count','8');u.searchParams.set('sortBy','LAST_MODIFIED');
+ const r=await fetch(u,{headers:{Authorization:'Bearer '+token,'X-Restli-Protocol-Version':'2.0.0','Linkedin-Version':process.env.JYC_LINKEDIN_VERSION||'202606'}});
+ if(!r.ok)throw Error('LinkedIn '+r.status);
+ const data=await r.json();
+ return (data.elements||[]).filter(x=>x.lifecycleState==='PUBLISHED').map(x=>({externalId:x.id,hub,platform:'LinkedIn',type:x.content?.media?'Post':'Update',title:cleanText(x.commentary).split('. ')[0]||hub+' LinkedIn update',summary:cleanText(x.commentary).slice(0,220),publishedAt:x.publishedAt?new Date(x.publishedAt).toISOString():x.createdAt?new Date(x.createdAt).toISOString():'',url:'https://www.linkedin.com/feed/update/'+encodeURIComponent(x.id),image:'',verified:true}));
+}
 async function rss(hub,feedUrl){
  if(!feedUrl)return [];
  const r=await fetch(feedUrl,{headers:{accept:'application/rss+xml, application/atom+xml, text/xml'}});if(!r.ok)throw Error('RSS '+r.status);
@@ -38,6 +48,7 @@ async function collect(){
  const tasks=[];
  for(const [hub,id] of Object.entries(cfg.instagram||{}))tasks.push(instagram(hub,id));
  for(const [hub,id] of Object.entries(cfg.youtube||{}))tasks.push(youtube(hub,id));
+ for(const [hub,id] of Object.entries(cfg.linkedin||{}))tasks.push(linkedin(hub,id));
  for(const [hub,url] of Object.entries(cfg.rss||{}))tasks.push(rss(hub,url));
  tasks.push(manual());
  const settled=await Promise.allSettled(tasks);
@@ -65,7 +76,7 @@ export default async function handler(req,res){
   if(!items.length)items=await dbRead();
   memory={at:Date.now(),items};
   res.setHeader('Cache-Control','s-maxage=900, stale-while-revalidate=1800');
-  res.status(200).json({items,live:items.length>0,configured:Boolean(process.env.META_ACCESS_TOKEN||process.env.YOUTUBE_API_KEY||process.env.JYC_RSS_FEEDS||process.env.JYC_MANUAL_UPDATES)});
+  res.status(200).json({items,live:items.length>0,configured:Boolean(process.env.META_ACCESS_TOKEN||process.env.YOUTUBE_API_KEY||process.env.LINKEDIN_ACCESS_TOKEN||process.env.JYC_RSS_FEEDS||process.env.JYC_MANUAL_UPDATES)});
  }catch(error){
   const fallback=await dbRead();memory={at:Date.now(),items:fallback};
   res.setHeader('Cache-Control','s-maxage=300, stale-while-revalidate=600');
