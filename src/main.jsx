@@ -103,7 +103,7 @@ import {SkipLink,InstallPrompt,MaintenanceGate,ErrorBoundary,MyJYC,CalendarPage,
 import Admin from './admin-chunk.jsx';
 import {readSiteCache,writeSiteCache,siteCacheAge,formatCacheAge,armStoredReminders,googleCalendarUrl} from './v15-functional.js';
 
-const logo='/jyc-logo-circle.png';
+const logo='/jyc-logo-official.webp';
 const isFestMode=data=>String(data?.mode||'events').toLowerCase()==='fest';
 const recruitmentEnabled=data=>data?.flags?.recruitmentHub!==false;
 
