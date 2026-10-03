@@ -472,11 +472,6 @@ function useAgenticPopup(){
  },[open]);
  return [open,()=>setOpen(false)]
 }
-function JYCBotLauncher({onOpen}){ 
- const [motion,setMotion]=useState('');
- useEffect(()=>{const modes=['wave','bounce','pulse'];let timers=[];const run=()=>{const mode=modes[Math.floor(Math.random()*modes.length)];setMotion(mode);timers.push(window.setTimeout(()=>setMotion(''),1100));timers.push(window.setTimeout(run,7200+Math.floor(Math.random()*5000)))};const first=window.setTimeout(run,2600);return()=>{window.clearTimeout(first);timers.forEach(clearTimeout)}} ,[]);
- return createPortal(<button className={`jyc-bot-launcher is-${motion||'idle'}`} onClick={onOpen} aria-label="Open JYC Assistant" title="JYC Assistant"><span className="jyc-bot-model-wrap" aria-hidden="true"><span className="jyc-bot-3d"><span className="jyc-bot-head"><i/><i/><b/></span><span className="jyc-bot-body"><em>JYC</em></span><span className="jyc-bot-arm jyc-bot-arm-left"/><span className="jyc-bot-arm jyc-bot-arm-right"/><span className="jyc-bot-base"/></span></span><span className="jyc-bot-spark" aria-hidden="true"/></button>,document.body);
-}
 function Navbar({data,admin,theme,setTheme}){
  const nav=useNavigate();const loc=useLocation();
  const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[assistant,setAssistant]=useState(false),[homeSection,setHomeSection]=useState('hero');
@@ -523,7 +518,7 @@ function Navbar({data,admin,theme,setTheme}){
    <Theme theme={theme} setTheme={setTheme}/><button className={`hamb ${open?'open':''}`} onClick={()=>setOpen(!open)} aria-label="Menu" aria-expanded={open}><i/><i/><i/></button>
    {open&&<button className="mobile-nav-scrim" aria-label="Close navigation" onClick={()=>setOpen(false)}/>}<button className="search-trigger" onClick={()=>setSearch(true)} aria-label="Search JYC" title="Search JYC (Ctrl/Cmd + K)"><span className="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/></svg></span><span className="search-label">Search</span><kbd>Ctrl K</kbd></button>
  </div></header>
- {createPortal(dock,document.body)}{createPortal(more,document.body)}{createPortal(<JYCBotLauncher onOpen={()=>setAssistant(true)}/>,document.body)}{searchView}{assistant&&<JYCAssistant data={data} close={()=>setAssistant(false)}/> }</>
+ {createPortal(dock,document.body)}{createPortal(more,document.body)}{searchView}{assistant&&<JYCAssistant data={data} close={()=>setAssistant(false)}/> }</>
 }
 function MobileMoreSheet({data,admin,close,openAssistant}){
  const nav=useNavigate();
