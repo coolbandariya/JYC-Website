@@ -11,7 +11,7 @@
     {
       "src": "/jyc-logo-official.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
     }
   ],
@@ -42,17 +42,6 @@
       "name": "JYC Moments",
       "short_name": "Moments",
       "url": "/gallery",
-      "icons": [
-        {
-          "src": "/jyc-logo-official.webp",
-          "sizes": "512x512"
-        }
-      ]
-    },
-    {
-      "name": "JYC Planner",
-      "short_name": "Planner",
-      "url": "/planner",
       "icons": [
         {
           "src": "/jyc-logo-official.webp",
