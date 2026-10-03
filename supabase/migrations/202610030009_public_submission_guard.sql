@@ -46,6 +46,7 @@ begin
 end;
 $$;
 revoke all on function public.jyc_allow_public_submission(text,integer,integer) from public;
+grant execute on function public.jyc_allow_public_submission(text,integer,integer) to service_role;
 
 commit;
 select 'JYC public submission abuse limiter enabled.' as result;
