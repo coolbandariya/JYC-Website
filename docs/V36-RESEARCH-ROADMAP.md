@@ -223,3 +223,32 @@ JYC should own that pattern with its own visual language.
 ## Non-goals
 
 Do not add features merely because they are technically impressive. JYC's public site should remain a reliable student-activity platform first: discover a community, find something happening, participate, and preserve the memory afterward.
+
+
+## Social / media verification findings
+
+Current public checks also verified a subset of club and event social identities. V36 stores only links with strong public attribution; unknown handles remain blank rather than being guessed.
+
+Verified links surfaced in V36 include JYC 128, Vamunique, Rapid Programming Hub, CICR, Innovation JIIT, ZenCoders, JODC, CypherX, GDG JIIT-128, Dronotics and Abhivyakti.
+
+Evidence includes official/current LinkedIn organisation pages, official Linktree pages, current event sites and current JIIT publications. In particular: GDG JIIT-128 links Instagram/LinkedIn/YouTube/GitHub/Discord through its public Linktree; CICR's Linktree links Instagram and LinkedIn; ZenCoders publicly names @zencodersjiit; Dronotics' event material names @dronoticsjiit128; and Vamunique's current LinkedIn identifies it as the official dance society of JIIT Sector 128.
+
+Media policy: core website content should come from JYC's published records. Official club/event sites and social profiles are verification and discovery layers, not the primary CMS. Historical brochures/presentations should remain clearly labelled as historical/context material.
+
+## Implemented V36 feature layer
+
+- Leadership is exposed as a canonical public route while preserving Team compatibility.
+- Event Calendar has a first-class public route/alias.
+- Events support Upcoming / Live / Past states and category + club filters.
+- Completed published fest records remain discoverable in the fest archive.
+- Club pages expose verified official social connections.
+- Fest pages expose official organiser/event links where verified.
+- V36 QA includes a senior V1 product contract and release/cache metadata checks.
+
+## Remaining priority order
+
+P0: verify every current 2026–27 team member, club recruitment state, current club logos and current event posters against official records.
+
+P1: add Google Calendar export directly to the public event detail/calendar experience; strengthen registration states; expose recruitment deadlines/application links; add gallery photographer/source credits.
+
+P2: add Find Your Community discovery, saved events/reminders, stronger calendar navigation, social-link verification timestamps and admin content freshness indicators.
