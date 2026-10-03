@@ -111,3 +111,17 @@
   .public-app .hero-actions>*{min-width:0}
   .public-app .find-community-panel::after{display:none}
 }
+
+.public-app .club-socials{
+  display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--jyc33-line);
+}
+.public-app .club-socials a{
+  display:inline-flex;align-items:center;min-height:32px;padding:6px 9px;
+  border:1px solid var(--jyc33-line);border-radius:999px;
+  color:var(--jyc33-ink);text-decoration:none;font-size:10px;font-weight:800;
+  letter-spacing:.04em;background:color-mix(in srgb,var(--jyc33-surface) 90%,transparent);
+  transition:transform .25s var(--jyc-v36-ease),border-color .25s,background .25s;
+}
+.public-app .club-socials a:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--jyc33-brand) 55%,transparent);background:color-mix(in srgb,var(--jyc33-brand) 8%,var(--jyc33-surface))}
+.public-app .club-socials small{width:100%;font-size:9px;opacity:.65}
