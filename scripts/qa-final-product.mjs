@@ -6,6 +6,7 @@ const system=read('src/styles/public-system.css');
 const index=read('index.html');
 const manifest=read('public/manifest.json');
 const main=read('src/main.jsx');
+const admin=read('src/admin-chunk.jsx');
 
 const checks=[
   [system.includes("@import '../jyc-logo-final-theme.css';"),'senior theme remains the final public CSS layer'],
@@ -22,7 +23,9 @@ const checks=[
   [main.includes('PDF_HUB_PROGRAMME.map')&&main.includes('supplied-event-programme'),'All Hubs programme material remains surfaced'],
   [main.includes('PDF_HUB_EXTRA_GALLERY')&&main.includes('PDF_HUB_STORIES'),'source archive remains wired into the public experience'],
   [main.includes('AdminVerification')&&main.includes("tab==='verification'"),'admin verification workflow is wired into the control center'],
+  [admin.includes("'verification'")&&admin.includes('source URL is required'),'verification queue is exposed and evidence is required in the editor'],
   [fs.existsSync('supabase/migrations/202610030005_publication_verification_guard.sql'),'publication verification guard migration exists'],
+  [fs.existsSync('supabase/migrations/202610030007_verification_trust_contract.sql'),'verification trust contract migration exists'],
   [fs.existsSync('supabase/tests/database/jyc_security_rls.test.sql'),'database RLS regression suite exists']
 ];
 let failed=false;
