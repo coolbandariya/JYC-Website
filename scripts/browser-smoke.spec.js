@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const base = process.env.JYC_BASE_URL || 'http://127.0.0.1:5173';
-const routes = ['/', '/about', '/history', '/clubs', '/events', '/gallery', '/team', '/planner', '/map', '/my-jyc', '/contact', '/fests', '/guide'];
+const routes = ['/', '/about', '/history', '/clubs', '/events', '/gallery', '/team', '/planner', '/map', '/my-jyc', '/contact', '/fests', '/guide', '/updates'];
 
 test('public app mounts with no runtime errors', async ({ page }) => {
   const errors = [];
@@ -27,6 +27,13 @@ for (const route of routes) {
   });
 }
 
+
+test('JYC Now page stays within responsive guardrails', async ({ page }) => {
+  await page.goto(base + '/updates', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('The organisation, in motion.')).toBeVisible();
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+  expect(overflow).toBe(false);
+});
 
 test('homepage accessibility and responsive guardrails', async ({ page }) => {
   await page.goto(base, { waitUntil: 'domcontentloaded' });
