@@ -11,6 +11,7 @@ import './v28-editorial-system.css';
 import './v29-interaction-polish.css';
 import './v32-public-production-overhaul.css';
 import './v33-final-public-experience.css';
+import './v36-depth-polish.css';
 import {JYC_HUB_CONTENT, JYC_HUB_FAMILIES, hubProfile} from './v21-hub-content.js';
 import {JYC_ORIENTATION_FAMILIES,JYC_ORIENTATION_LAYERS,JYC_ORIENTATION_EVENTS,JYC_ORIENTATION_AT_A_GLANCE} from './jyc-orientation-insights.js';
 import {hubDetails} from './v23.6-hub-details.js';
@@ -18,7 +19,7 @@ import {hubIdentity,eventIdentity} from './hub-identities.js';
 import {PDF_HUB_GALLERY,PDF_HUB_STORIES,HUB_PHOTO_MAP} from './pdf-hub-content.js';
 import {PDF_HUB_EXTRA_GALLERY,PDF_HUB_PROGRAMME} from './pdf-hub-extra.js';
 import {enrichSourceClubs,mergeSourceGallery,sourceHubMedia} from './jyc-source-media.js';
-import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY,JYC_PUBLIC_ROUTES,JYC_V1_ANIMATION_CONTRACT,JYC_CONTENT_RULES} from './public-v1/config.js';
+import {JYC_EVENT_CATEGORIES,JYC_COMMUNITY_DISCOVERY} from './public-v1/config.js';
 
 const PUBLIC_TEAM_FALLBACK=[
  {id:'devansh-tripathi',name:'Devansh Tripathi',role:'General Secretary',published:true,bio:'A prominent face of JYC 128, contributing across student societies spanning leadership, creativity, innovation, culture, literature, design and technology.',photo:'/assets/team/devansh-tripathi.webp'},
