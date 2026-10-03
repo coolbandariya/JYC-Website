@@ -414,7 +414,7 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
   '/join-jyc':'Join JYC 128 is currently coming soon. Recruitment and application opportunities will be published here when the next official cycle opens.'
  };
  const privateRoute=['/admin','/login','/my-jyc','/notifications','/settings','/agenda','/projects/submit','/download','/planner'].includes(clean)||clean.startsWith('/qr/')||clean.endsWith('/register');
- const knownPublic=['/','/about','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/archive','/calendar','/event-calendar','/events','/achievements','/announcements','/resources','/recruitment','/join-jyc'].includes(clean)&&(clean!=='/fests'||isFestMode(data));
+ const knownPublic=['/','/about','/history','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/archive','/calendar','/event-calendar','/events','/achievements','/announcements','/resources','/recruitment','/join-jyc'].includes(clean)&&(clean!=='/fests'||isFestMode(data));
  const knownDetail=Boolean(club||event);
  const unknownRoute=!privateRoute&&!knownPublic&&!knownDetail;
  const pageType=club?'club':event?'event':clean==='/fests'?'fests':clean==='/clubs'?'clubs':clean==='/events'?'events':clean==='/gallery'?'gallery':clean==='/team'||clean==='/leadership'?'team':clean==='/history'?'history':clean==='/resources'?'resources':clean==='/announcements'?'announcements':clean==='/achievements'?'achievements':clean==='/guide'?'about':clean==='/calendar'||clean==='/planner'?'calendar':clean==='/recruitment'?'recruitment':clean==='/join-jyc'?'join-jyc':clean==='/about'?'about':clean==='/contact'?'contact':'home';
