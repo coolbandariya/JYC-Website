@@ -64,8 +64,7 @@ The existing migrations are intentionally kept unchanged. For a fresh/known data
 4. `supabase/platform-v4-fix.sql`
 5. `supabase/final-role-hardening.sql`
 
-If the old accidental Abhivyakti record exists, run:
-`supabase/maintenance/00-remove-legacy-demo-data.sql`
+Abhivyakti is a legitimate JYC community. Do not run a name-based deletion. If a stale record is suspected, verify it against an independent source-backed identifier before changing production data.
 
 For an already-migrated production database, do not blindly rerun destructive SQL. Verify tables/functions first.
 
