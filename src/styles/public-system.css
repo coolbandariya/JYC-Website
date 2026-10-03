@@ -45,8 +45,8 @@ html { scroll-behavior: smooth; }
 }
 
 :where(button, [role="button"], input[type="button"], input[type="submit"], input[type="reset"]) {
-  min-width: 24px;
-  min-height: 24px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 img {
