@@ -4,8 +4,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f8f1e4",
-  "theme_color": "#f8f1e4",
+  "background_color": "#efe3cb",
+  "theme_color": "#efe3cb",
   "description": "Official JIIT Youth Club website for JIIT Noida clubs, events, people and campus moments.",
   "icons": [
     {
