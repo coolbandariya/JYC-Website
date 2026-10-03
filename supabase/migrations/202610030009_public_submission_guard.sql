@@ -1,0 +1,51 @@
+-- JYC public submission abuse boundary.
+begin;
+
+create table if not exists public.jyc_public_submission_rate_limits (
+  fingerprint text primary key,
+  window_started_at timestamptz not null default now(),
+  request_count integer not null default 0,
+  updated_at timestamptz not null default now()
+);
+alter table public.jyc_public_submission_rate_limits enable row level security;
+revoke all on public.jyc_public_submission_rate_limits from anon, authenticated;
+
+create or replace function public.jyc_allow_public_submission(
+  p_fingerprint text,
+  p_limit integer default 5,
+  p_window_seconds integer default 3600
+)
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  now_ts timestamptz := now();
+  row_data public.jyc_public_submission_rate_limits;
+begin
+  if coalesce(trim(p_fingerprint),'') = '' then return false; end if;
+  p_limit := greatest(1, least(coalesce(p_limit,5),50));
+  p_window_seconds := greatest(60, least(coalesce(p_window_seconds,3600),86400));
+  insert into public.jyc_public_submission_rate_limits(fingerprint,window_started_at,request_count,updated_at)
+  values(trim(p_fingerprint),now_ts,1,now_ts)
+  on conflict(fingerprint) do update
+    set request_count = case
+      when now_ts - jyc_public_submission_rate_limits.window_started_at >= make_interval(secs => p_window_seconds)
+        then 1
+      else jyc_public_submission_rate_limits.request_count + 1
+    end,
+    window_started_at = case
+      when now_ts - jyc_public_submission_rate_limits.window_started_at >= make_interval(secs => p_window_seconds)
+        then now_ts
+      else jyc_public_submission_rate_limits.window_started_at
+    end,
+    updated_at = now_ts
+  returning * into row_data;
+  return row_data.request_count <= p_limit;
+end;
+$$;
+revoke all on function public.jyc_allow_public_submission(text,integer,integer) from public;
+
+commit;
+select 'JYC public submission abuse limiter enabled.' as result;
