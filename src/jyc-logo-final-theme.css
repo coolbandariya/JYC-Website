@@ -237,6 +237,13 @@ html[data-theme="dark"] .public-app .gallery-filter button.active{
 .public-app [style*="--hub-accent"]{--hub-accent:var(--jyc-bronze)!important;--hub-accent-soft:rgba(194,166,130,.12)!important;--hub-accent-line:rgba(194,166,130,.34)!important}
 html[data-theme="dark"] .public-app [style*="--hub-accent"]{--hub-accent:var(--jyc-champagne)!important;--hub-accent-soft:rgba(194,166,130,.14)!important;--hub-accent-line:rgba(194,166,130,.34)!important}
 
+
+/* Shared reveal language: small, purposeful motion instead of decorative clutter. */
+.public-app .reveal{opacity:0;transform:translateY(16px);transition:opacity .65s var(--jyc-ease),transform .65s var(--jyc-ease);transition-delay:var(--reveal-delay,0ms)}
+.public-app .reveal.is-visible{opacity:1;transform:none}
+.public-app .card:hover,.public-app .activity-card:hover,.public-app .home-team-card:hover,.public-app .hub-story-card:hover,.public-app .jyc-journal-card:hover,.public-app .past-card:hover,.public-app .contact-card:hover{transform:translateY(-5px)!important;box-shadow:0 22px 48px rgba(20,25,39,.13)!important;border-color:rgba(194,166,130,.55)!important}
+html[data-theme="dark"] .public-app .card:hover,html[data-theme="dark"] .public-app .activity-card:hover,html[data-theme="dark"] .public-app .home-team-card:hover,html[data-theme="dark"] .public-app .hub-story-card:hover,html[data-theme="dark"] .public-app .jyc-journal-card:hover,html[data-theme="dark"] .public-app .past-card:hover,html[data-theme="dark"] .public-app .contact-card:hover{box-shadow:0 24px 60px rgba(0,0,0,.38)!important}
+
 /* Logo-led navigation */
 .public-app .nav{
   background:color-mix(in srgb,var(--jyc-navy) 96%,transparent)!important;
@@ -323,6 +330,8 @@ html[data-theme="dark"] .public-app [style*="--hub-accent"]{--hub-accent:var(--j
   .public-app .card,.public-app .btn,.public-app .nav{forced-color-adjust:auto!important}
 }
 @media (prefers-reduced-motion:reduce){
+  .public-app .reveal{opacity:1!important;transform:none!important;transition:none!important}
+
   .home .hero-rule,.home .hero-logo-stage img,.home .hero-logo-stage::before,.home .hero-logo-ring-a,.home .hero-logo-ring-b,.home .hero-logo-pulse{animation:none!important}
   .public-app .gallery-grid .gallery-item img,.public-app .club-card-visual img,.public-app .home-team-card img{transition:none!important}
 }
