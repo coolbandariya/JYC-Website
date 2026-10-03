@@ -1,0 +1,346 @@
+/* JYC SENIOR LOGO SYSTEM · 2026-10-03
+   Final visual contract derived from the supplied senior-approved emblem.
+   Palette: deep navy / champagne gold / ivory / restrained bronze.
+   This is the final public override layer; historical CSS remains for reference.
+*/
+:root{
+  --jyc-navy:#141927;
+  --jyc-navy-deep:#0f1420;
+  --jyc-navy-soft:#1c2232;
+  --jyc-champagne:#c2a682;
+  --jyc-champagne-soft:#efe3cb;
+  --jyc-ivory:#faf7ef;
+  --jyc-cream:#f5efe3;
+  --jyc-bronze:#78593b;
+  --jyc-ink:#111111;
+  --jyc-muted:#6b665e;
+  --jyc-line:rgba(20,25,39,.16);
+  --jyc-line-dark:rgba(239,227,203,.20);
+  --jyc-shadow:0 18px 55px rgba(20,25,39,.10);
+  --jyc-shadow-dark:0 22px 65px rgba(0,0,0,.34);
+  --jyc-ease:cubic-bezier(.22,.8,.24,1);
+  --jyc-content:min(1180px,calc(100vw - 40px));
+  --accent-gold:var(--jyc-champagne);
+  --accent-red:var(--jyc-navy);
+  --club-red:var(--jyc-navy);
+  --club-gold:var(--jyc-champagne);
+  --jyc-gold:var(--jyc-champagne);
+  --bg-main:var(--jyc-cream);
+  --bg-card:var(--jyc-ivory);
+  --text-primary:var(--jyc-ink);
+  --text-muted:var(--jyc-muted);
+  --border-tech:var(--jyc-line);
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --jyc-bg:var(--jyc-cream);
+  --jyc-surface:var(--jyc-ivory);
+  --jyc-text:var(--jyc-ink);
+  --jyc-muted-live:var(--jyc-muted);
+  --jyc-border:var(--jyc-line);
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --jyc-bg:var(--jyc-navy-deep);
+  --jyc-surface:var(--jyc-navy);
+  --jyc-text:var(--jyc-ivory);
+  --jyc-muted-live:#b9af9e;
+  --jyc-border:var(--jyc-line-dark);
+}
+html,body,#root{min-width:0;overflow-x:hidden}
+html{background:var(--jyc-bg);scroll-padding-top:78px}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% -12%,rgba(194,166,130,.18),transparent 34%),
+    linear-gradient(180deg,var(--jyc-bg) 0%,color-mix(in srgb,var(--jyc-bg) 86%,var(--jyc-champagne-soft)) 100%);
+  color:var(--jyc-text);
+  transition:background-color .35s ease,color .25s ease;
+}
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 50% -12%,rgba(194,166,130,.10),transparent 32%),
+    linear-gradient(180deg,#0b101b 0%,#0f1420 62%,#141927 100%);
+}
+.public-app,.home,.page{
+  --bg-main:var(--jyc-bg)!important;
+  --bg-card:var(--jyc-surface)!important;
+  --text-primary:var(--jyc-text)!important;
+  --text-muted:var(--jyc-muted-live)!important;
+  --border-tech:var(--jyc-border)!important;
+  --accent-gold:var(--jyc-champagne)!important;
+  --accent-red:var(--jyc-navy)!important;
+  --club-red:var(--jyc-navy)!important;
+  --club-gold:var(--jyc-champagne)!important;
+  color:var(--jyc-text)!important;
+}
+.public-app .section,
+.public-app .page,
+.home-layout>.section,
+.home-photo-story>.section{
+  width:var(--jyc-content)!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.public-app .section-head,
+.public-app .reference-section-head{
+  display:grid!important;
+  justify-items:center!important;
+  text-align:center!important;
+  margin-inline:auto!important;
+}
+.public-app .section-head>div,
+.public-app .reference-section-head>div{
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+.public-app .section-head p,
+.public-app .reference-section-head p{
+  margin-inline:auto!important;
+  max-width:66ch!important;
+}
+.public-app .card-grid,
+.public-app .club-grid,
+.public-app .reference-event-grid,
+.public-app .activity-grid,
+.public-app .home-team-preview,
+.public-app .hub-story-grid,
+.public-app .jyc-journal-grid,
+.public-app .past-grid{
+  align-items:stretch!important;
+  justify-content:center!important;
+}
+.public-app .card,
+.public-app .activity-card,
+.public-app .home-team-card,
+.public-app .hub-story-card,
+.public-app .jyc-journal-card,
+.public-app .past-card,
+.public-app .contact-card,
+.public-app .archive-club,
+.public-app .event-related-card,
+.public-app .club-section-card,
+.public-app .event-context-card,
+.public-app .home-about-ecosystem,
+.public-app .jyc-feature-event,
+.public-app .jyc-now-strip,
+.public-app .announcement-card,
+.public-app .achievement-feature,
+.public-app .feature-card,
+.public-app .about-intro-v28,
+.public-app .about-flow-v28{
+  background:
+    linear-gradient(145deg,rgba(194,166,130,.075),transparent 58%),
+    var(--jyc-surface)!important;
+  color:var(--jyc-text)!important;
+  border:1px solid var(--jyc-border)!important;
+  box-shadow:var(--jyc-shadow)!important;
+}
+html[data-theme="dark"] .public-app .card,
+html[data-theme="dark"] .public-app .activity-card,
+html[data-theme="dark"] .public-app .home-team-card,
+html[data-theme="dark"] .public-app .hub-story-card,
+html[data-theme="dark"] .public-app .jyc-journal-card,
+html[data-theme="dark"] .public-app .past-card,
+html[data-theme="dark"] .public-app .contact-card,
+html[data-theme="dark"] .public-app .archive-club,
+html[data-theme="dark"] .public-app .event-related-card,
+html[data-theme="dark"] .public-app .club-section-card,
+html[data-theme="dark"] .public-app .event-context-card{
+  box-shadow:var(--jyc-shadow-dark)!important;
+}
+.public-app h1,.public-app h2,.public-app h3,.public-app h4,.public-app h5,.public-app h6,
+.public-app strong,.public-app b,.public-app label{
+  color:var(--jyc-text)!important;
+}
+.public-app p,.public-app li,.public-app span{max-width:100%}
+.public-app .eyebrow,
+.public-app .tag,
+.public-app .text-link,
+.public-app .reference-view-all,
+.public-app .card-topline,
+.public-app .club-index,
+.public-app .latest-index,
+.public-app .moment-tile small{
+  color:var(--jyc-bronze)!important;
+}
+html[data-theme="dark"] .public-app .eyebrow,
+html[data-theme="dark"] .public-app .tag,
+html[data-theme="dark"] .public-app .text-link,
+html[data-theme="dark"] .public-app .reference-view-all,
+html[data-theme="dark"] .public-app .card-topline,
+html[data-theme="dark"] .public-app .club-index,
+html[data-theme="dark"] .public-app .latest-index,
+html[data-theme="dark"] .public-app .moment-tile small{
+  color:var(--jyc-champagne)!important;
+}
+.public-app a:not(.btn){color:var(--jyc-bronze)}
+html[data-theme="dark"] .public-app a:not(.btn){color:var(--jyc-champagne-soft)}
+.public-app .btn:not(.secondary),
+.public-app .btn.primary{
+  background:var(--jyc-navy)!important;
+  color:var(--jyc-ivory)!important;
+  border-color:var(--jyc-navy)!important;
+  box-shadow:0 8px 22px rgba(20,25,39,.16)!important;
+}
+.public-app .btn:not(.secondary):hover,
+.public-app .btn.primary:hover{
+  background:var(--jyc-navy-soft)!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 14px 30px rgba(20,25,39,.22)!important;
+}
+html[data-theme="dark"] .public-app .btn:not(.secondary),
+html[data-theme="dark"] .public-app .btn.primary{
+  background:var(--jyc-champagne)!important;
+  color:var(--jyc-navy-deep)!important;
+  border-color:var(--jyc-champagne)!important;
+}
+html[data-theme="dark"] .public-app .btn:not(.secondary):hover,
+html[data-theme="dark"] .public-app .btn.primary:hover{
+  background:var(--jyc-champagne-soft)!important;
+}
+.public-app .btn.secondary{
+  background:transparent!important;
+  color:var(--jyc-text)!important;
+  border-color:var(--jyc-border)!important;
+}
+.public-app .filter-toggle,
+.public-app .event-scope-tabs button,
+.public-app .filter-chip,
+.public-app .category-pill,
+.public-app .gallery-filter button,
+.public-app .page-stat-row span{
+  color:var(--jyc-muted-live)!important;
+  background:var(--jyc-surface)!important;
+  border-color:var(--jyc-border)!important;
+}
+.public-app .filter-toggle.active,
+.public-app .event-scope-tabs button.active,
+.public-app .filter-chip.active,
+.public-app .category-pill.active,
+.public-app .gallery-filter button.active{
+  background:var(--jyc-navy)!important;
+  color:var(--jyc-ivory)!important;
+  border-color:var(--jyc-navy)!important;
+}
+html[data-theme="dark"] .public-app .filter-toggle.active,
+html[data-theme="dark"] .public-app .event-scope-tabs button.active,
+html[data-theme="dark"] .public-app .filter-chip.active,
+html[data-theme="dark"] .public-app .category-pill.active,
+html[data-theme="dark"] .public-app .gallery-filter button.active{
+  background:var(--jyc-champagne)!important;
+  color:var(--jyc-navy-deep)!important;
+  border-color:var(--jyc-champagne)!important;
+}
+
+/* Logo-led navigation */
+.public-app .nav{
+  background:color-mix(in srgb,var(--jyc-navy) 96%,transparent)!important;
+  border-bottom:1px solid rgba(194,166,130,.24)!important;
+  box-shadow:0 10px 34px rgba(20,25,39,.20)!important;
+}
+.public-app .nav .brand-mark{
+  background:var(--jyc-ivory)!important;
+  border:1px solid rgba(194,166,130,.62)!important;
+  box-shadow:0 8px 24px rgba(194,166,130,.13)!important;
+}
+.public-app .nav .brand>span:last-child{color:var(--jyc-ivory)!important}
+.public-app .nav nav button{color:rgba(250,247,239,.74)!important}
+.public-app .nav nav button:hover{color:var(--jyc-ivory)!important}
+.public-app .nav nav button.active{
+  background:var(--jyc-champagne)!important;
+  color:var(--jyc-navy-deep)!important;
+  border-color:var(--jyc-champagne)!important;
+}
+.public-app .nav .theme-toggle,
+.public-app .nav .search-trigger{
+  background:rgba(250,247,239,.08)!important;
+  color:var(--jyc-ivory)!important;
+  border-color:rgba(194,166,130,.30)!important;
+}
+.public-app .nav .search-trigger svg{stroke:var(--jyc-champagne)!important}
+.public-app .theme-toggle{
+  transition:transform .3s var(--jyc-ease),background .3s ease,box-shadow .3s ease!important;
+}
+.public-app .theme-toggle:hover{
+  transform:rotate(8deg) translateY(-1px)!important;
+  box-shadow:0 8px 22px rgba(194,166,130,.18)!important;
+}
+
+/* Hero: animated, but editorial rather than flashy */
+.home .hero-copy{animation:jycSeniorTextIn .7s var(--jyc-ease) both!important}
+.home .hero-art{animation:jycSeniorArtIn .9s .06s var(--jyc-ease) both!important}
+.home .hero-rule{
+  background:linear-gradient(90deg,var(--jyc-bronze),var(--jyc-champagne),var(--jyc-bronze))!important;
+  background-size:200% 100%!important;
+  animation:jycGoldSweep 5s ease-in-out infinite!important;
+}
+.home .hero-logo-stage img{animation:jycLogoFloat 7s ease-in-out infinite!important}
+.home .hero-logo-stage::before{animation:jycLogoGlow 5s ease-in-out infinite!important}
+.home .hero-logo-ring-a{border-color:rgba(194,166,130,.40)!important;animation:jycRingSpin 30s linear infinite!important}
+.home .hero-logo-ring-b{border-color:rgba(194,166,130,.24)!important;animation:jycRingSpinReverse 42s linear infinite!important}
+.home .hero-logo-pulse{border-color:rgba(194,166,130,.30)!important;animation:jycPulse 4.5s ease-in-out infinite!important}
+.home .hero-stats>div{transition:transform .35s var(--jyc-ease),background .35s ease,box-shadow .35s ease!important}
+.home .hero-stats>div:hover{background:rgba(194,166,130,.10)!important;box-shadow:inset 0 0 0 1px rgba(194,166,130,.12)!important}
+
+/* Image treatment: warm editorial grade, no arbitrary club colors */
+.public-app .gallery-grid .gallery-item img,
+.public-app .archive-story-photo img,
+.public-app .jyc-feature-poster img,
+.public-app .about-programme-image img,
+.public-app .club-card-visual img,
+.public-app .team-photo-editorial img,
+.public-app .home-team-photo img{
+  filter:saturate(.88) contrast(1.04)!important;
+  transition:transform .65s var(--jyc-ease),filter .4s ease!important;
+}
+.public-app .gallery-grid .gallery-item:hover img,
+.public-app .club-card:hover .club-card-visual img,
+.public-app .home-team-card:hover img{
+  transform:scale(1.035)!important;
+  filter:saturate(.98) contrast(1.06)!important;
+}
+
+/* Focus and accessibility */
+:where(a,button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])):focus-visible{
+  outline:3px solid var(--jyc-champagne)!important;
+  outline-offset:3px!important;
+  box-shadow:0 0 0 2px var(--jyc-navy-deep)!important;
+}
+:where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){
+  min-width:44px;
+  min-height:44px;
+}
+@media (prefers-contrast:more){
+  .public-app .card,.public-app .activity-card,.public-app .club-card,.public-app .home-team-card{border-width:2px!important}
+  .public-app .text-link,.public-app a:not(.btn){text-decoration:underline;text-underline-offset:3px}
+}
+@media (forced-colors:active){
+  .public-app .card,.public-app .btn,.public-app .nav{forced-color-adjust:auto!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .home .hero-rule,.home .hero-logo-stage img,.home .hero-logo-stage::before,.home .hero-logo-ring-a,.home .hero-logo-ring-b,.home .hero-logo-pulse{animation:none!important}
+  .public-app .gallery-grid .gallery-item img,.public-app .club-card-visual img,.public-app .home-team-card img{transition:none!important}
+}
+@keyframes jycSeniorTextIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes jycSeniorArtIn{from{opacity:0;transform:translateY(16px) scale(.975)}to{opacity:1;transform:none}}
+@keyframes jycGoldSweep{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes jycLogoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.012)}}
+@keyframes jycLogoGlow{0%,100%{transform:scale(.90);opacity:.40}50%{transform:scale(1.05);opacity:.70}}
+@keyframes jycRingSpin{to{transform:rotate(360deg)}}
+@keyframes jycRingSpinReverse{to{transform:rotate(-360deg)}}
+@keyframes jycPulse{0%,100%{transform:scale(.92);opacity:.24}50%{transform:scale(1.12);opacity:.58}}
+
+@media (max-width:900px){
+  :root{--jyc-content:min(100% - 28px,760px)}
+  .public-app .section,.public-app .page,.home-layout>.section,.home-photo-story>.section{width:var(--jyc-content)!important}
+  .public-app .section-head,.public-app .reference-section-head{text-align:center!important}
+}
+@media (max-width:600px){
+  :root{--jyc-content:calc(100vw - 20px)}
+  .public-app .section,.public-app .page,.home-layout>.section,.home-photo-story>.section{width:var(--jyc-content)!important}
+  .home .hero{width:var(--jyc-content)!important}
+  .home .hero-copy,.home .hero-copy>p{margin-inline:auto!important;text-align:center!important}
+  .home .hero-actions{justify-content:center!important}
+  .home .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
