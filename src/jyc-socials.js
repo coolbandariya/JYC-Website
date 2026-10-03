@@ -1,7 +1,9 @@
 export const JYC_SOCIALS = {
   JYC: {
-    instagram: 'https://www.instagram.com/jiityouthclub128/',
-    instagramHandle: '@jiityouthclub128',
+    instagram: 'https://www.instagram.com/jiityouthclub/',
+    instagramHandle: '@jiityouthclub',
+    verifiedBy: 'https://linktr.ee/jiityouthclub',
+    verifiedOn: '2026-10-03',
     linkedin: 'https://www.linkedin.com/company/jiityouthclub/',
     label: 'JIIT Youth Club · Sector 128'
   },
@@ -9,19 +11,25 @@ export const JYC_SOCIALS = {
   BDS: {},
   VamUnique: {
     linkedin: 'https://www.linkedin.com/company/vamunique-the-dance-society-jiit-noida/',
-    label: 'Vamunique · The Dance Society, JIIT Noida'
+    label: 'Vamunique · The Dance Society, JIIT Noida',
+    verifiedBy: 'https://www.linkedin.com/company/vamunique-the-dance-society-jiit-noida/',
+    verifiedOn: '2026-10-03'
   },
   Panache: {},
   RPH: {
     linkedin: 'https://www.linkedin.com/company/rapid-programming-hub-jiit-noida/',
-    label: 'Rapid Programming Hub · JIIT Noida'
+    label: 'Rapid Programming Hub · JIIT Noida',
+    verifiedBy: 'https://in.linkedin.com/in/rapid-programming-hub-jiit-3188bb385',
+    verifiedOn: '2026-10-03'
   },
   CICR: {
     instagram: 'https://www.instagram.com/cicr_jiit/',
     instagramHandle: '@cicr_jiit',
     linkedin: 'https://www.linkedin.com/company/cicrjiit128/',
     website: 'https://www.cicr.in/',
-    label: 'CICR · Creative & Innovative Cell in Robotics'
+    label: 'CICR · Creative & Innovative Cell in Robotics',
+    verifiedBy: 'https://www.linkedin.com/company/cicrjiit128/',
+    verifiedOn: '2026-10-03'
   },
   Innovation: {
     linkedin: 'https://www.linkedin.com/company/innovation-jiit/',
@@ -32,11 +40,15 @@ export const JYC_SOCIALS = {
     instagram: 'https://www.instagram.com/zencodersjiit/',
     instagramHandle: '@zencodersjiit',
     linkedin: 'https://www.linkedin.com/company/zencoders/',
-    label: 'ZENCODERS'
+    label: 'ZENCODERS',
+    verifiedBy: 'https://www.linkedin.com/company/zencoders/',
+    verifiedOn: '2026-10-03'
   },
   JODC: {
     linkedin: 'https://www.linkedin.com/company/jiit-open-source-developers-circle/',
-    label: 'JIIT Open-Source Developers Circle'
+    label: 'JIIT Open-Source Developers Circle',
+    verifiedBy: 'https://www.linkedin.com/company/jodc/',
+    verifiedOn: '2026-10-03'
   },
   CypherX: {
     linkedin: 'https://www.linkedin.com/company/cypherx-jiit/',
@@ -49,13 +61,17 @@ export const JYC_SOCIALS = {
     instagramHandle: '@gdg_jiit',
     linkedin: 'https://www.linkedin.com/company/dsc-jiit/',
     website: 'https://gdg-jiit.com/',
-    label: 'GDG JIIT-128'
+    label: 'GDG JIIT-128',
+    verifiedBy: 'https://www.linkedin.com/company/dsc-jiit/',
+    verifiedOn: '2026-10-03'
   },
   Dronotics: {
     instagram: 'https://www.instagram.com/dronoticsjiit128/',
     instagramHandle: '@dronoticsjiit128',
     website: 'https://www.dronotics.in/',
-    label: 'Dronotics · JIIT-128'
+    label: 'Dronotics · JIIT-128',
+    verifiedBy: 'https://www.dronotics.in/FPV%20rulebook%20DronoWar.pdf',
+    verifiedOn: '2026-10-03'
   },
   Aakriti: {},
   Aura: {},
