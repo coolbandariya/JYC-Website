@@ -24,9 +24,8 @@ create index if not exists jyc_project_submissions_created_idx on public.jyc_pro
 alter table public.jyc_project_submissions enable row level security;
 
 drop policy if exists "public submit projects" on public.jyc_project_submissions;
-create policy "public submit projects"
-on public.jyc_project_submissions for insert to anon, authenticated
-with check (status='submitted' and reviewer_id is null and reviewed_at is null);
+-- Public project writes are accepted only through the public-submission Edge Function.
+revoke insert on public.jyc_project_submissions from anon, authenticated;
 
 drop policy if exists "admins read project submissions" on public.jyc_project_submissions;
 create policy "admins read project submissions"
