@@ -315,10 +315,12 @@ function Contact({data}){
  const [sending,setSending]=useState(false);
  const [submitError,setSubmitError]=useState('');
  const submit=async e=>{e.preventDefault();setSubmitError('');if(!form.name.trim()||!form.email.trim()||!form.message.trim())return;setSending(true);try{
-   if(supabase.__configured){
-     const {error}=await supabase.from('jyc_contact_submissions').insert({name:form.name.trim(),email:form.email.trim(),message:form.message.trim(),source:'public-contact'});
-     if(error)throw error;
+   if(!supabase.__configured){
+     setSubmitError('The live contact inbox is not configured yet. Please use Instagram, LinkedIn or WhatsApp below.');
+     return;
    }
+   const {error}=await supabase.from('jyc_contact_submissions').insert({name:form.name.trim(),email:form.email.trim(),message:form.message.trim(),source:'public-contact'});
+   if(error)throw error;
    setSent(true);
  }catch(err){
    console.warn('JYC contact submission unavailable:',err);
@@ -343,7 +345,8 @@ function Events({data}){
  const clubs=[...new Set(all.map(e=>e.club).filter(Boolean))];
  const eventFamily=name=>{const raw=String(name||'').trim().toLowerCase();const key=Object.keys(JYC_HUB_CONTENT).find(k=>raw===k.toLowerCase()||raw.includes(k.toLowerCase()));return key?JYC_HUB_CONTENT[key].family:''};
  const eventCategories=['All','Cultural','Technical','Literary','Sports','Management','Social Outreach','Creative'];
- const filtered=all.filter(e=>filter==='All'||e.club===filter).filter(e=>family==='All'||eventFamily(e.club)===family).filter(e=>!q||`${e.title} ${e.club} ${e.venue} ${(e.highlights||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
+ const eventCategoryOf=e=>String(e.category||e.eventCategory||e.eventType||eventFamily(e.club)||'').trim();
+ const filtered=all.filter(e=>filter==='All'||e.club===filter).filter(e=>family==='All'||eventCategoryOf(e).toLowerCase()===family.toLowerCase()).filter(e=>!q||`${e.title} ${e.club} ${e.venue} ${eventCategoryOf(e)} ${(e.highlights||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
  const upcoming=filtered.filter(e=>eventState(e)!=='past'),live=filtered.filter(e=>eventState(e)==='live'),past=filtered.filter(e=>eventState(e)==='past');
  const shown=scope==='upcoming'?upcoming:scope==='live'?live:scope==='past'?past:filtered;
  return <section className="section page events-page"><Breadcrumbs items={[{label:'Events'}]}/><EcosystemContextRail/><div className="compact-page-head events-page-head reveal"><div><span className="eyebrow">JYC EVENTS{queryYear?` · ${queryYear}`:''}</span><h1>What's happening.</h1><p>Upcoming, live and past JIIT events — workshops, competitions, cultural activities, club programmes and campus experiences published by JYC.</p></div><div className="page-stat-row"><span><b>{upcoming.length}</b> upcoming</span><span><b>{live.length}</b> live</span><span><b>{past.length}</b> past</span></div></div>
@@ -372,6 +375,8 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
   '/events':'JIIT Events & Campus Activities | JIIT Youth Club',
   '/fests':'JIIT Fests & Flagship Events | JIIT Youth Club',
   '/team':'JYC 128 Leadership | Faculty, Apex & Core Team',
+  '/leadership':'JYC 128 Leadership | Faculty, Apex & Core Team',
+  '/gallery':'JYC Gallery | JIIT Youth Club 128',
   '/contact':'Contact JIIT Youth Club | JYC',
   '/recruitment':'JIIT Club Recruitment & Auditions | JIIT Youth Club',
   '/my-jyc':'My JYC | Published JYC content',
@@ -406,6 +411,8 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
   '/contact':'Official JYC 128 contact details, social channels and query form.',
   '/archive':'JYC archive of published events, clubs, gallery moments and campus stories from JIIT.',
   '/announcements':'Official JYC announcements, notices, registration updates and published student-community updates.',
+  '/gallery':'Browse the JYC 128 visual archive by event, year and published source media.',
+  '/leadership':'Meet the JYC 128 faculty advisors, apex leadership and core team.',
   '/achievements':'JYC 128 achievements, Wall of Fame, community milestones and published outcomes.',
   '/join-jyc':'Join JYC 128 is currently coming soon. Recruitment and application opportunities will be published here when the next official cycle opens.'
  };
@@ -855,7 +862,10 @@ function Clubs({data}){
  const familyVisible=visible.filter(c=>family==='All'||familyOf(c)===family);
  const cats=[...new Set(familyVisible.filter(c=>type==='All'||c.type===type).map(c=>c.category).filter(Boolean))];
  const ints=[...new Set(familyVisible.filter(c=>type==='All'||c.type===type).flatMap(c=>c.interests||[]))];
- const list=familyVisible.filter(c=>type==='All'||c.type===type).filter(c=>cat==='All'||c.category===cat).filter(c=>interest==='All'||(c.interests||[]).includes(interest)).filter(c=>!q||`${c.name} ${c.category} ${familyOf(c)} ${(c.interests||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
+ const discoveryAliases={'build & code':['coding','programming','development','open source','competitive programming','code'],'ai & robotics':['ai','machine learning','robotics','drones','aerial robotics','automation','electronics'],'music & dance':['music','dance','bhangra','performance','ensemble'],'theatre & performance':['theatre','dramatics','performance','film','storytelling'],'writing & debate':['writing','literary','speaking','debate','anchoring'],'design & media':['design','graphic design','photography','film','visual','creative','media'],'sports & fitness':['sports','cricket','football','basketball','fitness'],'social impact':['social','sustainability','environment','outreach'],'leadership & events':['leadership','management','events','community']};
+ const query=String(q||'').trim().toLowerCase();
+ const discoveryTerms=discoveryAliases[query]||[];
+ const list=familyVisible.filter(c=>type==='All'||c.type===type).filter(c=>cat==='All'||c.category===cat).filter(c=>interest==='All'||(c.interests||[]).includes(interest)).filter(c=>{if(!query)return true;const hay=`${c.name} ${c.category} ${familyOf(c)} ${(c.interests||[]).join(' ')} ${c.description||''} ${c.about||''}`.toLowerCase();return hay.includes(query)||discoveryTerms.some(term=>hay.includes(term))});
  const clear=()=>{setQ('');setFamily('All');setType('All');setCat('All');setInterest('All')};
  return <section className="section page clubs-page unified-public-page"><Breadcrumbs items={[{label:'Clubs'}]}/><EcosystemContextRail/><div className="compact-page-head clubs-page-head reveal"><div><span className="eyebrow">JYC CLUBS</span><h1>Find your space.</h1><p>Explore the official JYC community list through the five families defined in the supplied orientation material — then narrow by type, category or interest.</p></div><div className="page-stat-row"><span><b>{visible.length}</b> named communities</span><span><b>{JYC_HUB_FAMILIES.length}</b> families</span><span><b>{visible.filter(c=>c.type==='Technical').length}</b> technical</span></div></div>
   <div className="hub-spectrum reveal"><div><span className="eyebrow">THE JYC HUB SPECTRUM</span><h2>Start with what interests you.</h2><p>Culture, technology, creative work, literature and sport all sit inside the same JYC ecosystem. The filters below are derived from the supplied orientation list.</p></div><div className="hub-spectrum-tags">{JYC_HUB_FAMILIES.map((x,i)=><button type="button" className={family===x?'is-active':''} key={x} onClick={()=>{setFamily(x);setCat('All');setInterest('All')}}><b>{String(i+1).padStart(2,'0')}</b>{x}</button>)}</div></div>
