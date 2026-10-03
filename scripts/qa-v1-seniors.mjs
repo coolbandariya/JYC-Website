@@ -13,7 +13,7 @@ const index=read('index.html');
 const checks=[];
 const add=(name,ok)=>checks.push({name,ok:Boolean(ok)});
 
-add('V37 package version',pkg.version==='37.0.0');
+add('V38 package version',pkg.version==='38.0.0');
 add('Official JYC 128 scope is explicit',config.includes('JYC_OFFICIAL_SITE_SCOPE')&&config.includes('JIIT Youth Club 128')&&config.includes('Sector 128'));
 add('Public model map excludes utility-portal routes',!read('public/llms.txt').includes('/planner')&&!read('public/llms.txt').includes('/notifications')&&!read('public/llms.txt').includes('/resources'));
 add('Public SEO identity is JYC 128',index.includes('JIIT Youth Club 128')&&index.includes('Sector 128, Noida'));
