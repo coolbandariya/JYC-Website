@@ -6,6 +6,29 @@
 
 begin;
 
+drop policy if exists "Admins can write content verification" on public.jyc_content_verification;
+create policy "Editors can write content verification"
+on public.jyc_content_verification
+for all to authenticated
+using (
+  exists (
+    select 1
+    from public.jyc_admins a
+    where a.user_id=auth.uid()
+      and a.is_active=true
+      and a.role in ('super_admin','jyc_admin')
+  )
+)
+with check (
+  exists (
+    select 1
+    from public.jyc_admins a
+    where a.user_id=auth.uid()
+      and a.is_active=true
+      and a.role in ('super_admin','jyc_admin')
+  )
+);
+
 alter table public.jyc_content_verification
   add constraint jyc_content_verification_verified_contract
   check (
