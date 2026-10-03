@@ -1,6 +1,8 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 
+const RESPONSIVE_CSS=`@media(max-width:800px){.jyc-history-hero,.jyc-history-intro,.jyc-history-current,.jyc-history-teaser{display:block!important}.jyc-history-principle-grid{grid-template-columns:1fr 1fr!important}.jyc-history-item{grid-template-columns:54px 1fr!important}}@media(max-width:560px){.jyc-history-principle-grid{grid-template-columns:1fr!important}.jyc-history-hero h1{font-size:48px}.jyc-history-card{padding:22px 20px!important}.jyc-history-current,.jyc-history-teaser{padding:26px 20px!important}}@media(prefers-reduced-motion:reduce){.jyc-history-page *{scroll-behavior:auto}}`;
+
 const S={
  hero:{display:'grid',gridTemplateColumns:'1.25fr .75fr',gap:48,alignItems:'stretch',margin:'18px 0 48px',padding:'clamp(30px,5vw,72px)',border:'1px solid var(--line,rgba(21,32,48,.14))',borderRadius:28,background:'linear-gradient(135deg,var(--surface,#fff),color-mix(in srgb,var(--champagne,#c8ad7a) 12%,var(--surface,#fff)))',boxShadow:'0 24px 60px rgba(14,24,38,.08)'},
  heroTitle:{maxWidth:820,margin:'12px 0 18px',fontSize:'clamp(46px,7vw,92px)',lineHeight:.94,letterSpacing:'-.055em'},
@@ -99,7 +101,7 @@ export function HistoryTeaser(){
 
 export default function JYCHistory({data}){
   const nav=useNavigate();
-  return <main className="section page unified-public-page jyc-history-page">
+  return <main className="section page unified-public-page jyc-history-page"><style>{RESPONSIVE_CSS}</style>
     <div className="jyc-history-hero reveal" style={S.hero}>
       <div>
         <span className="eyebrow">JIIT YOUTH CLUB · HISTORY</span>
