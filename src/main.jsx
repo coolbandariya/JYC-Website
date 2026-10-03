@@ -341,6 +341,7 @@ function Events({data}){
  const all=data.events.filter(e=>e.published&&!e.archived).filter(e=>!queryYear||String(e.date||'').startsWith(queryYear)).sort((a,b)=>(Number(!!b.pinned)-Number(!!a.pinned))||`${a.date} ${a.start}`.localeCompare(`${b.date} ${b.start}`));
  const clubs=[...new Set(all.map(e=>e.club).filter(Boolean))];
  const eventFamily=name=>{const raw=String(name||'').trim().toLowerCase();const key=Object.keys(JYC_HUB_CONTENT).find(k=>raw===k.toLowerCase()||raw.includes(k.toLowerCase()));return key?JYC_HUB_CONTENT[key].family:''};
+ const eventCategories=['All','Cultural','Technical','Literary','Sports','Management','Social Outreach','Creative'];
  const filtered=all.filter(e=>filter==='All'||e.club===filter).filter(e=>family==='All'||eventFamily(e.club)===family).filter(e=>!q||`${e.title} ${e.club} ${e.venue} ${(e.highlights||[]).join(' ')}`.toLowerCase().includes(q.toLowerCase()));
  const upcoming=filtered.filter(e=>eventState(e)!=='past'),live=filtered.filter(e=>eventState(e)==='live'),past=filtered.filter(e=>eventState(e)==='past');
  const shown=scope==='upcoming'?upcoming:scope==='live'?live:scope==='past'?past:filtered;
@@ -364,21 +365,22 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  const liveClub=clean.startsWith('/clubs/')?data.clubs.find(c=>String(c.id)===String(slugId)||slug(c.name)===slug(slugId)):null;const hubKey=clean.startsWith('/clubs/')?Object.keys(JYC_HUB_CONTENT).find(k=>slug(k)===slug(slugId)):null;const club=liveClub||(!clean.startsWith('/clubs/')||!hubKey?null:{id:`hub-${slug(hubKey)}`,name:hubKey,type:JYC_HUB_CONTENT[hubKey].family==='Technical'?'Technical':'Non-Technical',category:JYC_HUB_CONTENT[hubKey].family,description:JYC_HUB_CONTENT[hubKey].summary,about:JYC_HUB_CONTENT[hubKey].detail,interests:[JYC_HUB_CONTENT[hubKey].focus],published:true,status:'published',theme:'jyc',customSections:[],achievements:[],projects:[],heads:[],recruitment:{on:false},logo:'',banner:'',instagram:'',whatsapp:'',website:'',linkedin:'',youtube:''});
  const event=clean.startsWith('/events/')?data.events.find(e=>String(e.id)===String(slugId)||slug(e.title)===slug(slugId)):null;
  const titles={
-  '/':'JIIT Youth Club (JYC) — Clubs, Events & Fests | JIIT Noida',
+  '/':'JIIT Youth Club 128 — Clubs, Events & Campus Life | JIIT Noida',
   '/about':'What is JIIT Youth Club (JYC)? | JIIT Noida',
   '/clubs':'JIIT Clubs & Student Communities | JIIT Youth Club',
   '/events':'JIIT Events & Campus Activities | JIIT Youth Club',
   '/fests':'JIIT Fests & Flagship Events | JIIT Youth Club',
-  '/team':'JIIT Youth Club Team | JYC',
+  '/team':'JYC 128 Leadership | Faculty, Apex & Core Team',
   '/contact':'Contact JIIT Youth Club | JYC',
   '/recruitment':'JIIT Club Recruitment & Auditions | JIIT Youth Club',
   '/my-jyc':'My JYC | Published JYC content',
-  '/calendar':'JIIT Events Calendar | JIIT Youth Club (JYC)',
+  '/calendar':'JYC 128 Event Calendar | JIIT Youth Club',
+  '/event-calendar':'JYC 128 Event Calendar | JIIT Youth Club',
   '/planner':'JYC Events | JIIT Youth Club',
   '/notifications':'JYC Notifications',
   '/login':'Sign In | JIIT Youth Club',
   '/download':'JIIT Youth Club Platform',
-  '/map':'JIIT Campus Map | JYC Venues & Events',
+  '/map':'JIIT Sector 128 Campus Map | JYC Venues & Events',
   '/agenda':'My JYC Agenda | JIIT Events',
   '/achievements':'JYC Achievements & Wall of Fame | JIIT Noida',
   '/join-jyc':'Join JYC | JIIT Youth Club',
@@ -395,22 +397,22 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
   '/fests':'Explore JIIT fests and flagship campus events such as officially published JYC programmes, with dates, venues, clubs and registration details when available.',
   '/resources':'JIIT Youth Club — official clubs, events, fests and community information.',
   '/guide':'About JIIT Youth Club — purpose, communities, events and campus life.',
-  '/map':'Find JIIT campus venues connected to JYC events and activities across Sector 62 and Sector 128.',
-  '/calendar':'Browse the JIIT event calendar for JIIT Youth Club events and campus activities by date.',
+  '/map':'Find JYC 128 venues and campus locations for events and activities at JIIT Sector 128.',
+  '/calendar':'Browse the JYC 128 event calendar by date, category and event status.',
   '/planner':'JYC event planning tools are not part of the public JYC editorial experience.',
   '/recruitment':'Find published JIIT club recruitment opportunities, auditions and official application links through JIIT Youth Club.',
-  '/about':'Learn what JIIT Youth Club is, how JYC connects student communities and how it supports campus activities, clubs and fests.',
-  '/contact':'Official JIIT Youth Club contact and social channels for student events, initiatives and opportunities.',
+  '/about':'Learn about JYC 128, its history and role at JIIT, its vision, mission and student-community values.',
+  '/contact':'Official JYC 128 contact details, social channels and query form.',
   '/archive':'JYC archive of published events, clubs, gallery moments and campus stories from JIIT.',
   '/announcements':'Official JYC announcements, notices, registration updates and published student-community updates.',
-  '/achievements':'JYC achievements, wall of fame, published outcomes and community milestones.',
-  '/join-jyc':'Join JYC is the upcoming student opportunity page for JIIT Youth Club. Recruitment and application details will be published here when the next cycle opens.'
+  '/achievements':'JYC 128 achievements, Wall of Fame, community milestones and published outcomes.',
+  '/join-jyc':'Join JYC 128 is currently coming soon. Recruitment and application opportunities will be published here when the next official cycle opens.'
  };
  const privateRoute=['/admin','/login','/my-jyc','/notifications','/settings','/agenda','/projects/submit','/download','/planner'].includes(clean)||clean.startsWith('/qr/')||clean.endsWith('/register');
- const knownPublic=['/','/about','/clubs','/events','/fests','/gallery','/team','/contact','/archive','/calendar','/map','/achievements','/announcements','/resources','/recruitment','/join-jyc'].includes(clean)&&(clean!=='/fests'||isFestMode(data));
+ const knownPublic=['/','/about','/clubs','/events','/fests','/gallery','/team','/leadership','/contact','/archive','/calendar','/event-calendar','/map','/achievements','/announcements','/resources','/recruitment','/join-jyc'].includes(clean)&&(clean!=='/fests'||isFestMode(data));
  const knownDetail=Boolean(club||event);
  const unknownRoute=!privateRoute&&!knownPublic&&!knownDetail;
- const pageType=club?'club':event?'event':clean==='/fests'?'fests':clean==='/clubs'?'clubs':clean==='/events'?'events':clean==='/gallery'?'gallery':clean==='/team'?'team':clean==='/resources'?'resources':clean==='/announcements'?'announcements':clean==='/achievements'?'achievements':clean==='/guide'?'about':clean==='/map'?'map':clean==='/calendar'||clean==='/planner'?'calendar':clean==='/recruitment'?'recruitment':clean==='/join-jyc'?'join-jyc':clean==='/about'?'about':clean==='/contact'?'contact':'home';
+ const pageType=club?'club':event?'event':clean==='/fests'?'fests':clean==='/clubs'?'clubs':clean==='/events'?'events':clean==='/gallery'?'gallery':clean==='/team'||clean==='/leadership'?'team':clean==='/resources'?'resources':clean==='/announcements'?'announcements':clean==='/achievements'?'achievements':clean==='/guide'?'about':clean==='/map'?'map':clean==='/calendar'||clean==='/planner'?'calendar':clean==='/recruitment'?'recruitment':clean==='/join-jyc'?'join-jyc':clean==='/about'?'about':clean==='/contact'?'contact':'home';
  const canonicalPath=club?`/clubs/${slug(club.name)}`:event?`/events/${slug(event.title)}${parts[2]==='register'?'/register':''}`:clean;
  useEffect(()=>{if((club||event)&&slugId!==slug((club||event).name||(club||event).title)){const target=event?`/events/${slug(event.title)}${parts[2]==='register'?'/register':''}`:`/clubs/${slug(club.name)}`;nav(target,{replace:true});}},[slugId,club?.id,event?.id,parts[2],nav]);
  const title=club?`${club.name} | JIIT Club · JYC`:event?`${event.title} | JIIT Event · JYC`:titles[clean]||'JIIT Youth Club';
@@ -420,9 +422,9 @@ function Routes({data,admin,session,setAdmin,commit,notify,theme,setTheme}){
  if(clean==='/')return <>{schema}<Home data={data}/></>;
  if(clean==='/about')return <>{schema}<About data={data}/></>;if(clean==='/clubs')return <>{schema}<Clubs data={data}/></>;if(club)return <>{schema}<ClubDetail data={data} id={slugId} virtualName={hubKey||undefined}/></>;
  if(clean==='/events')return <>{schema}<Events data={data}/></>;if(clean==='/fests')return isFestMode(data)?<>{schema}<FestsPage data={data}/></>:<Navigate to="/events" replace/>;if(event&&parts[2]==='register')return <>{schema}<RegistrationPage data={data} id={slugId} session={session}/></>;if(event)return <>{schema}<EventDetail data={data} id={slugId} session={session}/></>;
- if(clean==='/gallery')return <>{schema}<Gallery data={data}/></>;if(clean==='/team')return <>{schema}<Team data={data}/></>;if(clean==='/contact')return <>{schema}<Contact data={data}/></>;if(clean==='/archive')return <ArchivePage data={data}/>;
+ if(clean==='/gallery')return <>{schema}<Gallery data={data}/></>;if(clean==='/team'||clean==='/leadership')return <>{schema}<Team data={data}/></>;if(clean==='/contact')return <>{schema}<Contact data={data}/></>;if(clean==='/archive')return <ArchivePage data={data}/>;
  if(clean==='/announcements')return <Announcements data={data}/>;
- if(clean==='/achievements')return <Achievements data={data}/>;if(clean==='/join-jyc')return <JoinJYC/>;if(clean==='/recruitment')return recruitmentEnabled(data)?<>{schema}<RecruitmentHub data={data}/></>:<Navigate to="/clubs" replace/>;if(clean==='/my-jyc')return <MyJYC data={data} session={session}/>;if(clean==='/calendar')return <>{schema}<CalendarPage data={data}/></>;if(clean==='/planner')return <Navigate to="/events" replace/>;if(clean==='/notifications')return <Navigate to="/my-jyc" replace/>;if(clean==='/login')return <Navigate to="/my-jyc" replace/>;if(clean==='/download')return <Navigate to="/about" replace/>;if(clean==='/discover')return <Navigate to="/clubs" replace/>;if(clean==='/map')return <>{schema}<CampusMapPage data={data}/></>;if(clean.startsWith('/qr/'))return <QRSharePage data={data}/>;if(clean==='/moments')return <Navigate to="/gallery" replace/>;if(clean==='/agenda')return <Navigate to="/my-jyc" replace/>;if(clean==='/projects'||clean==='/projects/submit')return <Navigate to="/clubs" replace/>;if(clean==='/settings')return <Navigate to="/about" replace/>;if(clean==='/resources')return <Navigate to="/about" replace/>;if(clean==='/guide')return <Navigate to="/about" replace/>;if(clean==='/admin')return <Admin data={data} admin={admin} setAdmin={setAdmin} commit={commit} notify={notify} theme={theme} setTheme={setTheme}/>;return <section className="section page not-found-page"><div className="not-found-art"><span>404</span><i aria-hidden="true">JYC</i></div><span className="eyebrow">JYC · ROUTE MISSED</span><h1>This route is not part of the published JYC experience.</h1><p>The page you requested is not part of the published JYC experience.</p><div className="detail-actions"><Button onClick={()=>nav('/')}>Return home</Button><Button secondary onClick={()=>nav('/clubs')}>Explore clubs</Button></div></section>
+ if(clean==='/achievements')return <Achievements data={data}/>;if(clean==='/join-jyc')return <JoinJYC/>;if(clean==='/recruitment')return recruitmentEnabled(data)?<>{schema}<RecruitmentHub data={data}/></>:<Navigate to="/clubs" replace/>;if(clean==='/my-jyc')return <MyJYC data={data} session={session}/>;if(clean==='/calendar'||clean==='/event-calendar')return <>{schema}<CalendarPage data={data}/>;if(clean==='/planner')return <Navigate to="/events" replace/>;if(clean==='/notifications')return <Navigate to="/my-jyc" replace/>;if(clean==='/login')return <Navigate to="/my-jyc" replace/>;if(clean==='/download')return <Navigate to="/about" replace/>;if(clean==='/discover')return <Navigate to="/clubs" replace/>;if(clean==='/map')return <>{schema}<CampusMapPage data={data}/></>;if(clean.startsWith('/qr/'))return <QRSharePage data={data}/>;if(clean==='/moments')return <Navigate to="/gallery" replace/>;if(clean==='/agenda')return <Navigate to="/my-jyc" replace/>;if(clean==='/projects'||clean==='/projects/submit')return <Navigate to="/clubs" replace/>;if(clean==='/settings')return <Navigate to="/about" replace/>;if(clean==='/resources')return <Navigate to="/about" replace/>;if(clean==='/guide')return <Navigate to="/about" replace/>;if(clean==='/admin')return <Admin data={data} admin={admin} setAdmin={setAdmin} commit={commit} notify={notify} theme={theme} setTheme={setTheme}/>;return <section className="section page not-found-page"><div className="not-found-art"><span>404</span><i aria-hidden="true">JYC</i></div><span className="eyebrow">JYC · ROUTE MISSED</span><h1>This route is not part of the published JYC experience.</h1><p>The page you requested is not part of the published JYC experience.</p><div className="detail-actions"><Button onClick={()=>nav('/')}>Return home</Button><Button secondary onClick={()=>nav('/clubs')}>Explore clubs</Button></div></section>
 }
 function NavIcon({kind}){const paths={home:'M3 10.5 12 3l9 7.5M5.5 9.5V21h13V9.5M9 21v-6h6v6',clubs:'M8 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm8-1.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2.5 20a5.5 5.5 0 0 1 11 0M14 20a6 6 0 0 1 7.5 0',events:'M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z',gallery:'M4 5h16v14H4zM4 16l4-4 3 3 2-2 5 5M15 9h.01',team:'M8 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm8-1.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2.5 20a5.5 5.5 0 0 1 11 0M14 20a6 6 0 0 1 7.5 0',more:'M5 7h14M5 12h14M5 17h14',search:'M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm5.5-2 5 5'};return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={paths[kind]||paths.more}/></svg>}
 function AgenticAIPopup({close}){
@@ -482,8 +484,8 @@ function Navbar({data,admin,theme,setTheme}){
  const nav=useNavigate();const loc=useLocation();
  const [open,setOpen]=useState(false),[moreOpen,setMoreOpen]=useState(false),[search,setSearch]=useState(false),[assistant,setAssistant]=useState(false),[homeSection,setHomeSection]=useState('hero');
  const shortcutRef=React.useRef('');
- const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Moments','/gallery'],['Team','/team'],['Contact','/contact']];
- const homeLinks=[['Home','hero'],['About','about'],['Clubs','clubs'],['Events','events'],['Moments','moments'],['Team','team']];
+ const routeLinks=[['Home','/'],['About','/about'],['Clubs','/clubs'],['Events','/events'],['Gallery','/gallery'],['Leadership','/team'],['Contact','/contact']];
+ const homeLinks=[['Home','hero'],['About','about'],['Clubs','clubs'],['Events','events'],['Gallery','moments'],['Leadership','team']];
  useEffect(()=>{
    const onKey=e=>{
      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setSearch(true);return}
@@ -510,7 +512,7 @@ function Navbar({data,admin,theme,setTheme}){
    return()=>observer.disconnect();
  },[loc.pathname]);
  const goHomeSection=id=>{setOpen(false);setMoreOpen(false);if(loc.pathname!=='/') {nav('/#'+id);return}document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});setHomeSection(id)};
- const dockItems=[['Home','/','home'],['Clubs','/clubs','clubs'],['Events','/events','events'],['Team','/team','team'],['More','__more','more']];
+ const dockItems=[['Home','/','home'],['Clubs','/clubs','clubs'],['Events','/events','events'],['Leadership','/team','team'],['More','__more','more']];
  const dockActive=loc.pathname==='/'?0:loc.pathname.startsWith('/clubs')?1:loc.pathname.startsWith('/events')?2:loc.pathname.startsWith('/team')?3:4;
  const dock=<div className="mobile-dock" style={{'--dock-index':dockActive}} aria-label="Mobile navigation"><i className="dock-active-pill" aria-hidden="true"/>{dockItems.map(([n,p,icon],i)=>{const active=i===dockActive;return <button key={n} className={active?'active':''} onClick={()=>p==='__more'?setMoreOpen(v=>!v):nav(p)} aria-current={active?'page':undefined}><span><NavIcon kind={icon}/></span><b>{n}</b></button>})}</div>;
  const more=moreOpen?<MobileMoreSheet data={data} admin={admin} close={()=>setMoreOpen(false)} openAssistant={()=>{setMoreOpen(false);setAssistant(true)}}/>:null;
