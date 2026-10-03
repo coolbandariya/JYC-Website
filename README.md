@@ -4,7 +4,7 @@
 
 > **The official club-first digital home for JIIT Youth Club, Sector 128, Noida.**
 >
-> **Release: V26.2.0 — Production Hardening / Beige Signature / Campus Discovery** — a club-first, event-first public experience for JIIT Youth Club Sector 128.
+> **Release: V32.0.0 — Public Experience / Beige Signature / Production Polish** — a club-first, event-first public experience for JIIT Youth Club Sector 128.
 
 JYC brings its **clubs, events, people, memories and official community channels** into one focused public website. The Control Center is separate from the student-facing experience and handles publishing, review and operations.
 
@@ -138,7 +138,7 @@ See [`docs/OPEN-SOURCE-UI-NOTES.md`](docs/OPEN-SOURCE-UI-NOTES.md) for the refer
 
 ## Current release
 
-**V26.0.0 — Beige Signature Release**
+**V32.0.0 — Public Experience Release**
 
 This release preserves the strongest JYC platform features while tightening the public visual system around JYC beige, black and white, a centered logo-led hero, compact section rhythm, curated homepage content and stronger photography hierarchy.
 
@@ -254,3 +254,10 @@ Then verify the home page at mobile widths (320–600px), tablet widths (768–1
 The V26.2 audit also removed several release blockers: stale Phoenix/model-viewer runtime dependencies, demo-content injection when a configured Supabase backend is empty, stale sitemap/cache metadata, an offline service-worker response bug for non-navigation assets, missing public contact/project submission tables, and an outdated AI model default. The repository QA gate now includes production, runtime-contract and functional checks in addition to static/security/SEO checks.
 
 **Important deployment prerequisite:** the configured JYC Supabase project must be active. The repository's configured project is currently inactive because the linked Supabase account has reached its free-project active limit; production cannot be considered live until that backend is restored or Vercel is pointed at an active JYC Supabase project.
+
+
+## V32 public experience overhaul
+
+The public website is now organized around the approved JYC-128 information architecture: Home, About JYC, Hubs, Events, Event Details, Gallery/Archive, Team, Announcements, Achievements, Contact and controlled recruitment entry points. The final visual layer keeps JYC beige, black and white across day/night modes, centers the public composition, improves image treatment, strengthens mobile layouts, and uses restrained content-linked motion rather than decorative effects.
+
+The supplied 2026–27 JYC hub material is treated as the content source for the 21-community ecosystem and leadership structure. Public fallback content is used only for approved supplied material; fabricated statistics are not used as marketing copy.
