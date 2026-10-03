@@ -16,14 +16,8 @@ create table if not exists public.jyc_contact_submissions(
 alter table public.jyc_contact_submissions enable row level security;
 
 drop policy if exists "Public can submit contact messages" on public.jyc_contact_submissions;
-create policy "Public can submit contact messages"
-on public.jyc_contact_submissions for insert
-to anon, authenticated
-with check (
-  char_length(trim(name)) between 2 and 120
-  and char_length(trim(email)) between 5 and 320
-  and char_length(trim(message)) between 5 and 5000
-);
+-- Public contact writes are accepted only through the public-submission Edge Function.
+revoke insert on public.jyc_contact_submissions from anon, authenticated;
 
 drop policy if exists "Admins can read contact messages" on public.jyc_contact_submissions;
 create policy "Admins can read contact messages"
@@ -66,16 +60,8 @@ create table if not exists public.jyc_project_submissions(
 alter table public.jyc_project_submissions enable row level security;
 
 drop policy if exists "Public can submit projects" on public.jyc_project_submissions;
-create policy "Public can submit projects"
-on public.jyc_project_submissions for insert
-to anon, authenticated
-with check (
-  char_length(trim(name)) between 2 and 160
-  and char_length(trim(description)) between 10 and 5000
-  and char_length(trim(submitter_name)) between 2 and 120
-  and char_length(trim(submitter_email)) between 5 and 320
-  and (link is null or link ~* '^https?://')
-);
+-- Public project writes are accepted only through the public-submission Edge Function.
+revoke insert on public.jyc_project_submissions from anon, authenticated;
 
 drop policy if exists "Admins can read project submissions" on public.jyc_project_submissions;
 create policy "Admins can read project submissions"
