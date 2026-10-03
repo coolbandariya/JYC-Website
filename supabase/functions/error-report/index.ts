@@ -1,7 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.117.2';
 
 const allowedOrigin = (origin:string|null) => {
-  const configured = (Deno.env.get('SITE_URLS') || Deno.env.get('SITE_URL') || '')
+  const configured = (Deno.env.get('SITE_ORIGINS') || Deno.env.get('SITE_ORIGIN') || '')
     .split(',').map(x=>x.trim()).filter(Boolean);
   const known = new Set(configured);
   if (origin && known.has(origin)) return origin;
