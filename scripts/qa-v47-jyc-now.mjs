@@ -10,7 +10,7 @@ check(main.includes("'/updates','JYC Now'"),'JYC Now is discoverable from More')
 check(now.includes('What JYC is creating now')&&now.includes('Community Spotlight'),'editorial JYC Now experience exists');
 check(now.includes('View original ↗')&&now.includes('canonical source'),'cards retain source-first editorial behavior');
 check(now.includes('not a social-network feed')&&now.includes('does not recreate likes, comments or follows'),'public page is not a social-network clone');
-check(api.includes('META_ACCESS_TOKEN')&&api.includes('YOUTUBE_API_KEY')&&api.includes('JYC_RSS_FEEDS'),'server-side connectors are configurable');
+check(api.includes('META_ACCESS_TOKEN')&&api.includes('YOUTUBE_API_KEY')&&api.includes('LINKEDIN_ACCESS_TOKEN')&&api.includes('JYC_RSS_FEEDS'),'server-side connectors are configurable');
 check(!api.includes('eyJ')&&!api.includes('EAAC'),'provider credentials are not hard-coded');
 check(fs.existsSync('supabase/V47-JYC-NOW.sql'),'aggregation schema exists');
 check(sw.includes('jyc-cache-v47-0-0'),'service worker cache is refreshed for V47');
